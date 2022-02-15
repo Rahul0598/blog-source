@@ -53,10 +53,13 @@ params:
 
   # profile-mode
   profileMode:
-    enabled: true # needs to be explicitly set
+    enabled: false # needs to be explicitly set
     title: Rahul Devajji
     subtitle: "It's never too late."
-    imageUrl: "/images/face.jpg"
+    # imageUrl: "/blog/face.jpg"
+    # imageUrl: "/images/face.jpg"
+    # imageUrl: "/face.jpg"
+    imageUrl: face.jpg
     imageWidth: 320
     imageHeight: 284
     imageTitle: my face

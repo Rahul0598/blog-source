@@ -9,7 +9,7 @@ showToc: false
 TocOpen: false
 hidemeta: false
 comments: false
-description: "My experience with Linux distributions so far."
+description: "My experience with Linux so far."
 # canonicalURL: "https://canonical.url/to/page"
 disableHLJS: true # to disable highlightjs
 disableShare: true
