@@ -1,4 +1,8 @@
 # Blog built with Hugo and PaperMod theme
+---
+WIP : experimenting with the workflows and themes, not focusing on content yet.
+
+---
 
 I'm using docker to build, debug and publish this site.
 
