@@ -1,0 +1,30 @@
+services:
+  build:
+   image: klakegg/hugo:ext-nodejs
+   volumes:
+     - ./config.yml:/src/config.yml
+     - ./content:/src/content
+     - ./resources:/src/resources
+     - ./static:/src/static
+     - ./themes:/src/themes
+
+  server:
+    image: klakegg/hugo:ext-nodejs
+    command: server --navigateToChanged
+    volumes:
+      - ./config.yml:/src/config.yml
+      - ./content:/src/content
+      - ./resources:/src/resources
+      - ./static:/src/static
+      - ./themes:/src/themes
+    ports:
+      - 1313:1313
+  
+  publish:
+    image: klakegg/hugo:latest
+    entrypoint: hugo-official
+    environment:
+      HUGO_ENV_ARG: "production"
+    volumes:
+      - .:/src
+
