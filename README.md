@@ -22,9 +22,9 @@ From here on, you can use the `docker-compose` file to build, serve and publish 
 
 `docker-compose up build`
 
-`docker-compose up serve` - for live-server
+`docker-compose up serve` - to start the live-server
 
-`docker-compose up publish` - to publish the website.
+`docker-compose up publish` - to generate the publish files.
 
 I used git submodules to integrate the theme and the final publish files of the site. This way, I can ensure that every change I make and push to the source will be simultaneously pushed to the website repository, **while** maintaining a separate repository for both of the source and public files.
 
