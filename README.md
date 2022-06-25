@@ -22,7 +22,7 @@ From here on, you can use the `docker-compose` file to build, serve and publish 
 
 `docker-compose up build`
 
-`docker-compose up serve` - to start the live-server
+`docker-compose up server` - to start the live-server
 
 `docker-compose up publish` - to generate the publish files.
 

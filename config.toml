@@ -1,0 +1,815 @@
+baseURL = "https://hugodoit.pages.dev"
+# [en, zh-cn, fr, pl, ...] determines default content language
+defaultContentLanguage = "en"
+# theme
+theme = "DoIt"
+# themes directory
+themesDir = "./themes"
+
+# website title
+title = "DoIt"
+
+# whether to use robots.txt
+enableRobotsTXT = true
+# whether to use git commit log
+enableGitInfo = false
+# whether to use emoji code
+enableEmoji = true
+
+[languages]
+  [languages.en]
+    weight = 1
+    # language code
+    languageCode = "en"
+    # language name
+    languageName = "English"
+    # whether to include Chinese/Japanese/Korean
+    hasCJKLanguage = false
+    # default amount of posts in each pages
+    paginate = 5
+    # [UA-XXXXXXXX-X] google analytics code (replaced by params.analytics.google)
+    googleAnalytics = ""
+    # copyright description used only for seo schema
+    copyright = "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License."
+    # Menu config
+    [languages.en.menu]
+      [[languages.en.menu.main]]
+        identifier = "posts"
+        # you can add extra information before the name (HTML format is supported), such as icons
+        pre = ""
+        # you can add extra information after the name (HTML format is supported), such as icons
+        post = ""
+        name = "Posts"
+        url = "/posts/"
+        # title will be shown when you hover on this menu link.
+        title = ""
+        weight = 1
+#      [[languages.en.menu.main]]
+#        identifier = "tags"
+#        pre = ""
+#        post = ""
+#        name = "Tags"
+#        url = "/tags/"
+#        title = ""
+#        weight = 2
+#      [[languages.en.menu.main]]
+#        identifier = "categories"
+#        pre = ""
+#        post = ""
+#        name = "Categories"
+#        url = "/categories/"
+#        title = ""
+#        weight = 3
+#      [[languages.en.menu.main]]
+#        identifier = "series"
+#        pre = ""
+#        post = ""
+#        name = "Series"
+#        url = "/series/"
+#        title = ""
+#        weight = 4
+#      [[languages.en.menu.main]]
+#        identifier = "authors"
+#        pre = ""
+#        post = ""
+#        name = "Authors"
+#        url = "/authors/"
+#        title = ""
+#        weight = 5
+#       [[languages.en.menu.main]]
+#        identifier = "showcase"
+#        pre = ""
+#        post = ""
+#        name = "Showcase"
+#        url = "/showcase/"
+#        title = ""
+#        weight = 6
+#      [[languages.en.menu.main]]
+#        identifier = "documentation"
+#        pre = ""
+#        post = ""
+#        name = "Docs"
+#        url = "/categories/documentation/"
+#        title = ""
+#        weight = 7
+#       [[languages.en.menu.main]]
+#        identifier = "about"
+#        pre = ""
+#        post = ""
+#        name = "About"
+#        url = "/about/"
+#        title = ""
+#        weight = 8
+#      [[languages.en.menu.main]]
+#        identifier = "github"
+#        pre = "<i class='fab fa-github fa-fw'></i>"
+#        post = ""
+#        name = ""
+#        url = "https://github.com/HEIGE-PCloud/DoIt"
+#        title = "GitHub"
+#        weight = 9
+    [languages.en.params]
+      # site description
+      description = "Devajji's very own blog!"
+      # site keywords
+      keywords = ["Devajji", "Blog"]
+      # App icon config
+      [languages.en.params.app]
+        # optional site title override for the app when added to an iOS home screen or Android launcher
+        title = "Rahul Devajji"
+        # whether to omit favicon resource links
+        noFavicon = false
+        # modern SVG favicon to use in place of older style .png and .ico files
+        svgFavicon = ""
+        # Safari mask icon color
+        iconColor = "#5bbad5"
+        # Windows v8-10 tile color
+        tileColor = "#da532c"
+      # Search config
+      [languages.en.params.search]
+        enable = true
+        # type of search engine ("lunr", "algolia", "fuse")
+        type = "algolia"
+        # max index length of the chunked content
+        contentLength = 4000
+        # placeholder of the search bar
+        placeholder = ""
+        # max number of results length
+        maxResultLength = 10
+        # snippet length of the result
+        snippetLength = 300
+        # HTML tag name of the highlight part in results
+        highlightTag = "em"
+        # whether to use the absolute URL based on the baseURL in search index
+        absoluteURL = false
+        [languages.en.params.search.algolia]
+          index = "en_index"
+          appID = "5YGRNRQK1G"
+          searchKey = "0ff6874805de24b84aa1d5ebccad56cd"
+        [languages.en.params.search.fuse]
+          # https://fusejs.io/api/options.html
+          isCaseSensitive = false
+          minMatchCharLength = 2
+          findAllMatches = false
+          location = 0
+          threshold = 0.1
+          distance = 100
+          ignoreLocation = true
+          useExtendedSearch = false
+          ignoreFieldNorm = false
+      # Home page config
+      [languages.en.params.home]
+        # amount of RSS pages
+        rss = 10
+        # Home page profile
+        [languages.en.params.home.profile]
+          enable = true
+          # Gravatar Email for preferred avatar in home page
+          gravatarEmail = ""
+          # URL of avatar shown in home page
+          avatarURL = "/images/face.webp"
+          # title shown in home page (HTML format is supported)
+          title = ""
+          # subtitle shown in home page
+          subtitle = "It's never too late."
+          # whether to use typeit animation for subtitle
+          typeit = true
+          # whether to show social links
+          social = true
+          # disclaimer (HTML format is supported)
+          disclaimer = ""
+        # Home page posts
+        [languages.en.params.home.posts]
+          enable = true
+          # special amount of posts in each home posts page
+          paginate = 7
+      # Social config in home page
+      [languages.en.params.social]
+        GitHub = "Rahul0598"
+        Linkedin = "rahul-devajji-047b22140"
+        #Twitter = "devajjir"
+        #Instagram = "devajjir"
+        #Facebook = "xxxx"
+        #Telegram = "xxxx"
+        #Medium = ""
+        #Gitlab = ""
+        #Youtubelegacy = "xxxx"
+        #Youtubecustom = ""
+        #Youtubechannel = ""
+        #Tumblr = ""
+        #Quora = ""
+        #Keybase = ""
+        #Pinterest = ""
+        #Reddit = ""
+        #Codepen = ""
+        #FreeCodeCamp = ""
+        #Bitbucket = ""
+        #Stackoverflow = ""
+        #Weibo = ""
+        #Odnoklassniki = ""
+        #VK = ""
+        #Flickr = ""
+        #Xing = ""
+        #Snapchat = ""
+        #Soundcloud = ""
+        #Spotify = ""
+        #Bandcamp = ""
+        #Paypal = ""
+        #Fivehundredpx = ""
+        #Mix = ""
+        #Goodreads = ""
+        #Lastfm = ""
+        #Foursquare = ""
+        #Hackernews = ""
+        #Kickstarter = ""
+        #Patreon = ""
+        #Steam = ""
+        #Twitch = ""
+        #Strava = ""
+        #Skype = ""
+        #Whatsapp = ""
+        #Zhihu = ""
+        #Douban = ""
+        #Angellist = ""
+        #Slidershare = ""
+        #Jsfiddle = ""
+        #Deviantart = ""
+        #Behance = ""
+        #Dribbble = ""
+        #Wordpress = ""
+        #Vine = ""
+        #Googlescholar = ""
+        #Researchgate = ""
+        #Thingiverse = ""
+        #Devto = ""
+        #Gitea = ""
+        #XMPP = ""
+        #Matrix = ""
+        #Bilibili = ""
+        #ORCID = ""
+        #QQ = ""
+        #QQGroup = ""
+        #Liberapay = "xxx"
+        #Ko-Fi = "xxx"
+        #BuyMeACoffee = ""
+        #Linktree = ""
+        Email = "devajjir@gmail.com"
+        RSS = false
+        [languages.en.params.social.Mastodon]
+          #id = "@xxxx"
+          #prefix = "https://mastodon.technology/"
+        [languages.en.params.social.Diaspora]
+          #id = "@xxxx"
+          #prefix = "https://yyyy/"
+      # Sponsor config
+      [languages.en.params.sponsor]
+        enable = false
+        bio = "If you find this post helpful, please consider sponsoring."
+        link = "https://github.com/sponsors/HEIGE-PCloud"
+        # custom = "<a href=\"https://www.buymeacoffee.com/PCloud\" target=\"_blank\"><img src=\"https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png\" alt=\"Buy Me A Coffee\" style=\"height: 40px !important;width: 145 !important;\" ></a>"
+
+
+[params]
+  # website title
+  title = "Devajji's very own blog!"
+  # DoIt theme version
+  version = "0.2.X"
+  # site default theme ("light", "dark", "black", "auto")
+  defaultTheme = "auto"
+  # public git repo url only then enableGitInfo is true
+  gitRepo = "https://github.com/Rahul0598/blog-source"
+  # which hash function used for SRI, when empty, no SRI is used ("sha256", "sha384", "sha512", "md5")
+  fingerprint = ""
+  # date format
+  dateFormat = "2006-01-02"
+  # website images for Open Graph and Twitter Cards
+  images = ["static/images/face.webp"]
+  # enable PWA
+  enablePWA = false
+  # license information
+  license = '<a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>'
+  # [Experimental] Bundle js
+  bundle = false
+  # Header config
+  [params.header]
+    # desktop header mode ("fixed", "normal", "auto")
+    desktopMode = "fixed"
+    # mobile header mode ("fixed", "normal", "auto")
+    mobileMode = "auto"
+    # theme change mode ("switch", "select")
+    themeChangeMode = "select"
+    # Header title config
+    [params.header.title]
+      # URL of the LOGO
+      logo = ""
+      # title name
+      name = "Rahul Devajji"
+      # you can add extra information before the name (HTML format is supported), such as icons
+      pre = "<i href='/images/favicon96x96.png'></i>"
+      # you can add extra information after the name (HTML format is supported), such as icons
+      post = ""
+      # whether to use typeit animation for title name
+      typeit = true
+
+  # Footer config
+  [params.footer]
+    enable = true
+    # Custom content (HTML format is supported)
+    custom = ''
+    # whether to show Hugo and theme info
+    hugo = true
+    # Hosted on (HTML format is supported)
+    # <a title="Github Pages" href="https://docs.github.com/en/pages/" target="_blank" rel="noopener noreffer">GitHub Pages</a>
+    hostedOn = '' 
+    # whether to show copyright info
+    copyright = true
+    # whether to show the author
+    author = true
+    # site creation time
+    since = 2022
+    # license info (HTML format is supported)
+    license= '<a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>'
+
+  # Section (all posts) page config
+  [params.section]
+    # special amount of posts in each section page
+    paginate = 20
+    # date format (month and day)
+    dateFormat = "01-02"
+    # amount of RSS pages
+    rss = 10
+    # recently updated posts settings
+    [params.section.recentlyUpdated]
+      enable = true
+      rss = true
+      days = 30
+      maxCount = 10
+
+  # List (category or tag) page config
+  [params.list]
+    # special amount of posts in each list page
+    paginate = 20
+    # date format (month and day)
+    dateFormat = "01-02"
+    # amount of RSS pages
+    rss = 10
+
+  # Page config
+  [params.page]
+    # whether to hide a page from home page
+    hiddenFromHomePage = false
+    # whether to hide a page from search results
+    hiddenFromSearch = false
+    # whether to enable twemoji
+    twemoji = false
+    # whether to enable lightgallery
+    lightgallery = false
+    # whether to enable the ruby extended syntax
+    ruby = true
+    # whether to enable the fraction extended syntax
+    fraction = true
+    # whether to enable the fontawesome extended syntax
+    fontawesome = true
+    # whether to show link to Raw Markdown content of the content
+    linkToMarkdown = true
+    # configure the link to view source the post
+    # linkToSource = "https://github.com/HEIGE-PCloud/DoIt/blob/main/exampleSite/content/{path}"
+    # "https://github.com/user/repo/blob/main/{path}"
+    # configure the link to edit the post
+    # linkToEdit = "https://github.com/HEIGE-PCloud/DoIt/edit/main/exampleSite/content/{path}"
+    # https://github.com/user/repo/edit/main/{path}
+    # https://gitlab.com/user/repo/-/edit/main/{path}
+    # https://bitbucket.org/user/repo/src/main/{path}?mode=edit
+    # configure the link to report issue for the post
+    linkToReport = "https://github.com/Rahul0598/blog-source/issues/new?title=[bug]%20{title}&body=|Field|Value|%0A|-|-|%0A|Title|{title}|%0A|Url|{url}|%0A|Filename|https://github.com/Rahul0598/blog-source/blob/main/content/{path}|"
+    # https://github.com/user/repo/issues/new?title=[bug]%20{title}&body=|Field|Value|%0A|-|-|%0A|Title|{title}|%0A|Url|{url}|%0A|Filename|https://github.com/user/repo/blob/main/{path}|"
+    # https://gitlab.com/user/repo/-/issues/new?issue[title]=[bug]%20{title}&issue[description]=|Field|Value|%0A|-|-|%0A|Title|{title}|%0A|Url|{url}|%0A|Filename|https://gitlab.com/user/repo/-/edit/main/{path}|
+    # whether to show the full text content in RSS
+    rssFullText = false
+    # Page style ("normal", "wide")
+    pageStyle = "normal"
+    # whether to enable series navigation
+    seriesNavigation = true
+    # Display a message at the beginning of an article to warn the reader that its content might be outdated.
+    [params.page.outdatedArticleReminder]
+      enable = true
+      # Display the reminder if the last modified time is more than 90 days ago.
+      reminder = 90
+      # Display warning if the last modified time is more than 180 days ago.
+      warning = 180
+    # Table of the contents config
+    [params.page.toc]
+      # whether to enable the table of the contents
+      enable = true
+      # whether to keep the static table of the contents in front of the post
+      keepStatic = false
+      # whether to make the table of the contents in the sidebar automatically collapsed
+      auto = true
+    # Code config
+    [params.page.code]
+      # whether to show the copy button of the code block
+      copy = true
+      # the maximum number of lines of displayed code by default
+      maxShownLines = 10
+    # Table config
+    [params.page.table]
+      # whether to enable sorting in the tables
+      sort = true
+    [params.page.header]
+      # whether to enable auto header numbering
+      [params.page.header.number]
+        enable = true
+        [params.page.header.number.format]
+          h2 = "{h2} {title}"
+          h3 = "{h2}.{h3} {title}"
+          h4 = "{h2}.{h3}.{h4} {title}"
+          h5 = "{h2}.{h3}.{h4}.{h5} {title}"
+          h6 = "{h2}.{h3}.{h4}.{h5}.{h6} {title}"
+    # KaTeX mathematical formulas config (KaTeX https://katex.org/)
+    [params.page.math]
+      enable = false
+      # default block delimiter is $$ ... $$ and \\[ ... \\]
+      blockLeftDelimiter = ""
+      blockRightDelimiter = ""
+      # default inline delimiter is $ ... $ and \\( ... \\)
+      inlineLeftDelimiter = ""
+      inlineRightDelimiter = ""
+      # KaTeX extension copy_tex
+      # KaTeX 插件 copy_tex
+      copyTex = true
+      # KaTeX extension mhchem
+      # KaTeX 插件 mhchem
+      mhchem = true
+    # Mapbox GL JS config (Mapbox GL JS https://docs.mapbox.com/mapbox-gl-js)
+    [params.page.mapbox]
+      # access token of Mapbox GL JS
+      # Mapbox GL JS 的 access token
+      accessToken = "pk.eyJ1IjoiZGlsbG9uenEiLCJhIjoiY2s2czd2M2x3MDA0NjNmcGxmcjVrZmc2cyJ9.aSjv2BNuZUfARvxRYjSVZQ"
+      # style for the light theme
+      lightStyle = "mapbox://styles/mapbox/light-v10?optimize=true"
+      # style for the dark theme
+      darkStyle = "mapbox://styles/mapbox/dark-v10?optimize=true"
+      # whether to add NavigationControl (https://docs.mapbox.com/mapbox-gl-js/api/#navigationcontrol)
+      navigation = true
+      # whether to add GeolocateControl (https://docs.mapbox.com/mapbox-gl-js/api/#geolocatecontrol)
+      geolocate = true
+      # whether to add ScaleControl (https://docs.mapbox.com/mapbox-gl-js/api/#scalecontrol)
+      scale = true
+      # whether to add FullscreenControl (https://docs.mapbox.com/mapbox-gl-js/api/#fullscreencontrol)
+      fullscreen = true
+    # Social share links in post page
+    [params.page.share]
+      enable = true
+      Twitter = true
+      Facebook = false
+      Linkedin = true
+      Whatsapp = true
+      Pinterest = false
+      Tumblr = false
+      HackerNews = true
+      Reddit = true
+      VK = false
+      Buffer = false
+      Xing = false
+      Line = true
+      Instapaper = false
+      Pocket = false
+      Digg = false
+      Stumbleupon = false
+      Flipboard = false
+      Weibo = true
+      Renren = false
+      Myspace = false
+      Blogger = false
+      Baidu = false
+      Odnoklassniki = false
+      Evernote = false
+      Skype = false
+      Trello = false
+      Mix = false
+      Telegram = false
+    # Comment config
+    [params.page.comment]
+      enable = true
+      # Disqus comment config (https://disqus.com/)
+      [params.page.comment.disqus]
+        enable = false
+        # Disqus shortname to use Disqus in posts
+        shortname = ""
+      # Gitalk comment config (https://github.com/gitalk/gitalk)
+      [params.page.comment.gitalk]
+        enable = false
+        owner = ""
+        repo = ""
+        clientId = ""
+        clientSecret = ""
+      # Valine comment config (https://github.com/xCss/Valine)
+      [params.page.comment.valine]
+        enable = false
+        appId = ""
+        appKey = ""
+        placeholder = ""
+        avatar = "mp"
+        meta= ""
+        pageSize = 10
+        lang = "en"
+        visitor = true
+        recordIP = false
+        highlight = true
+        enableQQ = false
+        serverURLs = ""
+        # emoji data file name, default is "google.yml"
+        # ("apple.yml", "google.yml", "facebook.yml", "twitter.yml")
+        # located in "themes/DoIt/assets/data/emoji/" directory
+        # you can store your own data files in the same path under your project:
+        # "assets/data/emoji/"
+        # ("apple.yml", "google.yml", "facebook.yml", "twitter.yml")
+        # "assets/data/emoji/"
+        emoji = ""
+      # Waline comment config (https://waline.js.org)
+      [params.page.comment.waline]
+        enable = false
+        serverURL = "https://do-it-waline-comment.vercel.app"
+        pageview = true
+        comment = true
+        # emoji = ['https://cdn.jsdelivr.net/gh/walinejs/emojis/weibo']
+        # meta = ['nick', 'mail', 'link']
+        # requiredMeta = []
+        # login = 'enable'
+        # wordLimit = 0
+        # pageSize = 10
+        # imageUploader = false
+        # highlighter = false
+        # texRenderer = false
+      # Facebook comment config (https://developers.facebook.com/docs/plugins/comments)
+      [params.page.comment.facebook]
+        enable = false
+        width = "100%"
+        numPosts = 10
+        appId = ""
+        languageCode = ""
+      # Telegram comments config (https://comments.app/)
+      [params.page.comment.telegram]
+        enable = false
+        siteID = ""
+        limit = 5
+        height = ""
+        color = ""
+        colorful = true
+        dislikes = false
+        outlined = false
+        dark = false
+      # Commento comment config (https://commento.io/)
+      [params.page.comment.commento]
+        enable = false
+      # Utterances comment config (https://utteranc.es/)
+      [params.page.comment.utterances]
+        enable = false
+        # owner/repo
+        repo = ""
+        issueTerm = "pathname"
+        label = ""
+        lightTheme = "github-light"
+        darkTheme = "github-dark"
+      # Twikoo comment config (https://twikoo.js.org/)
+      [params.page.comment.twikoo]
+        enable = true
+        envId = "https://doit-docs-comment-twikoo.vercel.app/"
+        region = ""
+        path = ""
+        visitor = true
+        commentCount = true
+      # Vssue comment config (https://vssue.js.org//)
+      [params.page.comment.vssue]
+        enable = false
+        platform = "" # ("bitbucket", "gitea", "gitee", "github", "gitlab")
+        owner = ""
+        repo = ""
+        clientId = ""
+        clientSecret = ""
+      # Remark42 comment config (https://remark42.com/)
+      [params.page.comment.remark42]
+        enable = false
+        host = ""
+        site_id = ""
+        max_shown_comments = 15
+        show_email_subscription = true
+        simple_view = false
+      # giscus comment config (https://giscus.app/)
+      [params.page.comment.giscus]
+        enable = false
+        # owner/repo
+        dataRepo = ""
+        dataRepoId = ""
+        dataCategory = ""
+        dataCategoryId = ""
+        dataMapping = "pathname"
+        dataReactionsEnabled = "1"
+        dataEmitMetadata = "0"
+        dataInputPosition = "bottom"
+        lightTheme = "light"
+        darkTheme = "dark"
+        dataLang = "en"
+    # Third-party library config
+    [params.page.library]
+      [params.page.library.css]
+        # someCSS = "some.css"
+        # [params.page.library.css.someOtherCSS]
+        #   src = "someOther.css"
+        #   defer = true
+        #   attr = "customAttribute"
+        # located in "assets/"
+        # someCSS = "https://cdn.example.com/some.css"
+      [params.page.library.js]
+        # someJavaScript = "some.js"
+        # [params.page.library.js.someOtherJavaScript]
+        #   src = "someOther.js"
+        #   defer = false
+        #   async = true
+        #   attr = "customAttribute"
+        # located in "assets/"
+        # someJavascript = "https://cdn.example.com/some.js"
+    # Page SEO config
+    [params.page.seo]
+      # image URL
+      #images = []
+      # Publisher info
+      [params.page.seo.publisher]
+        #name = "xxxx"
+        #logoUrl = "/images/face.webp"
+
+  # Sponsor config
+  [params.sponsor]
+    enable = false
+    bio = "If you find this post helpful, please consider sponsoring."
+    # link = "https://github.com/sponsors/HEIGE-PCloud"
+    # custom = "<a href=\"https://www.buymeacoffee.com/PCloud\" target=\"_blank\"><img src=\"https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png\" alt=\"Buy Me A Coffee\" style=\"height: 40px !important;width: 145 !important;\" ></a>"
+
+  # TypeIt config
+  [params.typeit]
+    # typing speed between each step (measured in milliseconds)
+    speed = 100
+    # blinking speed of the cursor (measured in milliseconds)
+    cursorSpeed = 1000
+    # character used for the cursor (HTML format is supported)
+    cursorChar = "|"
+    # cursor duration after typing finishing (measured in milliseconds, "-1" means unlimited)
+    duration = -1
+
+  # Site verification code for Google/Bing/Yandex/Pinterest/Baidu
+  [params.verification]
+    google = "MQ8DNu27ayX6B_4ObiEDK09vGr1fdy7kOAnbd09hJk4"
+    bing = ""
+    yandex = ""
+    pinterest = ""
+    baidu = ""
+    so = ""
+    sogou = ""
+
+  # Site SEO config
+  [params.seo]
+    # image URL
+    #image = "/images/Apple-Devices-Preview.png"
+    # thumbnail URL
+    #thumbnailUrl = "/images/screenshot.png"
+
+  # Analytics config
+  [params.analytics]
+    enable = false
+    # Google Analytics
+    [params.analytics.google]
+      id = ""
+      # whether to anonymize IP
+      anonymizeIP = true
+    # Fathom Analytics
+    [params.analytics.fathom]
+      id = ""
+      # server url for your tracker if you're self hosting
+      server = ""
+    # Baidu Analytics
+    [params.analytics.baidu]
+      id = ""
+    # Umami Analytics
+    [params.analytics.umami]
+      data_website_id = ""
+      src = ""
+      data_domains = ""
+    # Plausible Analytics
+    [params.analytics.plausible]
+      data_domain = ""
+      src = ""
+    # Cloudflare Analytics
+    [params.analytics.cloudflare]
+      token = ""
+
+  # Cookie consent config
+  [params.cookieconsent]
+    enable = false
+    # text strings used for Cookie consent banner
+    [params.cookieconsent.content]
+      message = ""
+      dismiss = ""
+      link = ""
+
+  # CDN config for third-party library files
+  [params.cdn]
+    # CDN data file name, disabled by default
+    # ("jsdelivr.yml")
+    # located in "themes/DoIt/assets/data/cdn/" directory
+    # you can store your own data files in the same path under your project:
+    # "assets/data/cdn/"
+    # ("jsdelivr.yml")
+    # "themes/DoIt/assets/data/cdn/"
+    # "assets/data/cdn/"
+    data = ""
+
+  # Compatibility config
+  [params.compatibility]
+    # whether to use Polyfill.io to be compatible with older browsers
+    polyfill = false
+    # whether to use object-fit-images to be compatible with older browsers
+    objectFit = false
+
+# Markup related configuration in Hugo
+[markup]
+  # Syntax Highlighting (https://gohugo.io/content-management/syntax-highlighting)
+  [markup.highlight]
+    codeFences = true
+    guessSyntax = true
+    lineNos = true
+    lineNumbersInTable = true
+    # false is a necessary configuration (https://github.com/dillonzq/LoveIt/issues/158)
+    noClasses = false
+  # Goldmark is from Hugo 0.60 the default library used for Markdown
+  [markup.goldmark]
+    [markup.goldmark.extensions]
+      definitionList = true
+      footnote = true
+      linkify = true
+      strikethrough = true
+      table = true
+      taskList = true
+      typographer = true
+    [markup.goldmark.renderer]
+      # whether to use HTML tags directly in the document
+      unsafe = true
+  # Table Of Contents settings
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 6
+
+# Author config
+[author]
+  name = "Rahul Devajji"
+  email = "devajjir@gmail.com"
+  link = "https://github.com/Rahul0598"
+  avatar = "/images/face.webp"
+  gravatarEmail = ""
+
+# Sitemap config
+[sitemap]
+  changefreq = "weekly"
+  filename = "sitemap.xml"
+  priority = 0.5
+
+# Permalinks config (https://gohugo.io/content-management/urls/#permalinks)
+[Permalinks]
+  # posts = ":year/:month/:filename"
+  posts = ":filename"
+
+# Privacy config (https://gohugo.io/about/hugo-and-gdpr/)
+[privacy]
+  # privacy of the Google Analytics (replaced by params.analytics.google)
+  # Google Analytics 相关隐私 (被 params.analytics.google 替代)
+  [privacy.googleAnalytics]
+    # ...
+  [privacy.twitter]
+    enableDNT = true
+  [privacy.youtube]
+    privacyEnhanced = true
+
+# Options to make output .md files
+[mediaTypes]
+  [mediaTypes."text/plain"]
+    suffixes = ["md"]
+
+# Options to make output .md files
+[outputFormats.MarkDown]
+  mediaType = "text/plain"
+  isPlainText = true
+  isHTML = false
+
+# Options to make hugo output files
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+  page = ["HTML", "MarkDown"]
+  section = ["HTML", "RSS"]
+  taxonomy = ["HTML", "RSS"]
+  taxonomyTerm = ["HTML"]
+
+# Options for taxonomies
+[taxonomies]
+author = "authors"
+category = "categories"
+tag = "tags"
+series = "series"

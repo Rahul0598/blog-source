@@ -1,18 +1,18 @@
 services:
   build:
-   image: klakegg/hugo:ext-nodejs
+   image: klakegg/hugo:0.101.0-ext-alpine
    volumes:
-     - ./config.yml:/src/config.yml
+     - ./config.toml:/src/config.toml
      - ./content:/src/content
      - ./resources:/src/resources
      - ./static:/src/static
      - ./themes:/src/themes
 
   server:
-    image: klakegg/hugo:ext-nodejs
+    image: klakegg/hugo:0.101.0-ext-alpine
     command: server --navigateToChanged
     volumes:
-      - ./config.yml:/src/config.yml
+      - ./config.toml:/src/config.toml
       - ./content:/src/content
       - ./resources:/src/resources
       - ./static:/src/static

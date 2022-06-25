@@ -4,3 +4,6 @@
 [submodule "public"]
 	path = public
 	url = https://github.com/Rahul0598/blog.git
+[submodule "themes/DoIt"]
+	path = themes/DoIt
+	url = https://github.com/HEIGE-PCloud/DoIt.git
