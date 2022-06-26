@@ -7,7 +7,7 @@ theme = "DoIt"
 themesDir = "./themes"
 
 # website title
-title = "DoIt"
+title = "Devajji's Blog"
 
 # whether to use robots.txt
 enableRobotsTXT = true
