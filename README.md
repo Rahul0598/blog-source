@@ -56,5 +56,6 @@ Following are the steps to integrate the themes and public files into your sourc
         $ git commit -m "initialized submodules"
         $ git push -u origin master --recurse-submodules=on-demand
 
-Now, every time you can separate the source and public files while maintaining synchronicity.
+This way, you can separate the source and public files while maintaining synchronicity.
 
+To clone this repo, remember to add the --recursive flag : `git clone https://github.com/Rahul0598/blog-source.git --recursive`.
