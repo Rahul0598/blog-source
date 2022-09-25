@@ -5,10 +5,8 @@ defaultContentLanguage = "en"
 theme = "DoIt"
 # themes directory
 themesDir = "./themes"
-
 # website title
 title = "Devajji's Blog"
-
 # whether to use robots.txt
 enableRobotsTXT = true
 # whether to use git commit log
