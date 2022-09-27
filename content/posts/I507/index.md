@@ -34,7 +34,7 @@ I have chosen to monitor and change my sleeping habits. Since I started my maste
 
 The following is a screenshot from the "Samsung Health" application which shows the average sleep statistics this year from the months of January through September. It is evident that I sleep very late in the night.
 
-{{< image src="yearly-average-sept21-aug22.jpg" caption="Bar graph showing monthly average sleep time statistic (`image`)" height="50%" width="100%">}}
+{{< image src="yearly-average-sept21-aug22.jpg" caption="Bar graph showing monthly average sleep time statistic (`image`)" height="200" width="300">}}
 
 The months of January through May were stressful and hard as I had taken three core subjects (9 credits) which were all essential to satisfy my degree requirements. I also had the added pressure of landing a summer internship.
 
@@ -44,11 +44,11 @@ The fall semester I decided to continue my internship and the research assistant
 
 Hopefully I would be able to break this cycle, with the help of some analytics and science.
 
-### Behavioral Models.
+### Behavioral Model - SCT
 
 Social Cognitive Theory (SCT) discusses how individuals acquire and maintain behavior based on internal and external social interactions [[2]](#2). SCT takes into account a person's past experiences to factor into whether behavioral change will occur.
 
-{{< image src="SCT.png" caption="Flow chart describing the various factors affecting an individuals behavior change decisions (`image`)" height="1%">}}
+{{< image src="SCT.png" caption="Flow chart describing the various factors affecting an individuals behavior change decisions (`image`)" >}}
 
 There are six constricts developed as a part of SCT, I will connect each of those with my situation.[[2]](#2)
 
@@ -63,9 +63,9 @@ There are six constricts developed as a part of SCT, I will connect each of thos
 
 There are two main things I look for while downloading an application: 1) the number of downloads, and 2) the average rating. "Sleep as Android" seemed to be the best one out of the available applications. I did not go into the available features and the details regarding the application before deciding to download it. The fact that it was also tagged as an "Editor's choice" made the decision easier. 
 
-{{< image src="app-store-available-apps.jpg" caption="A screenshot showing the list of applications available for download when searched with the term 'sleep tracker' on Google Play Store (`image`)" height="50px">}}
+{{< image src="app-store-available-apps.jpg" caption="A screenshot showing the list of applications available for download when searched with the term 'sleep tracker' on Google Play Store (`image`)" height="100" width="300">}}
 
-{{< image src="sleep-for-android.jpg" caption="'Sleep as Android' has the highest average reviews, downloads and has the Editor's choice tag (`image`)" height="50px">}}
+{{< image src="sleep-for-android.jpg" caption="'Sleep as Android' has the highest average reviews, downloads and has the Editor's choice tag (`image`)" width="400">}}
 
 ## Onboarding Experience
 
