@@ -20,6 +20,16 @@ ShowBreadCrumbs: true
 ShowPostNavLinks: true
 ---
 
+<style>
+table th {
+    background: #ffffff
+}
+td, th {
+   border: none!important;
+}
+</style>
+
+
 Behavior change refers to efforts put in place to change people's personal habits and attitudes, to prevent disease [[1]](#1). 
 
 As a part of I507, I was tasked to use a health monitoring application and change a behavior. The idea was to understand what it takes to change a behavior so that we can design better applications for other people.
@@ -63,12 +73,45 @@ There are six constricts developed as a part of SCT, I will connect each of thos
 
 There are two main things I look for while downloading an application: 1) the number of downloads, and 2) the average rating. "Sleep as Android" seemed to be the best one out of the available applications. I did not go into the available features and the details regarding the application before deciding to download it. The fact that it was also tagged as an "Editor's choice" made the decision easier. 
 
-{{< image src="app-store-available-apps.jpg" caption="A screenshot showing the list of applications available for download when searched with the term 'sleep tracker' on Google Play Store (`image`)" height="100" width="300">}}
-
-{{< image src="sleep-for-android.jpg" caption="'Sleep as Android' has the highest average reviews, downloads and has the Editor's choice tag (`image`)" width="400">}}
+| | |
+| - | - |
+{{< image src="app-store-available-apps.jpg" caption="A screenshot showing the list of applications available for download when searched with the term 'sleep tracker' on Google Play Store (`image`)" width="250">}} | {{< image src="sleep-for-android.jpg" caption="'Sleep as Android' has the highest average reviews, downloads and has the Editor's choice tag (`image`)" width="500">}}
 
 ## Onboarding Experience
 
+The first time you launch the application, you are greeted with a swipe-able screen showing and describing the features of the application. I have personally never swiped all the way to the end of such tutorials on any app. So, when I first downloaded the app too, I skipped after the first few slides. Perhaps the tutorial were a video, then I would've watched it instead of the slides.
+
+Few of the screenshots describing the available features, other than the primary feature of tracking sleep. 
+
+| | | | |
+| - | - | - | - |
+{{< image src="tutorial-smart-wake-up.jpg" caption="Smart Wake (`image`)" width="200">}} | {{< image src="tutorial-lullabies.jpg" caption="Lullabies (`image`)" width="200">}} | {{< image src="tutorial-sonar.jpg" caption="Sonar (`image`)" width="200">}} | {{< image src="tutorial-record-sleep-noises.jpg" caption="Record Sleep noises(`image`)" width="200">}}
+
+1. Smart wake-up feature sounds interesting. The app, apparently tracks your sleep patterns and finds the right time to wake you up, which is outside the REM sleep duration.
+2. I listen to some podcast before I fall asleep, and I am not really used to having music or ASMR playing in the background while sleeping. So, I would pass on the lullabies feature.
+3. I wonder how much battery the sonar feature would consume through the night. 
+4. I have not been told that I snore in my sleep, except for when I am exhausted, then I snore.
+
+The app requires permissions to access physical activity, maybe that is to keep of track of movements during the sleep which would aid in its tracking ability.
+Once the required permission is given, you are taken to the button which would ask you to set an alarm.
+
+{{< image src="set-alarm-lots-of-icons.jpg" caption="Window to set an alarm with some unknown icons(`image`)" width="300">}}
+
+1. The dial is easy to understand, set the hour and minute for when you would like to wake up.
+2. The little numeric input area is a faster way to set the alarm time, 730 transforms to 07:30AM and 215 transforms to 21:05
+3. The microphone button is another way to set the alarm, with your voice.
+4. The third button asks for permission to access your location data to set the alarm to the time of sunrise (I don't think I'd ever need that feature!)
+5. The last button sets the alarm to your target wake-up time.
+
+{{< image src="home-screen.jpg" caption="Home screen of the app(`image`)" width="300">}}
+
+The home screen of the app has the features to set an alarm, tutorial slides and statistics of the most recent sleep tracking activity and the averages.
+
+## Tracking Experience
+
+
+
+## Thoughts and Improvements
 
 ## References
 
