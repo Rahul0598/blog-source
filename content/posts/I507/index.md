@@ -36,7 +36,7 @@ As a part of I507, I was tasked to use a health monitoring application and chang
 
 In the context of Health (the topic of our class), behavior refers to a person's beliefs and actions regarding their health and well-being. They are influenced by a person's environment. Positive behavior promotes health and prevents disease while the opposite is true for negative behaviors. 
 
-I have chosen to monitor and change my sleeping habits. Since I started my master's education, I have rarely slept for longer than 6 hours a night on average. Through this blog post, I will attempt to document my experience using a sleep tracker application on my phone over the course 4 weeks and see if I make improvements to my sleep schedule. 
+I have chosen to monitor and change my sleeping habits. Since I started my master's education, I have rarely slept for longer than 6 hours a night on average. Through this blog post, I will attempt to document my experience using a sleep tracker application on my phone over the course of 4 weeks and see if I make improvements to my sleep schedule. 
 
 ## Background and Theory
 
@@ -162,10 +162,15 @@ The chart on the left is good representation of your sleep cycle. The goal is to
 
 The graphs are color-blind friendly and there is a clear distinction between the shades of blue and red used to differentiate healthy and unfavorable patterns. Only if you have the condition - Monochromacy/Achromatopsia, you will not be able to see the difference in colors, but you would still understand all the other graphs as they are coded based on intensity of color. 
 
-### 
+### Validation of Tracking Data
 
+The app (Sleep as Android) has a definite starting point for sleep tracking, when I manually start the tracker. And, a definite ending point, when the alarm rings and I save the tracked information. I can say with certainty that the duration tracking information is accurate. 
+Whereas the general purpose activity tracker app - Samsung Health, tracks the sleep hours based on my phone usage. It checks for the periods of time when the phone is not used during the night. Sometimes I use the phone right after I wake up and just lay in bed, idle (contemplating life), before I get out of bed. I suppose all this gets added up as sleep time on the Samsung Health app. 
+
+At the time of writing this blog, the Samsung Health app shows an average sleep duration of 6 hours and 24 minutes over the past month (2nd September 2022 - 2nd October 2022). Whereas the dedicated sleep tracking app - Sleep as Android, shows an average of 4 hours and 15 minutes. This is a huge difference. I always thought that 6 hours of sleep was good enough accounting for all the work I have to do on a day-to-day basis. This way, using a dedicated sleep tracker app is a definite eye-opener and shows you exactly and accurately all that is wrong.
 
 ### Implications of Tracking
+
 
 
 ## References
