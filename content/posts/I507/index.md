@@ -119,14 +119,14 @@ In the morning, the alarm rings and wakes you up to the preset ringtone and show
 
 | | |
 | - | - |
-{{< image src="post-tracking.jpg" alt="Visualization showing the summary of the last night's sleep." caption="Summary of the night's sleep." width="300">}} | {{< image src="post-tracking-2.jpg" alt="Visualization showing the different types of graphs describing the stages of sleep" caption="Summary of the night's sleep along with the noise recording." width="300">}}
+{{< image src="alarm.jpg" alt="Screenshot of the alarm going off with the options to either stop or snooze." caption="Screenshot of the alarm going off." width="300">}} | {{< image src="post-tracking-2.jpg" alt="Visualization showing the different types of graphs describing the stages of sleep" caption="Summary of the night's sleep along with the noise recording." width="300">}}
 
 It is hard to interpret the graph, we do not know what the highs and lows of the graph mean. But, documentation tells us that : 
 1. The first graph represents the "Actigraph" [[3]](#3). It shows the intensity of your nightly movements. The higher the peak, the more you've been moving.
 2. The second graph represents the "Hypnograph" [[3]](#3). It represents the various stages of sleep based on the intensity of color of the peaks.
 3. The third graph represents the "Noise graph" [[3]](#3). It shows how much noise (sleep talking, snoring, misc) noises were recorded through the night.
 
-In the initial 2 weeks of tracking, I was not aware of the fact that, not all features are enabled by default. 
+In the initial 2 weeks of tracking, I was not aware of the fact that not all features are enabled by default. 
 
 1. Automatic sleep tracking is disabled by default, it is a feature which automatically starts tracking your sleep without needing to manually start it. This includes the feature of sleep time estimates when the tracker is not turned on by default. All these estimates are done based on your sleep history, patterns of sleep and alarm time. 
 
@@ -134,7 +134,24 @@ In the initial 2 weeks of tracking, I was not aware of the fact that, not all fe
 
 I only realized that they aren't enabled when I exported the tracking data onto my laptop and saw that these fields are marked as unset. I believe a thorough review of the documentation is needed before you fully understand how to best use the app.
 
+### Statistics and Visualizations
+
+The app provides a wealth of data analysis using all the data it tracks. Starting with the summary statistics which is available on the home page. This is what I end up looking at most of the time. 
+{{< image src="stats-primary.jpg" alt="Screenshot of the overall sleep statistics relative to the country of residence." caption="Summary of sleep tracking over a month. Showing personal average relative to country average." width="300">}}
+
+In the past month of September. I have slept for an average of 4 hours only. This is 2 hours less than my average before using this app and 3 hours less than the average of the United States. Obviously, I failed miserably in trying to improve my sleep cycle. To understand the meaning of all the metrics shown in the first graph, we revisit our user manual [[3]](#3) and turn to the sleep score section. 
+1. **Duration** : I slept for an average of 4 hours 15 mins. Since I had set the target sleep duration to 7 hours, it shows us a deficit of 2 hours 45 minutes.
+2. **Irregularity** : How irregular your sleep is. Variance of your mid-sleep hour. The documentation also tells us what is healthy (under 0.5 hours) and what is not (over 1 hour). Clearly what I'm doing is unfavorable.
+3. **Deep Sleep** : How long you’ve been in deep sleep compared to the total sleep duration. Healthy: over 30% and Unfavorable: under 20%. This is pretty good, my average is 40% which is healthy.
+4. **Efficiency** : How long you’ve been actually sleeping vs. being in bed. Mine is a healthy average of 95%, this is true as I don't stay awake after I start the sleep tracker because I know that I'm supposed to be sleeping then. So, this is one of the positive changes.
+5. **Snoring** : I rarely snore, so 0%, yay!
+6. **Rating** : I never rated my sleep out of 5 stars, so this statistics is meaningless to me.
+In the end it shows us how many hours of sleep I have lost over the period in consideration (1 month) - over 80 hours!
+
+The graphs are color-blind friendly and there is a clear distinction between the shades of blue and red used to differentiate healthy and unfavorable patterns. Only if you have the condition - Monochromacy/Achromatopsia, you will not be able to see the difference in colors, but you would still understand all the other graphs as they are coded based on intensity of color. 
+
 ### 
+
 
 ### Implications of Tracking
 
