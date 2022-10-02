@@ -156,7 +156,9 @@ Some of the other graphs that I find useful are :
 
 | | |
 | - | - |
-{{< image src="sleep-overall.jpg" alt="Screenshot of the overall sleep cycle summary graph. Goal is to fill up the circle." caption="Easy way of knowing where you are lacking in your sleep cycle." width="300">}} | {{< image src="duration-graph.jpg" alt="Screenshot of graph showing the duration of sleep over a month. It shows a steady decline in the number of hours" caption="SLine graph showing a steady decline in the number of hours of sleep." width="300">}}
+{{< image src="sleep-overall-circle.jpg" alt="Screenshot of the overall sleep cycle summary graph. Goal is to fill up the circle." caption="Easy way of knowing where you are lacking in your sleep cycle." width="300">}} | {{< image src="duration-graph.jpg" alt="Screenshot of graph showing the duration of sleep over a month. It shows a steady decline in the number of hours" caption="Line graph showing a steady decline in the number of hours of sleep." width="400">}}
+
+The chart on the left is good representation of your sleep cycle. The goal is to ensure that the graph is full or all the colors are filled up. And, the graph on the right shows a steady decline in the number of hours I have slept. So, looking at these graphs I know that if I should just focus on sleeping on time and that there are no other issues.
 
 The graphs are color-blind friendly and there is a clear distinction between the shades of blue and red used to differentiate healthy and unfavorable patterns. Only if you have the condition - Monochromacy/Achromatopsia, you will not be able to see the difference in colors, but you would still understand all the other graphs as they are coded based on intensity of color. 
 
