@@ -48,7 +48,7 @@ The following is a screenshot from the "Samsung Health" application which shows 
 
 The months of January through May were stressful and hard as I had taken three core subjects (9 credits) which were all essential to satisfy my degree requirements. I also had the added pressure of landing a summer internship.
 
-In the summer (May - August), I was working full-time on my internship and worked part-time as a research assistant on campus, which was again called for long working hours.
+In the summer (May - August), I was working full-time on my internship and worked part-time as a research assistant on campus, which again called for long working hours.
 
 The fall semester I decided to continue my internship and the research assistant-ship part-time (35 hours a week combined) along with two 13-week courses. Which (*sigh*) made it harder for me to manage my time again. 
 
@@ -79,7 +79,7 @@ There are two main things I look for while downloading an application: 1) the nu
 
 ## Onboarding Experience
 
-The first time you launch the application, you are greeted with a swipe-able screen showing and describing the features of the application. I have personally never swiped all the way to the end of such tutorials on any app. So, when I first downloaded the app too, I skipped after the first few slides. Perhaps the tutorial were a video, then I would've watched it instead of the slides.
+The first time you launch the application, you are greeted with a swipe-able screen showing and describing the features of the application. I have personally never swiped all the way to the end of such tutorials on any app. So, when I first downloaded the app too, I skipped after the first few slides. If the tutorial were a video, then I would've watched it instead of the slides.
 
 Few of the screenshots describing the available features, other than the primary feature of tracking sleep. 
 
@@ -169,9 +169,13 @@ Whereas the general purpose activity tracker app - Samsung Health, tracks the sl
 
 At the time of writing this blog, the Samsung Health app shows an average sleep duration of 6 hours and 24 minutes over the past month (2nd September 2022 - 2nd October 2022). Whereas the dedicated sleep tracking app - Sleep as Android, shows an average of 4 hours and 15 minutes. This is a huge difference. I always thought that 6 hours of sleep was good enough accounting for all the work I have to do on a day-to-day basis. This way, using a dedicated sleep tracker app is a definite eye-opener and shows you exactly and accurately all that is wrong.
 
-### Implications of Tracking
+## Implication and Uses of Tracking
 
+What do you get from tracking your sleep, keeping your phone by your side and letting the app record your sleep time noises?
 
+| | |
+| - | - |
+{{< image src="advices.jpg" alt="Screenshot of the advices screen, which shows places for improvement and details about how it can be improved." caption="Easy way of knowing where you are lacking in your sleep cycle." width="300">}} | {{< image src="advices-2.jpg" alt="Screenshot of graph showing the duration of sleep over a month. It shows a steady decline in the number of hours" caption="Line graph showing a steady decline in the number of hours of sleep." width="300">}}
 
 ## References
 
