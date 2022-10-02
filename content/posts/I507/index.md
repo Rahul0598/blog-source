@@ -22,7 +22,7 @@ ShowPostNavLinks: true
 
 <style>
 table th {
-    background: #ffffff
+    display: none!important;
 }
 td, th {
    border: none!important;
@@ -44,7 +44,7 @@ I have chosen to monitor and change my sleeping habits. Since I started my maste
 
 The following is a screenshot from the "Samsung Health" application which shows the average sleep statistics this year from the months of January through September. It is evident that I sleep very late in the night.
 
-{{< image src="yearly-average-sept21-aug22.jpg" caption="Bar graph showing monthly average sleep time statistic (`image`)" height="200" width="300">}}
+{{< image src="yearly-average-sept21-aug22.jpg" alt="Screenshot of a bar graph showing monthly average sleep time of 6 hours and 2 minutes per day from January through September 2022. (Taken from Samsung Health app)" caption=" 6 hours of average sleep time this year. (Taken from Samsung Health app)" width="300">}}
 
 The months of January through May were stressful and hard as I had taken three core subjects (9 credits) which were all essential to satisfy my degree requirements. I also had the added pressure of landing a summer internship.
 
@@ -56,9 +56,9 @@ Hopefully I would be able to break this cycle, with the help of some analytics a
 
 ### Behavioral Model - SCT
 
-Social Cognitive Theory (SCT) discusses how individuals acquire and maintain behavior based on internal and external social interactions [[2]](#2). SCT takes into account a person's past experiences to factor into whether behavioral change will occur.
+Social Cognitive Theory (SCT) discusses how individuals acquire and maintain behavior based on internal and external social interactions [[2]](#2). SCT takes into account a person's experiences to factor into whether behavioral change will occur.
 
-{{< image src="SCT.png" caption="Flow chart describing the various factors affecting an individuals behavior change decisions (`image`)" >}}
+{{< image src="SCT.png" alt="Flow chart depicting the Social Cognitive Theory. It shows how environmental factors, personal factors and personal behavior all influence each other when an individual wants to make a behavior change" caption="Flow chart describing the various factors affecting an individuals behavior change decisions" width="500">}}
 
 There are six constricts developed as a part of SCT, I will connect each of those with my situation.[[2]](#2)
 
@@ -75,7 +75,7 @@ There are two main things I look for while downloading an application: 1) the nu
 
 | | |
 | - | - |
-{{< image src="app-store-available-apps.jpg" caption="A screenshot showing the list of applications available for download when searched with the term 'sleep tracker' on Google Play Store (`image`)" width="250">}} | {{< image src="sleep-for-android.jpg" caption="'Sleep as Android' has the highest average reviews, downloads and has the Editor's choice tag (`image`)" width="500">}}
+{{< image src="app-store-available-apps.jpg" alt="A screenshot showing the list of applications available for download when searched with the term 'sleep tracker' on Google Play Store" caption="List of top sleep apps available on the play store" width="300">}} | {{< image src="sleep-for-android.jpg" caption="'Sleep as Android' has the highest average reviews, downloads and has the Editor's choice tag" alt="App named - Sleep as Android, has the highest number of downloads and best average reviews amongst the available sleep tracking app." width="500">}}
 
 ## Onboarding Experience
 
@@ -85,38 +85,67 @@ Few of the screenshots describing the available features, other than the primary
 
 | | | | |
 | - | - | - | - |
-{{< image src="tutorial-smart-wake-up.jpg" caption="Smart Wake (`image`)" width="200">}} | {{< image src="tutorial-lullabies.jpg" caption="Lullabies (`image`)" width="200">}} | {{< image src="tutorial-sonar.jpg" caption="Sonar (`image`)" width="200">}} | {{< image src="tutorial-record-sleep-noises.jpg" caption="Record Sleep noises(`image`)" width="200">}}
+{{< image src="tutorial-smart-wake-up.jpg" caption="Smart Wake" alt="Screenshot of the tutorial screen describing the smart wake feature. It wakes you up at the optimal sleep phase for a pleasant morning." width="200">}} | {{< image src="tutorial-lullabies.jpg" alt="Screenshot of the tutorial screen describing the lullabies feature which helps you fall asleep faster." caption="Lullabies" width="200">}} | {{< image src="tutorial-sonar.jpg" alt="Screenshot of the tutorial screen describing the sonar feature which tracks movements and breath rate." caption="Sonar" width="200">}} | {{< image alt="Screenshot of the tutorial screen describing the recording feature which detects snoring and uses snoring to make you stop." src="tutorial-record-sleep-noises.jpg" caption="Record Sleep noises" width="200">}}
 
 1. Smart wake-up feature sounds interesting. The app, apparently tracks your sleep patterns and finds the right time to wake you up, which is outside the REM sleep duration.
 2. I listen to some podcast before I fall asleep, and I am not really used to having music or ASMR playing in the background while sleeping. So, I would pass on the lullabies feature.
 3. I wonder how much battery the sonar feature would consume through the night. 
-4. I have not been told that I snore in my sleep, except for when I am exhausted, then I snore.
+4. I have not been told that I snore in my sleep, except for when I am exhausted. So, hopefully the phone proves I don't snore.
 
 The app requires permissions to access physical activity, maybe that is to keep of track of movements during the sleep which would aid in its tracking ability.
 Once the required permission is given, you are taken to the button which would ask you to set an alarm.
 
-{{< image src="set-alarm-lots-of-icons.jpg" caption="Window to set an alarm with some unknown icons(`image`)" width="300">}}
+{{< image src="set-alarm-lots-of-icons.jpg" caption="Window to set an alarm with some unknown icons." alt="Screenshot which shows you how to set the alarm." width="300">}}
 
-1. The dial is easy to understand, set the hour and minute for when you would like to wake up.
-2. The little numeric input area is a faster way to set the alarm time, 730 transforms to 07:30AM and 215 transforms to 21:05
-3. The microphone button is another way to set the alarm, with your voice.
-4. The third button asks for permission to access your location data to set the alarm to the time of sunrise (I don't think I'd ever need that feature!)
+1. The dial is easy to understand, you can set the hour and minute for when you would like to wake up.
+2. The little numeric input area turns out to be a faster way to set the alarm time, 730 transforms to 07:30AM and 215 transforms to 21:05
+3. The microphone button sets the alarm with your voice.
+4. The third button asks for permission to access your location data to set the alarm to the time of sunrise (*I don't think I'd ever need that feature!*)
 5. The last button sets the alarm to your target wake-up time.
 
-{{< image src="home-screen.jpg" caption="Home screen of the app(`image`)" width="300">}}
+The app also lets you set a sleep duration goal (7 hours for example) and sends you notifications 15 minutes (configurable to other durations) before your bedtime.
+
+{{< image src="home-screen.jpg" alt="Initially, there is no tracking data, so the homepage is empty." caption="Home screen of the app" width="300">}}
 
 The home screen of the app has the features to set an alarm, tutorial slides and statistics of the most recent sleep tracking activity and the averages.
 
-## Tracking Experience
+## Tracking and User Experience
 
+### How do you track?
 
+Tracking is done based on the alarm time (wake-up time) you set on the app. I had configured the alarm to repeat every morning and also set the goal sleep hours. With these settings, the app reminds you to sleep before your projected bedtime by sending a notification which vibrates the phone. There is an option to snooze the reminder to sleep, and the app will remind you again in 15 minutes. I felt that this feature of vibrating the phone until you actually go to sleep and start tracking is very helpful as it forces you to think about going to sleep every time the phone vibrates.
 
-## Thoughts and Improvements
+In the morning, the alarm rings and wakes you up to the preset ringtone and shows you the duration of sleep and the efficiency of your sleep along with a 5-star scale for you to rate your sleep.
+
+| | |
+| - | - |
+{{< image src="post-tracking.jpg" alt="Visualization showing the summary of the last night's sleep." caption="Summary of the night's sleep." width="300">}} | {{< image src="post-tracking-2.jpg" alt="Visualization showing the different types of graphs describing the stages of sleep" caption="Summary of the night's sleep along with the noise recording." width="300">}}
+
+It is hard to interpret the graph, we do not know what the highs and lows of the graph mean. But, documentation tells us that : 
+1. The first graph represents the "Actigraph" [[3]](#3). It shows the intensity of your nightly movements. The higher the peak, the more you've been moving.
+2. The second graph represents the "Hypnograph" [[3]](#3). It represents the various stages of sleep based on the intensity of color of the peaks.
+3. The third graph represents the "Noise graph" [[3]](#3). It shows how much noise (sleep talking, snoring, misc) noises were recorded through the night.
+
+In the initial 2 weeks of tracking, I was not aware of the fact that, not all features are enabled by default. 
+
+1. Automatic sleep tracking is disabled by default, it is a feature which automatically starts tracking your sleep without needing to manually start it. This includes the feature of sleep time estimates when the tracker is not turned on by default. All these estimates are done based on your sleep history, patterns of sleep and alarm time. 
+
+2. Sonar or accelerometer sensors need to be enabled for the tracking of movements and noises (includes snoring) during your sleep. The app starts recording when it detects any movement or noise and saves it on your phone and shows the same on the homepage for you to review it later.
+
+I only realized that they aren't enabled when I exported the tracking data onto my laptop and saw that these fields are marked as unset. I believe a thorough review of the documentation is needed before you fully understand how to best use the app.
+
+### 
+
+### Implications of Tracking
+
 
 ## References
 
 <a id="1">[1]</a> 
 Wikipedia contributors. (2022, August 29). Behavior change (public health). Wikipedia. Retrieved September 25, 2022, from https://en.wikipedia.org/wiki/Behavior_change_(public_health)
 
-<a id="2">[2]</a> 
+<a id="2">[2]</a>
 The Social Cognitive Theory. (n.d.). Retrieved September 25, 2022, from https://sphweb.bumc.bu.edu/otlt/mph-modules/sb/behavioralchangetheories/behavioralchangetheories5.html
+
+<a id="3">[3]</a>
+User Manual. (n.d.). Sleep as Android. Retrieved September 27, 2022, from https://docs.sleep.urbandroid.org/
