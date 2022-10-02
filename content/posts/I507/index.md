@@ -148,6 +148,16 @@ In the past month of September. I have slept for an average of 4 hours only. Thi
 6. **Rating** : I never rated my sleep out of 5 stars, so this statistics is meaningless to me.
 In the end it shows us how many hours of sleep I have lost over the period in consideration (1 month) - over 80 hours!
 
+The app has this cool feature where it shows the summary statistics from all the countries. Each country has a count of users who have agreed to share their data with the app owners to be a part of a "SleepCloud Study"[[4]](#4). The funny part is how you have to keep scrolling for a minute to reach the end and there is no search feature to find a country of interest.
+
+{{< image src="world-summary.jpg" alt="An endless scrollable list of all countries in the world!" caption="Screenshot of the overall sleep statistics from across the world." width="300">}}
+
+Some of the other graphs that I find useful are : 
+
+| | |
+| - | - |
+{{< image src="sleep-overall.jpg" alt="Screenshot of the overall sleep cycle summary graph. Goal is to fill up the circle." caption="Easy way of knowing where you are lacking in your sleep cycle." width="300">}} | {{< image src="duration-graph.jpg" alt="Screenshot of graph showing the duration of sleep over a month. It shows a steady decline in the number of hours" caption="SLine graph showing a steady decline in the number of hours of sleep." width="300">}}
+
 The graphs are color-blind friendly and there is a clear distinction between the shades of blue and red used to differentiate healthy and unfavorable patterns. Only if you have the condition - Monochromacy/Achromatopsia, you will not be able to see the difference in colors, but you would still understand all the other graphs as they are coded based on intensity of color. 
 
 ### 
@@ -166,3 +176,6 @@ The Social Cognitive Theory. (n.d.). Retrieved September 25, 2022, from https://
 
 <a id="3">[3]</a>
 User Manual. (n.d.). Sleep as Android. Retrieved September 27, 2022, from https://docs.sleep.urbandroid.org/
+
+<a id="4">[4]</a>
+Sleepcloud Study. (n.d.). Sleep as Android. Retrieved September 27, 2022, from https://sleep.urbandroid.org/sleepcloud-study/
