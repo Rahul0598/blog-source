@@ -4,7 +4,6 @@ date: 2022-09-20T09:51:54+0000
 weight: 1
 # aliases: ["/first"]
 tags: ["Health Informatics", "Sleep"]
-author: "Me"
 showToc: true
 TocOpen: true
 hidemeta: true
@@ -107,7 +106,7 @@ The app also lets you set a sleep duration goal (7 hours for example) and sends 
 
 {{< image src="home-screen.jpg" alt="Initially, there is no tracking data, so the homepage is empty." caption="Home screen of the app" width="300">}}
 
-The home screen of the app has the features to set an alarm, tutorial slides and statistics of the most recent sleep tracking activity and the averages.
+The home screen of the app has the features to set an alarm, tutorial slides and statistics of the most recent sleep tracking activity and the averages. It is also customizable, so you can change what you want to see on the dashboard.  
 
 ## Tracking and User Experience
 
@@ -144,7 +143,7 @@ In the past month of September. I have slept for an average of 4 hours only. Thi
 2. **Irregularity** : How irregular your sleep is. Variance of your mid-sleep hour. The documentation also tells us what is healthy (under 0.5 hours) and what is not (over 1 hour). Clearly what I'm doing is unfavorable.
 3. **Deep Sleep** : How long you’ve been in deep sleep compared to the total sleep duration. Healthy: over 30% and Unfavorable: under 20%. This is pretty good, my average is 40% which is healthy.
 4. **Efficiency** : How long you’ve been actually sleeping vs. being in bed. Mine is a healthy average of 95%, this is true as I don't stay awake after I start the sleep tracker because I know that I'm supposed to be sleeping then. So, this is one of the positive changes.
-5. **Snoring** : I rarely snore, so 0%, yay!
+5. **Snoring** : I rarely snore, so 0%, yay! 
 6. **Rating** : I never rated my sleep out of 5 stars, so this statistics is meaningless to me.
 In the end it shows us how many hours of sleep I have lost over the period in consideration (1 month) - over 80 hours!
 
@@ -162,6 +161,31 @@ The chart on the left is good representation of your sleep cycle. The goal is to
 
 The graphs are color-blind friendly and there is a clear distinction between the shades of blue and red used to differentiate healthy and unfavorable patterns. Only if you have the condition - Monochromacy/Achromatopsia, you will not be able to see the difference in colors, but you would still understand all the other graphs as they are coded based on intensity of color. 
 
+
+From all the tracking that happened over the month, the app recorded only one instance of snoring on the 27th of September 2022. You will have to turn the volume up and wear earphones to hear me snoring, but you should be able to hear the phone vibrate once it detects snoring noise. Sadly, it did not work as I continued to snore for 7 more minutes.
+
+<div class="container">
+<audio controls style="width: 50%;">
+    <source src="snoring.mp3" type="audio/mp3">
+    Your browser does not support the audio element.
+</audio>
+</div>
+
+I combined the step count from the Samsung Health app and the sleep duration from the Sleep as Android app, to understand why I snored on 27th as I don't generally snore.
+
+{{< image src="sleep-activity-link.png" alt="Graph showing the correlation between step count and sleep duration. Higher the step count, longer the sleep duration." caption="Higher the step count, longer the sleep duration." width="800">}}
+
+From the graph, we can see the dip in sleep duration on the 25th and the 26th when I slept for ~4 hours combined. So, it makes sense that I was knocked out when I finally slept on the night of 27th.
+
+The phone also picked up some weird beeping noise in the past two-three days. It is something that requires a deeper investigation. 
+
+<div class="container">
+<audio controls style="width: 50%;">
+    <source src="weird-noise.mp3" type="audio/mp3">
+    Your browser does not support the audio element.
+</audio>
+</div>
+
 ### Validation of Tracking Data
 
 The app (Sleep as Android) has a definite starting point for sleep tracking, when I manually start the tracker. And, a definite ending point, when the alarm rings and I save the tracked information. I can say with certainty that the duration tracking information is accurate. 
@@ -169,13 +193,15 @@ Whereas the general purpose activity tracker app - Samsung Health, tracks the sl
 
 At the time of writing this blog, the Samsung Health app shows an average sleep duration of 6 hours and 24 minutes over the past month (2nd September 2022 - 2nd October 2022). Whereas the dedicated sleep tracking app - Sleep as Android, shows an average of 4 hours and 15 minutes. This is a huge difference. I always thought that 6 hours of sleep was good enough accounting for all the work I have to do on a day-to-day basis. This way, using a dedicated sleep tracker app is a definite eye-opener and shows you exactly and accurately all that is wrong.
 
-## Implication and Uses of Tracking
+## Implications and Uses of Tracking
 
 What do you get from tracking your sleep, keeping your phone by your side and letting the app record your sleep time noises?
 
-| | |
-| - | - |
-{{< image src="advices.jpg" alt="Screenshot of the advices screen, which shows places for improvement and details about how it can be improved." caption="Easy way of knowing where you are lacking in your sleep cycle." width="300">}} | {{< image src="advices-2.jpg" alt="Screenshot of graph showing the duration of sleep over a month. It shows a steady decline in the number of hours" caption="Line graph showing a steady decline in the number of hours of sleep." width="300">}}
+| | | |
+| - | - | - |
+{{< image src="advices.jpg" alt="Screenshot of the advices screen, which shows places for improvement." caption="Areas where improvements need to be done to sleep cycle." width="300">}} | {{< image src="advices-2.jpg" alt="Screenshot showing details about how unfavorable patterns can be improved" caption="Details about how sleep duration can be improved." width="300">}} | {{< image src="good-things.jpg" alt="Screenshot about improvements made lately" caption="One of the improvements made lately." width="300">}} 
+
+The app gives you suggestions and advices about how you could improve in the areas where you are lagging. It also shows you where you are doing well. This detailed insight about your sleep is very helpful. Sometimes you know what is wrong, and you might not have the energy or would not want to put effort into ways you could correct yourself. For those instances, the app shows you some simple steps or measures you can take to help you sleep better.
 
 ## References
 
