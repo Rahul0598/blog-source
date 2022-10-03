@@ -234,6 +234,8 @@ There are a few features on the app that I have under-used, especially the sleep
 
 Behavior change is hard, it requires a lot of effort to be put into making lifestyle changes - time management, and personality changes - not binge on Netflix, in order to be successful. Tracking applications like *Sleep as Android* point out exactly what the problem is and advice you on how you could fix it, but they are limited to that. The environment and current life situation needs to be considered when thinking about whether a behavior change is possible. I believe that this tracking exercise has empowered me about the importance of maintaining a healthy sleep cycle. 
 
+*Addendum :* Android Authority, a tech blogging site published an article about the harmful effects of sleeping with the phone next to you [[9]](#9). I use my phone first thing in the morning and last thing at night. If it is within arm's length, I'll be touching it (*that sounds wrong*). With the usage of this tracking app, I have one additional reason to use it all the time. So, this poses a larger question - How healthy is this heavy dependence on devices? Are we creating new problems trying to fix existing problems? It is something to think about..
+
 ## References
 
 All the images taken from various sources have been cited appropriately. Any image without a reference belongs to me.
@@ -261,3 +263,6 @@ Social Cognitive Theory of Personality Mnemonic for MCAT. (n.d.). Retrieved Octo
 
 <a id="8">[8]</a>
 Sleep and Sleep Disorders. (2022, September 7). Centers for Disease Control and Prevention. Retrieved October 3, 2022, from https://www.cdc.gov/sleep/index.html
+
+<a id="9">[9]</a>
+Birney, A. (2022, September 27). Too many of you sleep with your phone, and it’s bad for your health. Android Authority. Retrieved October 3, 2022, from https://www.androidauthority.com/sleeping-with-phone-bad-for-health-3209960/
