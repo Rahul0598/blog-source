@@ -1,8 +1,8 @@
 ---
-title: "Behavior Change"
+title: "Charting Change"
 date: 2022-09-20T09:51:54+0000
+lastmod: 2022-10-03T02:05:00+0000
 weight: 1
-# aliases: ["/first"]
 tags: ["Health Informatics", "Sleep"]
 showToc: true
 TocOpen: true
@@ -28,49 +28,52 @@ td, th {
 }
 </style>
 
+What does it take to make a change in your behavior or lifestyle? What influences an individual's decisions to change a behavior? How long does it take to see results? Or, do you always see results when you make up your mind to change a habit you don't like?  
 
-Behavior change refers to efforts put in place to change people's personal habits and attitudes, to prevent disease [[1]](#1). 
+These are some of the questions I try to answer through this blog post by documenting my experience using a health monitoring application for a period of approximately 4 weeks. The idea is to understand what it takes to change behavior so that we can design better applications that actually help people achieve their goals. 
 
-As a part of I507, I was tasked to use a health monitoring application and change a behavior. The idea was to understand what it takes to change a behavior so that we can design better applications for other people.
+In order to change a behavior, we need to understand what it is. In the context of health, behavior refers to a person's beliefs and actions regarding their health and well-being. They are influenced by a person's environment. Positive behavior promotes health and prevents disease while the opposite is true for negative behaviors. Behavior change refers to efforts put in place to change people's personal habits and attitudes, to prevent disease [[1]](#1). 
 
-In the context of Health (the topic of our class), behavior refers to a person's beliefs and actions regarding their health and well-being. They are influenced by a person's environment. Positive behavior promotes health and prevents disease while the opposite is true for negative behaviors. 
-
-I have chosen to monitor and change my sleeping habits. Since I started my master's education, I have rarely slept for longer than 6 hours a night on average. Through this blog post, I will attempt to document my experience using a sleep tracker application on my phone over the course of 4 weeks and see if I make improvements to my sleep schedule. 
+The first step to bringing about a change, is to identify the issue. I have chosen to monitor and attempt to change my sleeping habits. Since I started my master's education, I have rarely slept for longer than 6 - 6.5 hours a night on average. Through this blog post, I am sharing my experience using a sleep tracker application on my phone and see if I gain some insights into my patterns.
 
 ## Background and Theory
 
 ### About me
 
-The following is a screenshot from the "Samsung Health" application which shows the average sleep statistics this year from the months of January through September. It is evident that I sleep very late in the night.
+Before you read further, you must know about my current lifestyle. Perhaps then you would be able to empathize with me in the end. I have a Samsung phone which has the Samsung Health app, I mostly use it to track my daily step count. The app also has the feature of tracking sleep durations based on the phone usage patterns. If you're not using your phone in the night for an extended period of time and the phone is stationary means you're asleep for that particular duration. I never wished for anything more than what the app could provide, no deeper analytics or insights regarding my sleep, just a single bar-graph. 
+
+The following is a screenshot from the Samsung Health app which shows the average sleep statistics this year from the months of January through September.
 
 {{< image src="yearly-average-sept21-aug22.jpg" alt="Screenshot of a bar graph showing monthly average sleep time of 6 hours and 2 minutes per day from January through September 2022. (Taken from Samsung Health app)" caption=" 6 hours of average sleep time this year. (Taken from Samsung Health app)" width="300">}}
 
-The months of January through May were stressful and hard as I had taken three core subjects (9 credits) which were all essential to satisfy my degree requirements. I also had the added pressure of landing a summer internship.
+The months of January through May were stressful and hard as I had taken three core subjects which were all essential to satisfy my degree requirements. I also had the added pressure of landing a summer internship.
 
-In the summer (May - August), I was working full-time on my internship and worked part-time as a research assistant on campus, which again called for long working hours.
+In the summer (May - August), I was working full-time on the internship and part-time as a research assistant, which again called for long working hours.
 
-The fall semester I decided to continue my internship and the research assistant-ship part-time (35 hours a week combined) along with two 13-week courses. Which (*sigh*) made it harder for me to manage my time again. 
+In the fall semester I decided to continue the internship and research assistant position in a part-time capacity (35 hours a week combined). Along with that I had enrolled for two classes. Which (*sigh*) made it harder for me to manage my time again, calling for long working hours through the week. 
 
-Hopefully I would be able to break this cycle, with the help of some analytics and science.
+I hoped to make some improvements through the usage of a dedicated sleep tracking application.
 
 ### Behavioral Model - SCT
 
-Social Cognitive Theory (SCT) discusses how individuals acquire and maintain behavior based on internal and external social interactions [[2]](#2). SCT takes into account a person's experiences to factor into whether behavioral change will occur.
+There is a wealth of research done in the field of behavior sciences to track the various stages involving an individual's decision to make a change. Two of the most commonly used theoretical models are Social Cognitive Theory (SCT) and Trans Theoretical Model (TTM). I have chosen SCT to describe and document and journey because I believe that the social and environmental aspect plays a crucial role in my case. 
 
-{{< image src="SCT.png" alt="Flow chart depicting the Social Cognitive Theory. It shows how environmental factors, personal factors and personal behavior all influence each other when an individual wants to make a behavior change" caption="Flow chart describing the various factors affecting an individuals behavior change decisions" width="500">}}
+Social Cognitive Theory (SCT) discusses how individuals acquire and maintain behavior based on internal and external social interactions [[2]](#2). SCT takes into account a person's experiences to factor whether behavioral change will occur.
+
+{{< image src="SCT.png" alt="Flow chart depicting the Social Cognitive Theory. It shows how environmental factors, personal factors and personal behavior all influence each other when an individual wants to make behavior change" caption="Flow chart describing the various factors affecting an individuals behavior change decisions" width="500">}}
 
 There are six constricts developed as a part of SCT, I will connect each of those with my situation.[[2]](#2)
 
-1. **Reciprocal Determinism** : This refers to the fact that behavioral change is dynamic and related to an individual's personality and the environment they are in. 
-2. **Behavioral Capability** : This refers to a person's ability to perform a behavioral change through knowledge and skills. I have identified the behavior I need to change and the negative impact it has on my performance. I know what to do (sleep early) and how to do it (manage time through the day in a better way). 
+1. **Reciprocal Determinism** : This refers to the fact that behavioral change is dynamic and related to an individual's personality and the environment they are in. Given the heavy academic load and it makes  
+2. **Behavioral Capability** : This refers to a person's ability to perform behavioral change through knowledge and skills. I have identified the behavior I need to change and the negative impact it has on my performance. I know what to do; sleep early. And how to do it; manage time through the day. 
 3. **Observational Learning** : Looking at others and emulating their behavior or inculcating their positive habits. A close friend of mine prioritizes sleep and mental well-being over all else. I engaged with them to understand how they manage their time and schedule. We set up a few study sessions where I sat with them while they worked through the day to understand their style of working.
-4. **Reinforcements** : Internal or external responses to a person's likelihood of continuing or discontinuing a behavior. I am hoping that the application would provide positive reinforcements to keep up the behavior change until it becomes a habit. The only way I would break the behavior would be if I am overwhelmed by the schedule. 
+4. **Reinforcements** : Internal or external responses to a person's likelihood of continuing or discontinuing behavior. The application is serving as a positive reinforcement to keep up the behavioral change with the intention of habituating it. Overwhelming schedule can act as a negative reinforcement prompting me to sleep late again.
 5. **Expectations** : Refers to the anticipated consequences of a person's behavior. My primary expectation is to sleep and wake up on time, to have a more energetic morning.
-6. **Self-Efficiency** : This refers to the level of person's confidence in their ability to successfully perform a behavior. I'm not so confident at the moment (not gonna lie). We'll see how it goes.
+6. **Self-Efficiency** : This refers to the level of person's confidence in their ability to successfully change behavior. I'm not so confident at the moment (not gonna lie). We'll see how it goes.
 
 ## Choice of Monitoring Application
 
-There are two main things I look for while downloading an application: 1) the number of downloads, and 2) the average rating. "Sleep as Android" seemed to be the best one out of the available applications. I did not go into the available features and the details regarding the application before deciding to download it. The fact that it was also tagged as an "Editor's choice" made the decision easier. 
+There are two main things I look for while downloading an application: 1) the number of downloads, and 2) the average rating. "Sleep as Android" seemed to be the best one out of the available applications. I did not go into the available features and the details regarding the application before deciding to download it, because I assumed that the most downloaded app would objectively be better than the other applications. The fact that it was also tagged as an "Editor's choice" made the decision easier. 
 
 | | |
 | - | - |
@@ -91,7 +94,7 @@ Few of the screenshots describing the available features, other than the primary
 3. I wonder how much battery the sonar feature would consume through the night. 
 4. I have not been told that I snore in my sleep, except for when I am exhausted. So, hopefully the phone proves I don't snore.
 
-The app requires permissions to access physical activity, maybe that is to keep of track of movements during the sleep which would aid in its tracking ability.
+The app requires permissions to access physical activity, maybe that is to keep track of movements during the sleep which would aid in its tracking ability.
 Once the required permission is given, you are taken to the button which would ask you to set an alarm.
 
 {{< image src="set-alarm-lots-of-icons.jpg" caption="Window to set an alarm with some unknown icons." alt="Screenshot which shows you how to set the alarm." width="300">}}
@@ -171,13 +174,13 @@ From all the tracking that happened over the month, the app recorded only one in
 </audio>
 </div>
 
-I combined the step count from the Samsung Health app and the sleep duration from the Sleep as Android app, to understand why I snored on 27th as I don't generally snore.
+I combined the step count from the Samsung Health app and the sleep duration from the Sleep as Android app, to understand why I snored on 27th as I don't generally snore.[[5]](#5)
 
 {{< image src="sleep-activity-link.png" alt="Graph showing the correlation between step count and sleep duration. Higher the step count, longer the sleep duration." caption="Higher the step count, longer the sleep duration." width="800">}}
 
 From the graph, we can see the dip in sleep duration on the 25th and the 26th when I slept for ~4 hours combined. So, it makes sense that I was knocked out when I finally slept on the night of 27th.
 
-The phone also picked up some weird beeping noise in the past two-three days. It is something that requires a deeper investigation. 
+The phone also picked up some weird beeping noise in the past two-three days. It is something that requires a *deeper investigation*.
 
 <div class="container">
 <audio controls style="width: 50%;">
@@ -199,9 +202,15 @@ What do you get from tracking your sleep, keeping your phone by your side and le
 
 | | | |
 | - | - | - |
-{{< image src="advices.jpg" alt="Screenshot of the advices screen, which shows places for improvement." caption="Areas where improvements need to be done to sleep cycle." width="300">}} | {{< image src="advices-2.jpg" alt="Screenshot showing details about how unfavorable patterns can be improved" caption="Details about how sleep duration can be improved." width="300">}} | {{< image src="good-things.jpg" alt="Screenshot about improvements made lately" caption="One of the improvements made lately." width="300">}} 
+{{< image src="advices.jpg" alt="Screenshot of the advices screen, which shows places for improvement." caption="Areas where improvements need to be done to sleep cycle." width="300">}} | {{< image src="advices-2.jpg" alt="Screenshot showing details about how unfavorable patterns can be improved. I suppose alcohol consumption must be reduced." caption="Details about how sleep duration can be improved." width="300">}} | {{< image src="good-things.jpg" alt="Screenshot about improvements made lately" caption="One of the improvements made lately." width="300">}} 
 
-The app gives you suggestions and advices about how you could improve in the areas where you are lagging. It also shows you where you are doing well. This detailed insight about your sleep is very helpful. Sometimes you know what is wrong, and you might not have the energy or would not want to put effort into ways you could correct yourself. For those instances, the app shows you some simple steps or measures you can take to help you sleep better.
+The app gives you suggestions and advices about how you could improve in the areas where you are lagging. It also shows you where you are doing well. This detailed insight about your sleep is very helpful. Sometimes you know what is wrong, and you might not have the energy or would not want to put effort into ways you could correct yourself. For those instances, the app shows you some simple steps or measures you can take to help you sleep better. It is also funny how alcohol consumption is the top recommendation as I do not drink.
+
+I must also mention that, initially, I found the excessive amount of charts and graphs a bit overwhelming. But now, after 4 weeks, the community summary statistics motivates you to work on fixing your schedule. It gives you a conscious/unconscious nudge to reduce the number of red graphs on the charts. 
+
+## Conclusion
+
+
 
 ## References
 
@@ -216,3 +225,6 @@ User Manual. (n.d.). Sleep as Android. Retrieved September 27, 2022, from https:
 
 <a id="4">[4]</a>
 Sleepcloud Study. (n.d.). Sleep as Android. Retrieved September 27, 2022, from https://sleep.urbandroid.org/sleepcloud-study/
+
+<a id="5">[5]</a>
+Devajji, R. (n.d.). Blog-source/sleep-step.ipynb at master · RAHUL0598/blog-source. GitHub. Retrieved October 2, 2022, from https://github.com/Rahul0598/blog-source/blob/master/content/posts/I507/Sleep-Step.ipynb 
