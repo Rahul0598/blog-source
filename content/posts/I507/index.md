@@ -34,13 +34,21 @@ These are some of the questions I try to answer through this blog post by docume
 
 In order to change a behavior, we need to understand what it is. In the context of health, behavior refers to a person's beliefs and actions regarding their health and well-being. They are influenced by a person's environment. Positive behavior promotes health and prevents disease while the opposite is true for negative behaviors. Behavior change refers to efforts put in place to change people's personal habits and attitudes, to prevent disease [[1]](#1). 
 
-The first step to bringing about a change, is to identify the issue. I have chosen to monitor and attempt to change my sleeping habits. Since I started my master's education, I have rarely slept for longer than 6 - 6.5 hours a night on average. Through this blog post, I am sharing my experience using a sleep tracker application on my phone and see if I gain some insights into my patterns.
+The first step to bringing about a change, is to identify the issue. I have chosen to monitor and attempt to change my sleeping habits. Since I started my master's education, I have rarely slept for longer than 6 - 6.5 hours a night on average. Though this does not have any immediate effects that I am noticing, I believe that this is not a healthy pattern to live by, in the long run. 
+
+Through this blog post, I am sharing my experience using a sleep tracker application on my phone and see if I gain some insights into my patterns.
 
 ## Background and Theory
 
+The CDC states that - Not getting enough sleep is linked with many chronic diseases and conditions. That, getting enough sleep is not a luxury, but something that is needed in order to maintain good health[[8]](#8).
+
 ### About me
 
-Before you read further, you must know about my current lifestyle. Perhaps then you would be able to empathize with me in the end. I have a Samsung phone which has the Samsung Health app, I mostly use it to track my daily step count. The app also has the feature of tracking sleep durations based on the phone usage patterns. If you're not using your phone in the night for an extended period of time and the phone is stationary means you're asleep for that particular duration. I never wished for anything more than what the app could provide, no deeper analytics or insights regarding my sleep, just a single bar-graph. 
+I have been sleeping for less than 7 hours for so many years now, I tell people that my body does not let me sleep past 6-6.5 hours. I never felt that it was particularly debilitating, I feel drained out in the morning, but I usually pick up steam by the afternoon and get stuff done. But, whenever I decide to start sleeping early, it so happens that I have unfinished work to tend to. 
+
+Before you read more about my experience with the app, you must know about my current lifestyle. Perhaps then you would be able to empathize with me in the end.
+
+I have a Samsung phone which has the Samsung Health app, I mostly use it to track my daily step count. The app also has the feature of tracking sleep durations based on the phone usage patterns. If you're not using your phone in the night for an extended period of time and the phone is stationary means you're asleep for that particular duration. I never wished for anything more than what the app could provide, no deeper analytics or insights regarding my sleep, just a single bar-graph. 
 
 The following is a screenshot from the Samsung Health app which shows the average sleep statistics this year from the months of January through September.
 
@@ -60,11 +68,11 @@ There is a wealth of research done in the field of behavior sciences to track th
 
 Social Cognitive Theory (SCT) discusses how individuals acquire and maintain behavior based on internal and external social interactions [[2]](#2). SCT takes into account a person's experiences to factor whether behavioral change will occur.
 
-{{< image src="SCT.png" alt="Flow chart depicting the Social Cognitive Theory. It shows how environmental factors, personal factors and personal behavior all influence each other when an individual wants to make behavior change" caption="Flow chart describing the various factors affecting an individuals behavior change decisions" width="500">}}
+{{< image src="SCT.png" alt="Flow chart depicting the Social Cognitive Theory. It shows how environmental factors, personal factors and personal behavior all influence each other when an individual wants to make behavior change" caption="Flow chart describing the various factors affecting an individuals behavior change decisions.[[7]](#7)" width="500">}}
 
 There are six constricts developed as a part of SCT, I will connect each of those with my situation.[[2]](#2)
 
-1. **Reciprocal Determinism** : This refers to the fact that behavioral change is dynamic and related to an individual's personality and the environment they are in. Given the heavy academic load and it makes  
+1. **Reciprocal Determinism** : This refers to the fact that behavioral change is dynamic and related to an individual's personality and the environment they are in. Given the heavy academic load there is less time to sleep and the college environment where your peers also sleep late, makes it harder to inculcate healthy habits.
 2. **Behavioral Capability** : This refers to a person's ability to perform behavioral change through knowledge and skills. I have identified the behavior I need to change and the negative impact it has on my performance. I know what to do; sleep early. And how to do it; manage time through the day. 
 3. **Observational Learning** : Looking at others and emulating their behavior or inculcating their positive habits. A close friend of mine prioritizes sleep and mental well-being over all else. I engaged with them to understand how they manage their time and schedule. We set up a few study sessions where I sat with them while they worked through the day to understand their style of working.
 4. **Reinforcements** : Internal or external responses to a person's likelihood of continuing or discontinuing behavior. The application is serving as a positive reinforcement to keep up the behavioral change with the intention of habituating it. Overwhelming schedule can act as a negative reinforcement prompting me to sleep late again.
@@ -115,7 +123,7 @@ The home screen of the app has the features to set an alarm, tutorial slides and
 
 ### How do you track?
 
-Tracking is done based on the alarm time (wake-up time) you set on the app. I had configured the alarm to repeat every morning and also set the goal sleep hours. With these settings, the app reminds you to sleep before your projected bedtime by sending a notification which vibrates the phone. There is an option to snooze the reminder to sleep, and the app will remind you again in 15 minutes. I felt that this feature of vibrating the phone until you actually go to sleep and start tracking is very helpful as it forces you to think about going to sleep every time the phone vibrates.
+Tracking is done based on the alarm time (wake-up time) you set on the app. I had configured the alarm to repeat every morning and also set the goal sleep hours. With these settings, the app reminds you to sleep before your projected bedtime by sending a notification which vibrates the phone. There is an option to snooze the reminder to sleep, and the app will remind you again in 15 minutes. I felt that this feature of vibrating the phone until you actually go to sleep and start tracking, is very helpful as it forces you to think about going to sleep every time the phone vibrates. I have a habit of listening to some podcast in bed, I feel like it helps me sleep. The episodes range in between 30-50 minutes, so the app has a feature of delaying the start of tracking and recording noises once you go to bed. I usually set the start delay to match the length of the episode, this way there is no bad data (podcast being tagged as sleep-talking) tracked. 
 
 In the morning, the alarm rings and wakes you up to the preset ringtone and shows you the duration of sleep and the efficiency of your sleep along with a 5-star scale for you to rate your sleep.
 
@@ -150,9 +158,13 @@ In the past month of September. I have slept for an average of 4 hours only. Thi
 6. **Rating** : I never rated my sleep out of 5 stars, so this statistics is meaningless to me.
 In the end it shows us how many hours of sleep I have lost over the period in consideration (1 month) - over 80 hours!
 
-The app has this cool feature where it shows the summary statistics from all the countries. Each country has a count of users who have agreed to share their data with the app owners to be a part of a "SleepCloud Study"[[4]](#4). The funny part is how you have to keep scrolling for a minute to reach the end and there is no search feature to find a country of interest.
+The app has this cool feature where it shows the summary statistics from all the countries. Each country has a count of users who have agreed to share their data with the app owners to be a part of a "SleepCloud Study"[[4]](#4). The funny part is how you have to keep scrolling for a minute to reach the end and there is no search feature to find a country of interest. 
 
 {{< image src="world-summary.jpg" alt="An endless scrollable list of all countries in the world!" caption="Screenshot of the overall sleep statistics from across the world." width="300">}}
+
+These summary statistics motivate you to fix your schedule. There is an unconscious nudge to reduce the number of red graphs on the charts.
+I must also mention that, initially I found the excessive amount of charts, graphs and analysis a bit overwhelming. But now, after 4 weeks, I have customized my dashboard to show me only the things I want to see. 
+
 
 Some of the other graphs that I find useful are : 
 
@@ -206,13 +218,21 @@ What do you get from tracking your sleep, keeping your phone by your side and le
 
 The app gives you suggestions and advices about how you could improve in the areas where you are lagging. It also shows you where you are doing well. This detailed insight about your sleep is very helpful. Sometimes you know what is wrong, and you might not have the energy or would not want to put effort into ways you could correct yourself. For those instances, the app shows you some simple steps or measures you can take to help you sleep better. It is also funny how alcohol consumption is the top recommendation as I do not drink.
 
-I must also mention that, initially, I found the excessive amount of charts and graphs a bit overwhelming. But now, after 4 weeks, the community summary statistics motivates you to work on fixing your schedule. It gives you a conscious/unconscious nudge to reduce the number of red graphs on the charts. 
+| | |
+| - | - |
+{{< image src="duration_regression.png" alt="Regression model advising you about how long you should sleep based on the ratings you give and tracked deep sleep percentage." caption="How long should you sleep?[[6]](#6)" width="300">}} | {{< image src="fall_asleep_regression.png" alt="Regression model advising you about when you should ideally sleep to feel the best in the morning." caption="When should you sleep?[[6]](#6)" width="300">}} 
+
+The app also advices you about when you should ideally fall asleep and for how long should you sleep [[6]](#6). The aim of these charts is to show how changes in your sleep duration and fall asleep hour affect your sleep rating and deep sleep percentage. The app takes existing historical data, filters out the outliers and then build a model that best fits the data.
+
+These are some of the most in-depth advice you receive by just keeping your phone beside you while you sleep. 
 
 ## Conclusion
 
 
 
 ## References
+
+All the images taken from various sources have been cited appropriately. Any image without a reference belongs to me.
 
 <a id="1">[1]</a> 
 Wikipedia contributors. (2022, August 29). Behavior change (public health). Wikipedia. Retrieved September 25, 2022, from https://en.wikipedia.org/wiki/Behavior_change_(public_health)
@@ -221,10 +241,19 @@ Wikipedia contributors. (2022, August 29). Behavior change (public health). Wiki
 The Social Cognitive Theory. (n.d.). Retrieved September 25, 2022, from https://sphweb.bumc.bu.edu/otlt/mph-modules/sb/behavioralchangetheories/behavioralchangetheories5.html
 
 <a id="3">[3]</a>
-User Manual. (n.d.). Sleep as Android. Retrieved September 27, 2022, from https://docs.sleep.urbandroid.org/
+User Manual. (n.d.). Sleep as Android. Retrieved September 27, 2022, from https://docs.sleep.urbandroid.org/sleep/0parent.html
 
 <a id="4">[4]</a>
 Sleepcloud Study. (n.d.). Sleep as Android. Retrieved September 27, 2022, from https://sleep.urbandroid.org/sleepcloud-study/
 
 <a id="5">[5]</a>
 Devajji, R. (n.d.). Blog-source/sleep-step.ipynb at master · RAHUL0598/blog-source. GitHub. Retrieved October 2, 2022, from https://github.com/Rahul0598/blog-source/blob/master/content/posts/I507/Sleep-Step.ipynb 
+
+<a id="6">[6]</a>
+Charts/Trends. (n.d.). Sleep as Android. Retrieved September 27, 2022, from https://docs.sleep.urbandroid.org/sleep/charts.html
+
+<a id="7">[7]</a>
+Social Cognitive Theory of Personality Mnemonic for MCAT. (n.d.). Retrieved October 3, 2022, from https://pixorize.com/view/5130
+
+<a id="8">[8]</a>
+Sleep and Sleep Disorders. (2022, September 7). Centers for Disease Control and Prevention. Retrieved October 3, 2022, from https://www.cdc.gov/sleep/index.html
