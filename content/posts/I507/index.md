@@ -228,7 +228,11 @@ These are some of the most in-depth advice you receive by just keeping your phon
 
 ## Conclusion
 
+Well, here we are. After four weeks, I can't say that my sleep schedule has changed for the better. But I can say with certainty that I do not have any obvious sleeping disorder and if my schedule permits and I sleep early, I should definitely be able to sleep for longer and have a higher deep sleep percentage. 
 
+There are a few features on the app that I have under-used, especially the sleep rating feature - where you rate your sleep as soon as you wake up (or by clicking on the dashboard), I wish it were more like a Likert scale with the options of choosing how energetic you feel. Probably that would be easier to choose than attempting to quantify based on the number of stars. Other than that, I feel like this is the best tracking application I have used. It is definitely worth paying for a lifetime access ad free access of the app ($10 at the time of writing).
+
+Behavior change is hard, it requires a lot of effort to be put into making lifestyle changes - time management, and personality changes - not binge on Netflix, in order to be successful. Tracking applications like *Sleep as Android* point out exactly what the problem is and advice you on how you could fix it, but they are limited to that. The environment and current life situation needs to be considered when thinking about whether a behavior change is possible. I believe that this tracking exercise has empowered me about the importance of maintaining a healthy sleep cycle. 
 
 ## References
 

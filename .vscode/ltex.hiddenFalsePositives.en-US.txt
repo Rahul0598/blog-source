@@ -1,0 +1,1 @@
+{"rule":"COMMA_COMPOUND_SENTENCE","sentence":"^\\QBut I can say with certainty that I do not have any obvious sleeping disorder and if my schedule permits and I sleep early, I should definitely be able to sleep for longer and have a higher deep sleep percentage.\\E$"}
