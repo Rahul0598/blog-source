@@ -1,6 +1,6 @@
 ---
-title: "2022"
-date: 2022-02-14T06:51:54+0000
+title: "Books"
+date: 2023-01-31T18:25:54+0000
 # weight: 1
 # aliases: ["/first"]
 # tags: ["first"]
@@ -9,7 +9,7 @@ showToc: false
 TocOpen: false
 hidemeta: false
 comments: false
-description: "Books I've read and audiobooks I've listened to in 2022"
+description: "Books I've read and audiobooks I've listened to."
 # canonicalURL: "https://canonical.url/to/page"
 disableHLJS: true # to disable highlightjs
 disableShare: true
@@ -17,9 +17,28 @@ disableHLJS: false
 hideSummary: true
 searchHidden: false
 ShowReadingTime: false
-ShowBreadCrumbs: true
-ShowPostNavLinks: true
+ShowBreadCrumbs: false
+ShowPostNavLinks: false
+autonumbering: false
 ---
+----
+# 2023
+----
+# January
+- The Ones Who Walk Away from Omelas - Ursula K. le Guin
+- The left hand of darkness - Ursula K. le Guin
+- The Egg - Andy Weir
+- Piranesi - Susanna Clarke
+- Before the Coffee Gets Cold - Toshikazu Kawaguchi
+
+----
+# 2022
+----
+# August
+- Convenience Store Woman - Sayaka Murata
+
+# July
+- Stories of your Life and Others - Ted Chiang
 
 # June
 - The Happy Ever After Playlist - Abby Jimenez
