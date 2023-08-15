@@ -1,5 +1,5 @@
 ---
-title: "rahuldevajji/about"
+title: ""
 date: "2023-08-14"
 draft: false
 katex: true
