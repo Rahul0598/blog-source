@@ -1,4 +1,4 @@
-# baseURL = 'https://rahul0598.github.io/'
+baseURL = '//rahuldevajji.com'
 languageCode = 'en-us'
 title = 'rahuldevajji'
 
@@ -50,10 +50,6 @@ pygmentsStyle = "emacs"
    url = "/reading/"
    name = "reading"
    weight = 4
-  [[menu.main]]
-    url = "https://github.com/Rahul0598"
-    name = "github"
-    weight = 5
 
 
 # Footer

@@ -10,6 +10,10 @@ toc: true
 website_carbon: true
 ---
 
+## September
+- Reincarnation Blue - Michael Poore
+- The left hand of darkness - Ursula K. Le Guin
+
 ## August
 - Convenience Store Woman - Sayaka Murata
 
