@@ -1,13 +1,10 @@
 ---
 title: "2022"
 slug: "reading2022"
-date: 2021-12-09T21:20:53-05:00
+date: 2022-12-09T21:20:53-05:00
 draft: false
 katex: true
 tags: ['reading']
-back_to_top: true
-toc: true
-website_carbon: true
 ---
 
 ## September

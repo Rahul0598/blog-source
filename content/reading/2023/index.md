@@ -5,9 +5,6 @@ date: 2023-08-14T00:26:53-05:00
 draft: false
 katex: true
 tags: ['reading']
-back_to_top: true
-toc: true
-website_carbon: true
 ---
 
 ## August
