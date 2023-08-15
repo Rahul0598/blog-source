@@ -1,3 +1,4 @@
+
 ---
 title: "Linux Journey"
 date: 2022-02-14T06:51:54+0000
@@ -36,4 +37,5 @@ Cut to mid 2021, I ditched my arch installation and took on Garuda's arch-based 
 This has been my journey through the world of Linux so far, not a lot of experimentation but a lot of learning. So, when will you hop onto the fun side? 
 
 *PS: Keep backing up your files. This way, you won't be afraid of starting afresh.*
+
 
