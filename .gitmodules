@@ -7,3 +7,6 @@
 [submodule "themes/DoIt"]
 	path = themes/DoIt
 	url = https://github.com/HEIGE-PCloud/DoIt.git
+[submodule "themes/bettermotherfuckinghugowebsite"]
+	path = themes/bettermotherfuckinghugowebsite
+	url = git@github.com:Rahul0598/bettermotherfuckinghugowebsite.git
