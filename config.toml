@@ -1,4 +1,4 @@
-baseURL = '//rahuldevajji.com'
+baseURL = 'http://localhost:1313'
 languageCode = 'en-us'
 title = 'rahuldevajji'
 
@@ -16,7 +16,7 @@ paginatePath = "page"
 # googleAnalytics = ""
 
 # Copyright
-copyright = "© 2023 — Rahul Devajji — All rights reserved."
+copyright = "© 2025 — Rahul Devajji — All rights reserved."
 
 # Highlighting
 
@@ -47,8 +47,8 @@ pygmentsStyle = "emacs"
    name = "tags"
    weight = 3
   [[menu.main]]
-   url = "/reading/"
-   name = "reading"
+   url = "/readings/"
+   name = "readings"
    weight = 4
 
 

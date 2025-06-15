@@ -1,28 +1,28 @@
 services:
   build:
-   image: klakegg/hugo:0.107.0-ext-alpine
+   image: klakegg/hugo:ext-pandoc
    volumes:
-     - ./config.toml:/src/config.toml
-     - ./content:/src/content
-     - ./static:/src/static
-     - ./themes:/src/themes
+     - ./config.toml:/src/config.toml:z
+     - ./content:/src/content:z
+     - ./static:/src/static:z
+     - ./themes:/src/themes:z
 
   server:
-    image: klakegg/hugo:0.107.0-ext-alpine
+    image: klakegg/hugo:ext-pandoc
     command: server --navigateToChanged
     volumes:
-      - ./config.toml:/src/config.toml
-      - ./content:/src/content
-      - ./static:/src/static
-      - ./themes:/src/themes
+      - ./config.toml:/src/config.toml:z
+      - ./content:/src/content:z
+      - ./static:/src/static:z
+      - ./themes:/src/themes:z
     ports:
       - 1313:1313
   
   publish:
-    image: klakegg/hugo:0.107.0-ext-alpine
+    image: klakegg/hugo:ext-pandoc
     entrypoint: hugo-official
     environment:
       HUGO_ENV_ARG: "production"
     volumes:
-      - .:/src
+      - .:/src:z
 

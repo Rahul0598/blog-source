@@ -9,7 +9,7 @@ website_carbon: true
 
 # Hi, I'm Rahul
 And I'm an [Informatics](https://informatics.indiana.edu/index.html) PhD. student at Indiana University Bloomington majoring in Health Informatics.
-I listen to podcasts and read a lot of sci-fi. I'm tracking all the [books]({{<ref "/reading">}}) I've read recently here, hopefully I'll also start writing about those books.
+I listen to podcasts and read a lot of sci-fi. I'm tracking all the [books]({{<ref "/readings">}}) I've read recently here, hopefully I'll also start writing about those books.
 I also write posts about general tech stuff on my [blog]({{<ref "/posts">}}).
 
 ![me](profile-picture.jpg)
@@ -17,7 +17,7 @@ I also write posts about general tech stuff on my [blog]({{<ref "/posts">}}).
 
 ### Quick links
 - [Browse by tags]({{< ref "/tags" >}})
-- [Books]({{<ref "/reading">}})
+- [Books]({{<ref "/readings">}})
 
 ###  Connect with me:
 
