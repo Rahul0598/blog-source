@@ -16,6 +16,7 @@ searchHidden: false
 ShowReadingTime: true
 ShowBreadCrumbs: true
 ShowPostNavLinks: true
+website_carbon: true
 ---
 
 Reading Langdon Winner's *The Whale and the Reactor* today feels like looking in a mirror. Published in 1986, his thoughts on technology's place in society resonate with an unsettling familiarity. The anxieties and arguments surrounding computers and nuclear power then are pretty similar to our conversations about Artificial Intelligence now. It seems we're grappling with the same fundamental questions, just with a new set of tools.
