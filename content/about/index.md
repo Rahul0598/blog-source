@@ -8,6 +8,7 @@ back_to_top: false
 website_carbon: true
 ---
 
+I am developing an approach to urban heat resilience that bridges the gap between climate science, data-driven research, and community action. My work combines satellite imagery, urban morphology, in-situ and wearable sensor data, and machine learning to model and predict urban heat patterns. I integrate socio-economic, health, and meteorological data to understand the impacts of extreme heat on vulnerable populations. Through projects like Local Climate Zone classification and personal heat exposure studies, I aim to inform equitable and sustainable urban planning solutions.
 
 ## What am I up to right now?
 
