@@ -14,6 +14,8 @@ I am developing an approach to urban heat resilience that bridges the gap betwee
 
 - Research Assistant at the [healthy cities lab](https://healthycities.sice.indiana.edu)
 - Research on localized climate zone classification using [Google Earth Engine](https://earthengine.google.com/)
+- Understanding the impact of extreme heat on hospital visits
+- Predicting hyper-local air temperature using remote sensing.
 
 ##  Connect with me:
 

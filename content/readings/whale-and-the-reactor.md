@@ -25,7 +25,7 @@ Reading Langdon Winner's *The Whale and the Reactor* today feels like looking in
 
 Winner criticized the idea of technology as an unstoppable force, a kind of progress we have no choice but to accept. He pointed out the flawed belief that any new invention is automatically beneficial and liberating.
 
-> "Over many decades technological optimists have been sustained by the belief that whatever happened to be created in the sphere of material/instrumental culture would certainly be compatible with freedom, democracy, and social justice. This amounts to a conviction that all technology—whatever its size, shape, or complexion—is inherently liberating".
+> "Over many decades technological optimists have been sustained by the belief that whatever happened to be created in the sphere of material/instrumental culture would certainly be compatible with freedom, democracy, and social justice. This amounts to a conviction that all technology - whatever its size, shape, or complexion - is inherently liberating".
 
 This sounds a lot like the current narrative around AI, which is often presented as an "unstoppable force" reshaping our world. This framing makes its widespread adoption feel inevitable.
 
