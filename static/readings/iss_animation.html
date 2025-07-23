@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Earth with Real-Time ISS and Night Lights</title>
+    <style>
+        body { 
+            margin: 0; 
+            overflow: hidden; 
+            background-color: black; 
+            font-family: Arial, sans-serif;
+        }
+        canvas { display: block; }
+        #info {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            border-radius: 5px;
+            font-size: 14px;
+            max-width: 300px;
+            z-index: 100;
+        }
+        #status {
+            color: green;
+            font-weight: bold;
+        }
+        .error {
+            color: red !important;
+        }
+    </style>
+</head>
+<body>
+    <div id="info">
+        <div id="status">Loading ISS data...</div>
+        <div id="coordinates"></div>
+        <div id="velocity"></div>
+        <div id="altitude"></div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        // Scene setup
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setClearColor(0x000000); // Dark space background
+        document.body.appendChild(renderer.domElement);
+
+        // Simple mouse controls
+        let isMouseDown = false;
+        let mouseX = 0, mouseY = 0;
+        let targetRotationX = 0, targetRotationY = 0;
+        let rotationX = 0, rotationY = 0;
+
+        renderer.domElement.addEventListener('mousedown', onMouseDown, false);
+        renderer.domElement.addEventListener('mousemove', onMouseMove, false);
+        renderer.domElement.addEventListener('mouseup', onMouseUp, false);
+        renderer.domElement.addEventListener('wheel', onWheel, false);
+
+        function onMouseDown(event) {
+            isMouseDown = true;
+            mouseX = event.clientX;
+            mouseY = event.clientY;
+        }
+
+        function onMouseMove(event) {
+            if (!isMouseDown) return;
+            
+            const deltaX = event.clientX - mouseX;
+            const deltaY = event.clientY - mouseY;
+            
+            targetRotationY += deltaX * 0.01;
+            targetRotationX += deltaY * 0.01;
+            
+            mouseX = event.clientX;
+            mouseY = event.clientY;
+        }
+
+        function onMouseUp() {
+            isMouseDown = false;
+        }
+
+        function onWheel(event) {
+            camera.position.z += event.deltaY * 0.01;
+            camera.position.z = Math.max(2, Math.min(10, camera.position.z));
+        }
+
+        // Position the camera
+        camera.position.z = 3;
+
+        // Create Earth (stationary)
+        const earthRadius = 1;
+        const geometry = new THREE.SphereGeometry(earthRadius, 64, 64);
+        const textureLoader = new THREE.TextureLoader();
+        
+        const earthTexture = textureLoader.load('https://threejs.org/examples/textures/planets/earth_atmos_2048.jpg');
+        const bumpTexture = textureLoader.load('https://threejs.org/examples/textures/planets/earth_normal_2048.jpg');
+        const lightsTexture = textureLoader.load('https://threejs.org/examples/textures/planets/earth_lights_2048.png'); // City lights texture
+        
+        const earthMaterial = new THREE.MeshPhongMaterial({
+            map: earthTexture,
+            bumpMap: bumpTexture,
+            bumpScale: 0.02,
+            emissiveMap: lightsTexture,
+            emissive: new THREE.Color(0xffffff),
+            emissiveIntensity: 0.8 // Adjust for subtle glow on night side
+        });
+
+        const earth = new THREE.Mesh(geometry, earthMaterial);
+        scene.add(earth);
+
+        // Add lights (sun simulation)
+        const ambientLight = new THREE.AmbientLight(0x404040, 0.3); // Lower ambient for better night contrast
+        scene.add(ambientLight);
+
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 1.2); // Brighter sun for day/night contrast
+        directionalLight.position.set(5, 3, 5);
+        scene.add(directionalLight);
+
+        // Create ISS model with enhanced outline visibility
+        const issGroup = new THREE.Group();
+
+        // Main body
+        const bodyGeometry = new THREE.BoxGeometry(0.08, 0.03, 0.05);
+        const bodyMaterial = new THREE.MeshPhongMaterial({ color: 0xcccccc });
+        const issBody = new THREE.Mesh(bodyGeometry, bodyMaterial);
+        issGroup.add(issBody);
+
+        // Solar panels
+        const panelGeometry = new THREE.BoxGeometry(0.15, 0.01, 0.08);
+        const panelMaterial = new THREE.MeshPhongMaterial({ color: 0x1a1a3a });
+
+        const leftPanel = new THREE.Mesh(panelGeometry, panelMaterial);
+        leftPanel.position.set(-0.08, 0, 0);
+        issGroup.add(leftPanel);
+
+        const rightPanel = new THREE.Mesh(panelGeometry, panelMaterial);
+        rightPanel.position.set(0.08, 0, 0);
+        issGroup.add(rightPanel);
+
+        // Brighter outline for visibility
+        const outlineMaterial = new THREE.MeshBasicMaterial({
+            color: 0xffff33, // Bright yellow
+            side: THREE.BackSide,
+            transparent: true,
+            opacity: 0.6 // Increased opacity
+        });
+
+        const outlineScale = 1.2;
+
+        // Outline for body
+        const outlineBody = new THREE.Mesh(bodyGeometry.clone(), outlineMaterial);
+        outlineBody.scale.set(outlineScale, outlineScale, outlineScale);
+        issGroup.add(outlineBody);
+
+        // Outline for panels
+        const leftOutline = new THREE.Mesh(panelGeometry.clone(), outlineMaterial);
+        leftOutline.position.copy(leftPanel.position);
+        leftOutline.scale.set(outlineScale, outlineScale, outlineScale);
+        issGroup.add(leftOutline);
+
+        const rightOutline = new THREE.Mesh(panelGeometry.clone(), outlineMaterial);
+        rightOutline.position.copy(rightPanel.position);
+        rightOutline.scale.set(outlineScale, outlineScale, outlineScale);
+        issGroup.add(rightOutline);
+
+        scene.add(issGroup);
+        
+        // ISS data
+        let issData = {
+            latitude: 0,
+            longitude: 0,
+            altitude: 408,
+            velocity: 27600
+        };
+
+        // Convert lat/lon to 3D position - CORRECTED VERSION
+        function latLonToVector3(lat, lon, radius) {
+            // Convert degrees to radians
+            const latRad = THREE.MathUtils.degToRad(lat);
+            const lonRad = THREE.MathUtils.degToRad(lon);
+            
+            // Standard spherical to cartesian conversion
+            // Note: longitude 0 should point towards +X axis
+            // latitude 0 should be on XZ plane
+            const x = radius * Math.cos(latRad) * Math.cos(lonRad);
+            const y = radius * Math.sin(latRad);
+            const z = -radius * Math.cos(latRad) * Math.sin(lonRad);
+            
+            return new THREE.Vector3(x, y, z);
+        }
+
+        // Fetch ISS data
+        async function fetchISSData() {
+            try {
+                const response = await fetch('https://api.wheretheiss.at/v1/satellites/25544');
+                const data = await response.json();
+                
+                issData.latitude = parseFloat(data.latitude);
+                issData.longitude = parseFloat(data.longitude);
+                issData.altitude = parseFloat(data.altitude);
+                issData.velocity = parseFloat(data.velocity);
+                
+                document.getElementById('status').textContent = 'ISS Tracking Active';
+                document.getElementById('status').className = '';
+                document.getElementById('coordinates').textContent = 
+                    `Lat: ${issData.latitude.toFixed(4)}°, Lon: ${issData.longitude.toFixed(4)}°`;
+                document.getElementById('velocity').textContent = 
+                    `Velocity: ${issData.velocity.toFixed(1)} km/h`;
+                document.getElementById('altitude').textContent = 
+                    `Altitude: ${issData.altitude.toFixed(1)} km`;
+                
+            } catch (error) {
+                console.warn('ISS API unavailable, using test coordinates');
+                document.getElementById('status').textContent = 'Test Mode (API unavailable)';
+                document.getElementById('status').className = 'error';
+                
+                // Use test coordinates to verify mapping
+                issData.latitude = 0;  // Equator
+                issData.longitude = 0; // Prime meridian
+                
+                document.getElementById('coordinates').textContent = 
+                    `Lat: ${issData.latitude.toFixed(4)}°, Lon: ${issData.longitude.toFixed(4)}° (test)`;
+                document.getElementById('velocity').textContent = 
+                    `Velocity: ${issData.velocity.toFixed(1)} km/h`;
+                document.getElementById('altitude').textContent = 
+                    `Altitude: ${issData.altitude.toFixed(1)} km`;
+            }
+        }
+
+        // Update ISS position
+        function updateISSPosition() {
+            // Use a fixed radius slightly above Earth surface for visibility
+            const issRadius = earthRadius + 0.1;
+            const issPosition = latLonToVector3(issData.latitude, issData.longitude, issRadius);
+            issGroup.position.copy(issPosition);
+            
+            // Orient ISS to point outward from Earth
+            issGroup.lookAt(0, 0, 0);
+            issGroup.rotateY(Math.PI); // Flip to face away from Earth
+        }
+
+        // Initial fetch and updates
+        fetchISSData();
+        setInterval(fetchISSData, 5000);
+
+        // Animation loop
+        function animate() {
+            requestAnimationFrame(animate);
+
+            // Smooth rotation
+            rotationX += (targetRotationX - rotationX) * 0.05;
+            rotationY += (targetRotationY - rotationY) * 0.05;
+            
+            // Apply rotation to Earth and ISS together
+            scene.rotation.x = rotationX;
+            scene.rotation.y = rotationY;
+
+            // Update ISS position
+            updateISSPosition();
+
+            renderer.render(scene, camera);
+        }
+
+        animate();
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
+</body>
+</html>

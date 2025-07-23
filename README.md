@@ -1,8 +1,4 @@
 # Blog built with Hugo
----
-WIP : experimenting with the workflows and themes, not focusing on content yet.
-
----
 
 I'm using docker to build, debug and publish this site. Lately I have been working towards building a completely containerized desktop workflow, which would keep the host installation clean and free from various packages and dependencies. Which is why - docker! 
 

@@ -44,3 +44,5 @@ While its vantage point is unique, the ISS isn't designed to be a primary weathe
 That said, speacialized instruments like **ECOSTRESS** have been successfully deployed on the ISS for other forms of Earth observation. 
 
 Ultimately, astronaut photos of storms may be a small piece of the puzzle, but they offer something no model or satellite can: a human glimpse of the Earth, seen from just above the clouds. They are a beautiful and scientifically valuable complement to the global network of radars, buoys, satellites, and supercomputers.
+
+*This post was inspired by Samantha Harvey's beautiful novel, Orbital.*
