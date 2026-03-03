@@ -21,7 +21,11 @@ website_carbon: true
 
 # Orbital: A View from Above
 
-*I finished the book, with some difficulty. Below is a real-time visualization of the ISS orbiting our planet, complete with city lights visible on the night side.*
+*I finished the book, with some difficulty.* This book reminded me of an event from my childhood. I might have been 5 years old when my mom tasked me with splitting almonds using a huge tailor's scissors. Naturally I sliced up a piece of my left index finger (whose mark I still carry today). After crying, and getting it bandaged, my father sat me in front of his laptop with Google Earth software showing Mars. It was cool piece of software which let you explore and zoom through the deep canyons of Mars, and gave you this feeling of endlessness.
+
+Reading this book gives you a similar experience but with earth. The author literally lists out everything you can see from the POV of astronauts in the space station. Like "oh look there's lake Michigan! So cool!." It is pretty interesting for a few minutes, and then you get bored.
+
+Anyway, below is a real-time visualization of the ISS orbiting our planet, complete with city lights visible on the night side.
 
 <div style="height: 600px; width: 100%; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; margin: 20px 0;">
 <iframe 
