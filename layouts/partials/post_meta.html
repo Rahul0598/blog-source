@@ -5,10 +5,10 @@
 <div class="post-meta">
     {{- if not .Date.IsZero -}}
     Date:
-    <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format $dateFormat }}</time>,
+    <time datetime="{{ .Date.Format " 2006-01-02" }}">{{ .Date.Format $dateFormat }}</time>,
     {{- end -}}
     &nbsp;Last Modified:
-    <time datetime="{{ .Lastmod.Format "2006-01-02" }}">{{ .Lastmod.Format $dateFormat }}</time>
+    <time datetime="{{ .Lastmod.Format " 2006-01-02" }}">{{ .Lastmod.Format $dateFormat }}</time>
     <br>
     {{- range $taxo, $taxonomy := .Site.Taxonomies }}
     {{- $elems := $.Param $taxo }}
