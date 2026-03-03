@@ -1,6 +1,7 @@
 services:
   build:
    image: klakegg/hugo:ext-pandoc
+   platform: linux/amd64
    volumes:
      - ./config.toml:/src/config.toml:z
      - ./content:/src/content:z
@@ -10,6 +11,7 @@ services:
   server:
     image: klakegg/hugo:ext-pandoc
     command: server --navigateToChanged
+    platform: linux/amd64
     volumes:
       - ./config.toml:/src/config.toml:z
       - ./content:/src/content:z
@@ -21,6 +23,7 @@ services:
   publish:
     image: klakegg/hugo:ext-pandoc
     entrypoint: hugo-official
+    platform: linux/amd64
     environment:
       HUGO_ENV_ARG: "production"
     volumes:
