@@ -1,0 +1,26 @@
+{{ $dateFormat := default "Jan 2, 2006" (index .Site.Params "datefmt") }}
+
+{{/* Only show date/meta on actual article pages, not section indexes or static pages */}}
+{{ if and (ne .Kind "section") (ne .Kind "home") (not .Params.hide_meta) }}
+<div class="post-meta">
+    {{- if not .Date.IsZero -}}
+    Date:
+    <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format $dateFormat }}</time>,
+    {{- end -}}
+    &nbsp;Last Modified:
+    <time datetime="{{ .Lastmod.Format "2006-01-02" }}">{{ .Lastmod.Format $dateFormat }}</time>
+    <br>
+    {{- range $taxo, $taxonomy := .Site.Taxonomies }}
+    {{- $elems := $.Param $taxo }}
+    {{- if $elems }}
+    {{ $taxo | humanize }} &#x5b;
+    {{- range $name := $elems }}
+    {{- with $.Site.GetPage (lower (printf "/%s/%s" $taxo (urlize $name))) }}
+    <a href="{{ .Permalink }}">{{ $name }}</a>
+    {{- end }}
+    {{- end }}
+    &#x5d;
+    {{- end }}
+    {{- end }}
+</div>
+{{ end }}
