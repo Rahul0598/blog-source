@@ -53,7 +53,13 @@ Tu, H., **Devajji, R.**, & Horan, T. (2025). Algorithmic Literacy and Digital Pr
 
 Habeeb, D., Polak, N., & **Devajji, R.** (2024). Leveraging an Urban Environmental Sensing Network to Improve Extreme Heat Resilience. *IEEE International Green and Sustainable Computing Conference (IGSC)*.
 
+### Invited Talks
+
 **Devajji, R.** (2025). SDG 13.3 and Early Warning Systems (EWS): AI in Extreme Heat Resilience. *AICTE ATAL Faculty Development Program, RNS Institute of Technology (RNSIT), Bengaluru* (3-hour invited session; alma mater).
+
+### Grants Awarded
+
+**Nick Polak and Rahul Devajji** (2023-2024): <a href="https://environment.indiana.edu/academics/scholarships/srdg.html#:~:text=Nick%20Polak%20and%20Rahul%20Devajji%3A%20Environmental%20sensing%20for%20extreme%20heat" target="_blank" rel="noopener noreferrer">Sustainability Research and Development Grant (SRDG): Environmental sensing for extreme heat</a> ($10,000)
 
 ---
 
@@ -61,9 +67,13 @@ Habeeb, D., Polak, N., & **Devajji, R.** (2024). Leveraging an Urban Environment
 
 | Category | Tools |
 |---|---|
-| **Remote Sensing** | Google Earth Engine, Landsat-8, Sentinel-2, NAIP, GDAL |
-| **GIS** | QGIS, ArcGIS Pro, ArcPy, PostGIS |
-| **ML / DL** | Scikit-learn, PyTorch, Decision Tree Ensembles, CNNs |
-| **Spatiotemporal** | Time-series ML, Spatial interpolation, R (spatial packages) |
-| **Data & Apps** | Python, R, PostgreSQL, Flask, Chart.js, Shiny, Tableau |
-| **Cloud & Infra** | GCP, Docker, Terraform, CI/CD |
+| **Earth Observation** | Google Earth Engine |
+| **Geospatial Analysis** | GDAL, Rasterio, GeoPandas, PostGIS |
+| **GIS Platforms** | QGIS, ArcGIS Pro, ArcPy, ESRI JS SDK |
+| **Machine Learning** | Scikit-learn, PyTorch, Decision Tree Ensembles, CNNs |
+| **Spatial & Statistical Modeling** | R (GLM, spatial packages), time-series analysis |
+| **Urban Sensing** | Distributed sensor networks, IoT environmental monitoring |
+| **Data Engineering** | Python pipelines, PostgreSQL, ETL workflows |
+| **Visualization & Apps** | Plotly Dash, Flask API, Chart.js, Shiny, Tableau |
+| **Cloud & Compute** | Google Cloud Platform, HPC clusters, Docker |
+| **Reproducible Research** | Git, GitHub, Jupyter, containerized workflows |
