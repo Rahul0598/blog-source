@@ -47,6 +47,6 @@ This problem persists today. In the post-ChatGPT era, we have unprecedented acce
 
 ### Passive Participation
 
-In the 1980s, the concern was that passively consuming news on television created a feeling of involvement that dampened the desire for real-world action. The internet has made this even more complex. Online news consumption is linked to both online and offline political and civic engagement. [Some research](https://www.degruyterbrill.com/document/doi/10.1515/commun-2021-0099/html?lang=en]) suggests that intentionally avoiding news can, counterintuitively, lead to *more* civic engagement, as people seek to regain a sense of agency.
+In the 1980s, the concern was that passively consuming news on television created a feeling of involvement that dampened the desire for real-world action. The internet has made this even more complex. Online news consumption is linked to both online and offline political and civic engagement. [Some research](https://www.degruyterbrill.com/document/doi/10.1515/commun-2021-0099/html?lang=en) suggests that intentionally avoiding news can, counterintuitively, lead to *more* civic engagement, as people seek to regain a sense of agency.
 
 Reading Winner reminds us that our present moment isn't entirely new. The challenge is to wake up from our "technological somnambulism" and make conscious choices about the kind of world we want to build with these powerful new tools.
