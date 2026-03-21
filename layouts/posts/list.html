@@ -1,0 +1,160 @@
+{{ define "main" }}
+<div class="posts-list">
+    <h1>{{ .Title }}</h1>
+    {{ .Content }}
+
+    <div class="posts-by-year">
+        {{ $postsByYear := dict }}
+        {{ range .Pages }}
+            {{ $year := .Date.Format "2006" }}
+            {{ $posts := index $postsByYear $year }}
+            {{ if not $posts }}
+                {{ $posts = slice }}
+            {{ end }}
+            {{ $posts = $posts | append . }}
+            {{ $postsByYear = merge $postsByYear (dict $year $posts) }}
+        {{ end }}
+
+        {{ $sortedYears := slice }}
+        {{ range $year, $posts := $postsByYear }}
+            {{ if ne $year "0001" }}
+                {{ $sortedYears = $sortedYears | append $year }}
+            {{ end }}
+        {{ end }}
+        {{ $sortedYears = sort $sortedYears "value" "desc" }}
+
+        {{ range $sortedYears }}
+        {{ $year := . }}
+        {{ $posts := index $postsByYear $year }}
+        {{ $sortedPosts := sort $posts "Date" "desc" }}
+        <div class="year-section">
+            <button class="year-toggle" onclick="toggleYear('{{ $year }}')">
+                <span class="toggle-icon" id="icon-{{ $year }}">▼</span>
+                <h2>{{ $year }} ({{ len $posts }} posts)</h2>
+            </button>
+
+            <div class="posts-year-list" id="posts-{{ $year }}" style="display: block;">
+                {{ range $sortedPosts }}
+                <div class="post-item">
+                    <a href="{{ .RelPermalink }}" class="post-link">
+                        <h3 class="post-title">{{ .Title }}</h3>
+                        {{ if .Date }}
+                        <p class="post-date">{{ .Date.Format "January 2, 2006" }}</p>
+                        {{ end }}
+                    </a>
+                </div>
+                {{ end }}
+            </div>
+        </div>
+        {{ end }}
+    </div>
+</div>
+
+<style>
+.posts-by-year {
+    margin-top: 2rem;
+}
+
+.year-section {
+    margin-bottom: 2rem;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.year-toggle {
+    width: 100%;
+    background: #f8f9fa;
+    border: none;
+    padding: 1rem;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background-color 0.2s;
+}
+
+.year-toggle:hover {
+    background: #e9ecef;
+}
+
+.toggle-icon {
+    font-size: 0.8rem;
+    transition: transform 0.2s;
+    width: 1rem;
+}
+
+.toggle-icon.collapsed {
+    transform: rotate(-90deg);
+}
+
+.year-toggle h2 {
+    margin: 0;
+    font-size: 1.3rem;
+    color: #333;
+}
+
+.posts-year-list {
+    transition: all 0.3s ease-out;
+    overflow: hidden;
+}
+
+.posts-year-list.hidden {
+    display: none;
+}
+
+.post-item {
+    border-bottom: 1px solid #f0f0f0;
+    padding: 1rem;
+    transition: background-color 0.2s;
+}
+
+.post-item:last-child {
+    border-bottom: none;
+}
+
+.post-item:hover {
+    background-color: #f8f9fa;
+}
+
+.post-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.post-title {
+    margin: 0 0 0.35rem 0;
+    font-size: 1.1rem;
+    color: #333;
+}
+
+.post-date {
+    margin: 0;
+    color: #999;
+    font-size: 0.9rem;
+}
+
+.post-link:hover .post-title {
+    color: #007bff;
+}
+</style>
+
+<script>
+function toggleYear(year) {
+    const postsList = document.getElementById('posts-' + year);
+    const icon = document.getElementById('icon-' + year);
+
+    if (postsList.style.display === 'none') {
+        postsList.style.display = 'block';
+        icon.textContent = '▼';
+        icon.classList.remove('collapsed');
+    } else {
+        postsList.style.display = 'none';
+        icon.textContent = '►';
+        icon.classList.add('collapsed');
+    }
+}
+</script>
+{{ end }}

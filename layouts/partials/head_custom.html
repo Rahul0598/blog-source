@@ -8,4 +8,84 @@
 <meta name="msapplication-TileColor" content="#33b884">
 <meta name="theme-color" content="#33b884">
 
+{{ if eq .RelPermalink "/research/" }}
+<style>
+  article > h2 {
+    margin-top: 2.75rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid #d6ddd8;
+    letter-spacing: 0.02em;
+  }
 
+  article > h2:first-of-type {
+    margin-top: 2rem;
+  }
+
+  article > h3 {
+    margin-top: 1.75rem;
+  }
+
+  .research-card {
+    margin: 1.25rem 0;
+    padding: 1rem 1.1rem;
+    background: linear-gradient(180deg, #fbfcfb 0%, #f4f8f6 100%);
+    border: 1px solid #d8e2dc;
+    border-left: 4px solid #33b884;
+    border-radius: 10px;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03);
+  }
+
+  .research-card h3 {
+    margin-top: 0;
+    margin-bottom: 0.65rem;
+    font-size: 1.05rem;
+  }
+
+  .research-card p {
+    margin-bottom: 0;
+  }
+
+  article h3 + p,
+  article h3 + ul,
+  article h3 + table {
+    margin-top: 0.45rem;
+  }
+
+  article hr {
+    margin: 2.4rem 0 2rem;
+    border: 0;
+    border-top: 1px solid #d6ddd8;
+  }
+
+  @media only screen and (max-width: 700px) {
+    .research-card {
+      padding: 0.9rem 0.85rem;
+      margin: 1rem 0;
+    }
+
+    article > h2 {
+      margin-top: 2.2rem;
+    }
+  }
+</style>
+{{ end }}
+
+{{ if eq .RelPermalink "/posts/where-san-francisco-airbnb-listings-offer-ac/" }}
+<style>
+  .full-width-embed {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(1400px, calc(100vw - 32px));
+    max-width: none;
+  }
+
+  @media only screen and (max-width: 900px) {
+    .full-width-embed {
+      width: 100%;
+      left: auto;
+      transform: none;
+    }
+  }
+</style>
+{{ end }}

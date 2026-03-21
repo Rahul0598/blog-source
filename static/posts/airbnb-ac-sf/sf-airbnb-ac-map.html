@@ -1,0 +1,973 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>San Francisco Airbnb Listings: AC vs No AC</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+  <style>
+    :root {
+      --bg: #f4efe8;
+      --panel: rgba(253, 249, 242, 0.95);
+      --ink: #1a1e24;
+      --muted: #5d6673;
+      --border: rgba(32, 40, 50, 0.12);
+      --shadow: 0 18px 48px rgba(28, 30, 34, 0.14);
+      --ac: #006d77;
+      --no-ac: #d97706;
+      --surface: rgba(255, 255, 255, 0.78);
+      --serif: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+      --sans: "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      height: 100%;
+    }
+
+    body {
+      font-family: var(--sans);
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(0, 109, 119, 0.12), transparent 28%),
+        radial-gradient(circle at top right, rgba(217, 119, 6, 0.13), transparent 30%),
+        linear-gradient(180deg, #f8f5ef 0%, var(--bg) 100%);
+    }
+
+    .shell {
+      width: min(1400px, 100%);
+      height: 100vh;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 380px;
+      gap: 0;
+      background: var(--panel);
+      box-shadow: var(--shadow);
+    }
+
+    .map-pane {
+      position: relative;
+      min-height: 680px;
+      border-right: 1px solid var(--border);
+    }
+
+    #map {
+      position: absolute;
+      inset: 0;
+    }
+
+    .topbar {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      right: 16px;
+      z-index: 700;
+      pointer-events: none;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: start;
+    }
+
+    .title-card,
+    .filter-card {
+      pointer-events: auto;
+      background: rgba(255, 252, 247, 0.92);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .title-card {
+      max-width: min(560px, calc(100% - 120px));
+      padding: 16px 18px;
+    }
+
+    .eyebrow {
+      margin-bottom: 8px;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--no-ac);
+    }
+
+    h1 {
+      margin: 0;
+      font-family: var(--serif);
+      font-size: clamp(26px, 3vw, 38px);
+      line-height: 1.02;
+    }
+
+    .dek {
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.55;
+      max-width: 62ch;
+    }
+
+    .filter-card {
+      padding: 12px;
+      min-width: 320px;
+      max-width: 360px;
+    }
+
+    .filter-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .toggle-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .toggle {
+      appearance: none;
+      border: 1px solid var(--border);
+      background: #fffdf9;
+      color: var(--ink);
+      border-radius: 999px;
+      padding: 9px 12px;
+      font: inherit;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .toggle.active {
+      background: var(--ink);
+      color: white;
+      border-color: var(--ink);
+    }
+
+    .legend {
+      margin-top: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      display: inline-block;
+    }
+
+    .search-wrap {
+      margin-top: 12px;
+    }
+
+    .search-input {
+      width: 100%;
+      border: 1px solid var(--border);
+      background: #fffdf9;
+      border-radius: 12px;
+      padding: 10px 12px;
+      font: inherit;
+      font-size: 13px;
+      color: var(--ink);
+    }
+
+    .search-results {
+      margin-top: 8px;
+      display: grid;
+      gap: 6px;
+      max-height: 220px;
+      overflow: auto;
+    }
+
+    .search-result {
+      text-align: left;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.82);
+      border-radius: 12px;
+      padding: 9px 10px;
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .search-result:hover {
+      background: #fffdf9;
+    }
+
+    .search-result-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.35;
+    }
+
+    .search-result-copy {
+      margin-top: 2px;
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    .search-empty {
+      font-size: 12px;
+      color: var(--muted);
+      padding: 8px 2px 2px;
+    }
+
+    .sidebar {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      background: rgba(255, 252, 247, 0.88);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      padding: 18px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .stat {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 14px;
+    }
+
+    .stat-label {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .stat-value {
+      font-family: var(--serif);
+      font-size: 30px;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .stat-copy {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    .panel {
+      overflow: auto;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      min-height: 0;
+    }
+
+    .placeholder {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+      background: var(--surface);
+      border: 1px dashed rgba(32, 40, 50, 0.18);
+      border-radius: 16px;
+      padding: 18px;
+    }
+
+    .listing-image {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      border-radius: 18px;
+      background: rgba(0, 0, 0, 0.06);
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border-radius: 999px;
+      padding: 7px 11px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .pill.ac {
+      color: white;
+      background: var(--ac);
+    }
+
+    .pill.no-ac {
+      color: white;
+      background: var(--no-ac);
+    }
+
+    .listing-title {
+      margin: 10px 0 0;
+      font-family: var(--serif);
+      font-size: 28px;
+      line-height: 1.05;
+    }
+
+    .listing-subtitle {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .cta {
+      display: inline-block;
+      margin-top: 6px;
+      color: var(--ink);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .section-title {
+      margin: 0 0 8px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+    }
+
+    .description {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.6;
+      white-space: pre-line;
+    }
+
+    .details {
+      display: grid;
+      gap: 8px;
+    }
+
+    .detail-row {
+      display: grid;
+      grid-template-columns: 110px minmax(0, 1fr);
+      gap: 10px;
+      padding: 9px 0;
+      border-top: 1px solid rgba(32, 40, 50, 0.08);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .detail-row:first-child {
+      border-top: 0;
+      padding-top: 0;
+    }
+
+    .detail-label {
+      color: var(--muted);
+    }
+
+    .amenities {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .amenity {
+      font-size: 12px;
+      padding: 6px 9px;
+      border-radius: 999px;
+      background: rgba(0, 109, 119, 0.08);
+      border: 1px solid rgba(0, 109, 119, 0.14);
+    }
+
+    .amenity.cooling {
+      background: rgba(0, 109, 119, 0.16);
+      border-color: rgba(0, 109, 119, 0.32);
+      color: #004d55;
+      font-weight: 700;
+    }
+
+    .amenity.heating {
+      background: rgba(217, 119, 6, 0.14);
+      border-color: rgba(217, 119, 6, 0.28);
+      color: #8a4a00;
+      font-weight: 700;
+    }
+
+    .footer-note {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.55;
+      margin-top: auto;
+      padding-top: 6px;
+    }
+
+    .leaflet-tooltip.listing-tip {
+      background: rgba(255, 252, 247, 0.94);
+      color: var(--ink);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      padding: 10px 12px;
+    }
+
+    .tip-title {
+      font-weight: 700;
+      font-size: 13px;
+      margin-bottom: 2px;
+    }
+
+    .tip-copy {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    .leaflet-bottom.leaflet-right .leaflet-control-zoom {
+      margin-bottom: 18px;
+      margin-right: 18px;
+    }
+
+    @media (max-width: 960px) {
+      .shell {
+        grid-template-columns: 1fr;
+        height: auto;
+      }
+
+      .map-pane {
+        min-height: 72vh;
+        border-right: 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .sidebar {
+        min-height: auto;
+      }
+
+      .topbar {
+        flex-direction: column;
+        right: 12px;
+        left: 12px;
+      }
+
+      .title-card {
+        max-width: none;
+      }
+
+      .filter-card {
+        min-width: 0;
+        max-width: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="shell">
+    <section class="map-pane">
+      <div id="map"></div>
+      <div class="topbar">
+        <div class="title-card">
+          <div class="eyebrow">Inside Airbnb San Francisco</div>
+          <h1 id="headline">Where SF Airbnb listings advertise AC, and where they do not.</h1>
+          <p class="dek" id="dek"></p>
+        </div>
+        <div class="filter-card">
+          <div class="filter-label">Filter map points</div>
+          <div class="toggle-group" id="filters"></div>
+          <div class="search-wrap">
+            <input id="listing-search" class="search-input" type="search"
+              placeholder="Search by Airbnb URL or listing name" autocomplete="off">
+            <div class="search-results" id="search-results"></div>
+          </div>
+          <div class="legend">
+            <span class="legend-item"><span class="dot" style="background: var(--ac)"></span>AC listed</span>
+            <span class="legend-item"><span class="dot" style="background: var(--no-ac)"></span>No AC listed</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <aside class="sidebar">
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-label">All Listings</div>
+          <div class="stat-value" id="total-value">0</div>
+          <div class="stat-copy">Every mapped Airbnb listing in this export.</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">No AC Listed</div>
+          <div class="stat-value" id="without-ac-value">0%</div>
+          <div class="stat-copy" id="without-ac-copy"></div>
+        </div>
+      </div>
+
+      <div class="panel" id="panel">
+        <div class="placeholder">
+          Hover over a listing to preview it. Click any point to open the full detail panel here, including pricing,
+          room type, host fields, amenities, and a direct link back to the Airbnb listing.
+        </div>
+        <div class="footer-note" id="footer-note"></div>
+      </div>
+    </aside>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="./sf-airbnb-map-data.js"></script>
+  <script>
+    const payload = window.__AIRBNB_MAP_DATA__;
+    const meta = payload.meta;
+    const listings = payload.listings;
+    const IDX = {
+      lat: 0,
+      lng: 1,
+      ac: 2,
+      name: 3,
+      url: 4,
+      image: 5,
+      price: 6,
+      neighborhood: 7,
+      roomType: 8,
+      propertyType: 9,
+      host: 10,
+      description: 11,
+      amenities: 12,
+      portableFan: 13,
+      ceilingFan: 14,
+      anyFan: 15,
+      facts: 16
+    };
+    const FACT = {
+      id: 0,
+      accommodates: 1,
+      bedrooms: 2,
+      beds: 3,
+      bathrooms: 4,
+      minimumNights: 5,
+      availability: 6,
+      hostSince: 7,
+      responseTime: 8,
+      responseRate: 9,
+      acceptanceRate: 10,
+      superhost: 11,
+      instantBook: 12,
+      reviewScore: 13,
+      reviewCount: 14,
+      license: 15,
+      lastScraped: 16
+    };
+    const fmtInt = new Intl.NumberFormat('en-US');
+    const fmtCurrency = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
+    const filters = [
+      { key: 'all', label: 'All listings' },
+      { key: 'ac', label: 'With AC' },
+      { key: 'no-ac', label: 'Without AC' },
+      { key: 'portable-fan', label: 'Portable fan' },
+      { key: 'any-fan', label: 'Any fan' }
+    ];
+
+    let activeFilter = 'all';
+    let selectedMarker = null;
+    let visibleEntries = [];
+
+    function escapeHtml(value) {
+      return String(value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function tooltipHtml(listing) {
+      const neighborhood = listing[IDX.neighborhood] || 'San Francisco';
+      const roomType = listing[IDX.roomType] || null;
+      const subtitle = roomType ? `${neighborhood} · ${roomType}` : neighborhood;
+      return `
+        <div class="tip-title">${escapeHtml(listing[IDX.name])}</div>
+        <div class="tip-copy">${escapeHtml(subtitle)}</div>
+      `;
+    }
+
+    function markerColor(listing) {
+      return listing[IDX.ac] ? getComputedStyle(document.documentElement).getPropertyValue('--ac').trim() : getComputedStyle(document.documentElement).getPropertyValue('--no-ac').trim();
+    }
+
+    function amenityKind(value) {
+      const text = String(value || '').toLowerCase();
+      if (
+        text.includes('air conditioning') ||
+        text.includes('air conditioner') ||
+        text.includes('ac unit') ||
+        text.includes('central air') ||
+        text.includes('portable fan') ||
+        text.includes('ceiling fan') ||
+        text.includes('fan') ||
+        text.includes('cooling')
+      ) {
+        return 'cooling';
+      }
+      if (text.includes('heating') || text.includes('heater') || text.includes('radiant heat')) {
+        return 'heating';
+      }
+      return '';
+    }
+
+    function listingIdFromUrl(url) {
+      if (!url) return null;
+      const match = String(url).match(/rooms\/(\d+)/);
+      return match ? match[1] : null;
+    }
+
+    function summaryCopy(filterKey, visibleCount, filteredWithoutAc, filteredWithAc) {
+      const withoutPct = visibleCount ? ((filteredWithoutAc / visibleCount) * 100).toFixed(1) : '0.0';
+      const withPct = visibleCount ? ((filteredWithAc / visibleCount) * 100).toFixed(1) : '0.0';
+
+      if (filterKey === 'ac') {
+        return `${fmtInt.format(visibleCount)} listings with AC are visible on the map.`;
+      }
+      if (filterKey === 'no-ac') {
+        return `${fmtInt.format(visibleCount)} listings without AC are visible on the map.`;
+      }
+      if (filterKey === 'portable-fan') {
+        return `${fmtInt.format(visibleCount)} listings with a portable fan are visible on the map. ${withoutPct}% of them do not advertise AC.`;
+      }
+      if (filterKey === 'any-fan') {
+        return `${fmtInt.format(visibleCount)} listings with any fan amenity are visible on the map. ${withoutPct}% of them do not advertise AC.`;
+      }
+      return `${fmtInt.format(visibleCount)} listings are visible on the map. ${withoutPct}% of them do not advertise AC.`;
+    }
+
+    function statCopy(filterKey, filteredWithoutAc, filteredWithAc) {
+      if (filterKey === 'ac') {
+        return `${fmtInt.format(filteredWithAc)} with AC listed`;
+      }
+      if (filterKey === 'no-ac') {
+        return `${fmtInt.format(filteredWithoutAc)} without AC listed`;
+      }
+      return `${fmtInt.format(filteredWithoutAc)} without AC listed, ${fmtInt.format(filteredWithAc)} with AC listed`;
+    }
+
+    function boolLabel(value) {
+      if (value === true) return 'Yes';
+      if (value === false) return 'No';
+      return null;
+    }
+
+    function factRows(listing) {
+      const facts = listing[IDX.facts];
+      const rows = [
+        ['Listing ID', facts[FACT.id]],
+        ['Neighborhood', listing[IDX.neighborhood]],
+        ['Room type', listing[IDX.roomType]],
+        ['Property type', listing[IDX.propertyType]],
+        ['Accommodates', facts[FACT.accommodates]],
+        ['Bedrooms', facts[FACT.bedrooms]],
+        ['Beds', facts[FACT.beds]],
+        ['Bathrooms', facts[FACT.bathrooms]],
+        ['Minimum nights', facts[FACT.minimumNights]],
+        ['Availability', facts[FACT.availability] != null ? `${fmtInt.format(facts[FACT.availability])} days/year` : null],
+        ['Air conditioning', listing[IDX.ac] ? 'Yes' : 'No'],
+        ['Host', listing[IDX.host]],
+        ['Host since', facts[FACT.hostSince]],
+        ['Host response time', facts[FACT.responseTime]],
+        ['Host response rate', facts[FACT.responseRate]],
+        ['Host acceptance rate', facts[FACT.acceptanceRate]],
+        ['Superhost', boolLabel(facts[FACT.superhost])],
+        ['Instant book', boolLabel(facts[FACT.instantBook])],
+        ['Review score', facts[FACT.reviewScore]],
+        ['Review count', facts[FACT.reviewCount]],
+        ['License', facts[FACT.license]],
+        ['Last scraped', facts[FACT.lastScraped]]
+      ];
+      return rows.filter((item) => item[1] !== null && item[1] !== undefined && item[1] !== '');
+    }
+
+    const map = L.map('map', {
+      zoomControl: false,
+      preferCanvas: true,
+      scrollWheelZoom: true
+    }).setView([37.7648, -122.4376], 12);
+    L.control.zoom({ position: 'bottomright' }).addTo(map);
+
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
+      maxZoom: 20
+    }).addTo(map);
+
+    const canvasRenderer = L.canvas({ padding: 0.5 });
+    const markerLayer = L.layerGroup().addTo(map);
+    const markerEntries = [];
+
+    function buildMarker(listing) {
+      const marker = L.circleMarker([listing[IDX.lat], listing[IDX.lng]], {
+        renderer: canvasRenderer,
+        radius: 5,
+        weight: 1,
+        color: '#ffffff',
+        opacity: 0.9,
+        fillColor: markerColor(listing),
+        fillOpacity: 0.78
+      });
+
+      marker.bindTooltip(tooltipHtml(listing), {
+        direction: 'top',
+        opacity: 1,
+        className: 'listing-tip',
+        offset: [0, -4]
+      });
+
+      marker.on('mouseover', function () {
+        if (selectedMarker && selectedMarker !== marker) {
+          resetMarker(selectedMarker);
+        }
+        highlightMarker(marker);
+      });
+
+      marker.on('mouseout', function () {
+        if (selectedMarker !== marker) {
+          resetMarker(marker);
+        }
+      });
+
+      marker.on('click', function () {
+        selectEntry({ listing, marker });
+      });
+
+      return marker;
+    }
+
+    function highlightMarker(marker) {
+      marker.setStyle({ radius: 8, weight: 2, fillOpacity: 0.96 });
+      marker.bringToFront();
+    }
+
+    function resetMarker(marker) {
+      marker.setStyle({ radius: 5, weight: 1, fillOpacity: 0.78 });
+    }
+
+    listings.forEach((listing) => {
+      markerEntries.push({ listing, marker: buildMarker(listing) });
+    });
+
+    function matchesFilter(listing) {
+      if (activeFilter === 'ac') return listing[IDX.ac];
+      if (activeFilter === 'no-ac') return !listing[IDX.ac];
+      if (activeFilter === 'portable-fan') return listing[IDX.portableFan];
+      if (activeFilter === 'any-fan') return listing[IDX.anyFan];
+      return true;
+    }
+
+    function selectEntry(entry) {
+      const { listing, marker } = entry;
+      if (selectedMarker && selectedMarker !== marker) {
+        resetMarker(selectedMarker);
+      }
+      selectedMarker = marker;
+      highlightMarker(marker);
+      renderPanel(listing);
+      map.setView([listing[IDX.lat], listing[IDX.lng]], Math.max(map.getZoom(), 14), {
+        animate: true
+      });
+      marker.openTooltip();
+    }
+
+    function applyFilter() {
+      markerLayer.clearLayers();
+      let visibleCount = 0;
+      const bounds = [];
+      visibleEntries = [];
+      markerEntries.forEach(({ listing, marker }) => {
+        const visible = matchesFilter(listing);
+        if (visible) {
+          marker.addTo(markerLayer);
+          bounds.push([listing[IDX.lat], listing[IDX.lng]]);
+          visibleCount += 1;
+          visibleEntries.push({ listing, marker });
+        }
+      });
+
+      if (selectedMarker && !markerLayer.hasLayer(selectedMarker)) {
+        selectedMarker = null;
+        renderPlaceholder();
+      }
+
+      if (bounds.length) {
+        map.fitBounds(bounds, { padding: [28, 28], maxZoom: 14 });
+      }
+
+      document.querySelectorAll('.toggle').forEach((button) => {
+        button.classList.toggle('active', button.dataset.filter === activeFilter);
+      });
+
+      const filteredWithoutAc = markerEntries.filter(({ listing }) => matchesFilter(listing) && !listing[IDX.ac]).length;
+      const filteredWithAc = visibleCount - filteredWithoutAc;
+      const shareWithout = visibleCount ? ((filteredWithoutAc / visibleCount) * 100).toFixed(1) : '0.0';
+      const filterObj = filters.find((item) => item.key === activeFilter);
+
+      document.getElementById('headline').textContent = activeFilter === 'all'
+        ? 'Where SF Airbnb listings advertise AC, and where they do not.'
+        : `${filterObj.label} across San Francisco Airbnb listings.`;
+      document.getElementById('dek').textContent = summaryCopy(activeFilter, visibleCount, filteredWithoutAc, filteredWithAc);
+      document.getElementById('total-value').textContent = fmtInt.format(visibleCount);
+      document.getElementById('without-ac-value').textContent = `${shareWithout}%`;
+      document.getElementById('without-ac-copy').textContent = statCopy(activeFilter, filteredWithoutAc, filteredWithAc);
+      renderSearchResults(document.getElementById('listing-search').value || '');
+    }
+
+    function renderPlaceholder() {
+      document.getElementById('panel').innerHTML = `
+        <div class="placeholder">
+          Hover over a listing to preview it. Click any point to open the full detail panel here, including pricing, room type, host fields, amenities, and a direct link back to the Airbnb listing.
+        </div>
+        <div class="footer-note" id="footer-note"></div>
+      `;
+      document.getElementById('footer-note').textContent = `Source snapshot: ${meta.sourceDateLabel}. Inside Airbnb describes itself as a mission-driven housing data and advocacy project focused on Airbnb's impact on residential communities, so this is an independent community dataset rather than an official Airbnb feed. AC means the amenities field includes "Air conditioning" or closely related AC wording.`;
+    }
+
+    function renderPanel(listing) {
+      const image = listing[IDX.image] ? `<img class="listing-image" src="${escapeHtml(listing[IDX.image])}" alt="">` : '';
+      const description = listing[IDX.description] ? `
+        <div>
+          <h2 class="section-title">Description</h2>
+          <p class="description">${escapeHtml(listing[IDX.description])}</p>
+        </div>
+      ` : '';
+      const amenities = listing[IDX.amenities] && listing[IDX.amenities].length ? `
+        <div>
+          <h2 class="section-title">Amenities</h2>
+          <div class="amenities">${listing[IDX.amenities].map((item) => {
+        const kind = amenityKind(item);
+        const className = kind ? `amenity ${kind}` : 'amenity';
+        return `<span class="${className}">${escapeHtml(item)}</span>`;
+      }).join('')}</div>
+        </div>
+      ` : '';
+      const details = factRows(listing).map((item) => `
+        <div class="detail-row">
+          <div class="detail-label">${escapeHtml(item[0])}</div>
+          <div>${escapeHtml(item[1])}</div>
+        </div>
+      `).join('');
+      const subtitle = [listing[IDX.neighborhood], listing[IDX.roomType], listing[IDX.propertyType]].filter(Boolean).join(' · ');
+
+      document.getElementById('panel').innerHTML = `
+        ${image}
+        <div>
+          <span class="pill ${listing[IDX.ac] ? 'ac' : 'no-ac'}">${listing[IDX.ac] ? 'AC listed' : 'No AC listed'}</span>
+          <h2 class="listing-title">${escapeHtml(listing[IDX.name])}</h2>
+          <p class="listing-subtitle">${escapeHtml(subtitle)}</p>
+          ${listing[IDX.url] ? `<a class="cta" href="${escapeHtml(listing[IDX.url])}" target="_blank" rel="noreferrer">Open Airbnb listing</a>` : ''}
+        </div>
+        ${description}
+        <div>
+          <h2 class="section-title">Listing details</h2>
+          <div class="details">${details}</div>
+        </div>
+        ${amenities}
+        <div class="footer-note">Source snapshot: ${meta.sourceDateLabel}. Inside Airbnb describes itself as a mission-driven housing data and advocacy project focused on Airbnb's impact on residential communities, so this is an independent community dataset rather than an official Airbnb feed. AC means the amenities field includes "Air conditioning" or closely related AC wording.</div>
+      `;
+    }
+
+    function searchMatches(query) {
+      const q = query.trim().toLowerCase();
+      if (!q) return [];
+      const embeddedId = q.match(/rooms\/(\d+)/);
+      const numericId = embeddedId ? embeddedId[1] : q.replace(/\D/g, '');
+      return visibleEntries.filter(({ listing }) => {
+        const name = (listing[IDX.name] || '').toLowerCase();
+        const url = (listing[IDX.url] || '').toLowerCase();
+        const listingId = listingIdFromUrl(listing[IDX.url]) || String(listing[IDX.facts][FACT.id] || '');
+        if (q.length >= 3 && (name.includes(q) || url.includes(q))) return true;
+        if (numericId && listingId === numericId) return true;
+        return false;
+      }).slice(0, 8);
+    }
+
+    function renderSearchResults(query) {
+      const wrap = document.getElementById('search-results');
+      wrap.innerHTML = '';
+      const q = query.trim();
+      if (!q) return;
+      const matches = searchMatches(q);
+      if (!matches.length) {
+        wrap.innerHTML = '<div class="search-empty">No visible listings match that URL or name.</div>';
+        return;
+      }
+      matches.forEach((entry) => {
+        const listing = entry.listing;
+        const subtitle = [listing[IDX.neighborhood], listing[IDX.roomType]].filter(Boolean).join(' · ');
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'search-result';
+        button.innerHTML = `
+          <div class="search-result-title">${escapeHtml(listing[IDX.name])}</div>
+          <div class="search-result-copy">${escapeHtml(subtitle)}</div>
+        `;
+        button.addEventListener('click', () => {
+          selectEntry(entry);
+        });
+        wrap.appendChild(button);
+      });
+    }
+
+    function mountFilters() {
+      const wrap = document.getElementById('filters');
+      filters.forEach((filter) => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'toggle';
+        button.dataset.filter = filter.key;
+        button.textContent = filter.label;
+        button.addEventListener('click', () => {
+          activeFilter = filter.key;
+          applyFilter();
+        });
+        wrap.appendChild(button);
+      });
+    }
+
+    function mountSearch() {
+      const input = document.getElementById('listing-search');
+      input.addEventListener('input', (event) => {
+        renderSearchResults(event.target.value);
+      });
+      input.addEventListener('keydown', (event) => {
+        if (event.key !== 'Enter') return;
+        const matches = searchMatches(event.target.value);
+        if (matches.length) {
+          event.preventDefault();
+          selectEntry(matches[0]);
+        }
+      });
+    }
+
+    mountFilters();
+    mountSearch();
+    renderPlaceholder();
+    applyFilter();
+  </script>
+</body>
+
+</html>
