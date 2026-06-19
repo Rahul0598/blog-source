@@ -30,6 +30,7 @@ jobs:
       - name: Build with Hugo
         run: |
           docker run --rm \
+            --user "$(id -u):$(id -g)" \
             -v "${GITHUB_WORKSPACE}:/src" \
             -w /src \
             klakegg/hugo:ext-pandoc \
