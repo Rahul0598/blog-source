@@ -1,22 +1,22 @@
 {{ define "main" }}
-<article class="posts-list compact-list-page">
+<article class="readings-list compact-list-page">
     <h1>{{ .Title }}</h1>
     {{ .Content }}
 
-    <div class="posts-by-year">
-        {{ $postsByYear := dict }}
+    <div class="books-by-year">
+        {{ $booksByYear := dict }}
         {{ range .Pages }}
             {{ $year := .Date.Format "2006" }}
-            {{ $posts := index $postsByYear $year }}
-            {{ if not $posts }}
-                {{ $posts = slice }}
+            {{ $books := index $booksByYear $year }}
+            {{ if not $books }}
+                {{ $books = slice }}
             {{ end }}
-            {{ $posts = $posts | append . }}
-            {{ $postsByYear = merge $postsByYear (dict $year $posts) }}
+            {{ $books = $books | append . }}
+            {{ $booksByYear = merge $booksByYear (dict $year $books) }}
         {{ end }}
 
         {{ $sortedYears := slice }}
-        {{ range $year, $posts := $postsByYear }}
+        {{ range $year, $books := $booksByYear }}
             {{ if ne $year "0001" }}
                 {{ $sortedYears = $sortedYears | append $year }}
             {{ end }}
@@ -25,17 +25,19 @@
 
         {{ range $sortedYears }}
         {{ $year := . }}
-        {{ $posts := index $postsByYear $year }}
-        {{ $sortedPosts := sort $posts "Date" "desc" }}
+        {{ $books := index $booksByYear $year }}
+        {{ $sortedBooks := sort $books "Date" "desc" }}
         <section class="year-section">
-            <h2>{{ $year }} <span>{{ len $posts }} posts</span></h2>
+            <h2>{{ $year }} <span>{{ len $books }} books</span></h2>
             <div class="item-list">
-                {{ range $sortedPosts }}
+                {{ range $sortedBooks }}
                 <a href="{{ .RelPermalink }}" class="list-item-link">
                     <span class="list-item-title">{{ .Title }}</span>
-                    {{ if .Date }}
-                    <span class="list-item-meta">{{ .Date.Format "Jan 2, 2006" }}</span>
-                    {{ end }}
+                    <span class="list-item-meta">
+                        {{- if .Params.author -}}by {{ .Params.author }}{{- end -}}
+                        {{- if and .Params.author .Date }} · {{ end -}}
+                        {{- if .Date -}}{{ .Date.Format "Jan 2006" }}{{- end -}}
+                    </span>
                 </a>
                 {{ end }}
             </div>
@@ -53,7 +55,7 @@
     margin: 0 0 0.8rem;
 }
 
-.posts-by-year {
+.books-by-year {
     margin-top: 0.8rem;
 }
 

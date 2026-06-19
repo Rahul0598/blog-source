@@ -8,7 +8,6 @@ showToc: true
 TocOpen: false
 hidemeta: false
 comments: false
-description: "Thinking of Langdon Winner's 'The Whale and the Reactor' in the age of AI."
 disableHLJS: false
 disableShare: true
 hideSummary: false

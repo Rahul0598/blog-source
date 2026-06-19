@@ -1,6 +1,6 @@
 ---
 title: "My Reading List"
-website_carbon: true
+website_carbon: false
 ---
 
-Here are the books I've read, along with my thoughts and ratings. Click on any book to read my review/thoughts.
+Books I've read lately, with notes and thoughts.

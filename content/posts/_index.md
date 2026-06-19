@@ -1,6 +1,6 @@
 ---
-title: ""
-website_carbon: true
+title: "Posts"
+website_carbon: false
 hide_meta: true
 ---
 

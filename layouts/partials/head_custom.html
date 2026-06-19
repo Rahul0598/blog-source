@@ -1,6 +1,7 @@
 
 
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="manifest" href="/site.webmanifest">
@@ -8,63 +9,196 @@
 <meta name="msapplication-TileColor" content="#33b884">
 <meta name="theme-color" content="#33b884">
 
-{{ if eq .RelPermalink "/research/" }}
 <style>
-  article > h2 {
-    margin-top: 2.75rem;
-    padding-top: 1.25rem;
-    border-top: 1px solid #d6ddd8;
-    letter-spacing: 0.02em;
+  body {
+    margin-top: 24px;
+    margin-bottom: 18px;
+    line-height: 1.48;
   }
 
-  article > h2:first-of-type {
-    margin-top: 2rem;
+  div.header h1 {
+    margin-bottom: 18px;
   }
 
-  article > h3 {
-    margin-top: 1.75rem;
-  }
-
-  .research-card {
-    margin: 1.25rem 0;
-    padding: 1rem 1.1rem;
-    background: linear-gradient(180deg, #fbfcfb 0%, #f4f8f6 100%);
-    border: 1px solid #d8e2dc;
-    border-left: 4px solid #33b884;
-    border-radius: 10px;
-    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03);
-  }
-
-  .research-card h3 {
+  section > header h1,
+  article h1:first-child {
     margin-top: 0;
-    margin-bottom: 0.65rem;
-    font-size: 1.05rem;
   }
 
-  .research-card p {
-    margin-bottom: 0;
+  p {
+    margin: 0.62rem 0;
   }
 
-  article h3 + p,
-  article h3 + ul,
-  article h3 + table {
+  div.footer {
+    margin-top: 1rem;
+    padding-top: 0.55rem;
+    font-size: 0.9rem;
+    line-height: 1.25;
+    text-align: center;
+  }
+
+  .footer-meta {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    gap: 0.95rem;
+    flex-wrap: wrap;
+  }
+
+  .footer-carbon {
+    display: flex;
+    justify-content: center;
     margin-top: 0.45rem;
   }
 
-  article hr {
-    margin: 2.4rem 0 2rem;
-    border: 0;
+  .footer-carbon #wcb {
+    margin: 0;
+  }
+</style>
+
+{{ if eq .RelPermalink "/" }}
+<style>
+  .home-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 240px;
+    gap: 1.8rem;
+    align-items: center;
+  }
+
+  .home-copy h1 {
+    margin-bottom: 0.35rem;
+    font-size: 2rem;
+  }
+
+  .home-tagline {
+    margin-top: 0;
+    color: #5f6762;
+    font-size: 1.02rem;
+  }
+
+  .home-profile-photo {
+    width: 240px;
+    height: auto;
+    object-fit: contain;
+    justify-self: end;
+    margin: 0;
+  }
+
+  .home-connect {
+    margin-top: 0.95rem;
+    padding-top: 0.7rem;
     border-top: 1px solid #d6ddd8;
   }
 
-  @media only screen and (max-width: 700px) {
-    .research-card {
-      padding: 0.9rem 0.85rem;
-      margin: 1rem 0;
+  @media only screen and (max-width: 640px) {
+    .home-grid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
     }
 
-    article > h2 {
-      margin-top: 2.2rem;
+    .home-profile-photo {
+      width: 180px;
+      grid-row: 1;
+      justify-self: center;
+    }
+
+    .home-copy h1 {
+      font-size: 1.75rem;
+    }
+  }
+</style>
+{{ end }}
+
+{{ if eq .RelPermalink "/research/" }}
+<style>
+  .research-columns {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.65fr);
+    gap: 1.1rem;
+    margin-top: 0.85rem;
+  }
+
+  .research-columns h2 {
+    margin: 0.15rem 0 0.45rem;
+    padding-top: 0.55rem;
+    border-top: 1px solid #d6ddd8;
+    font-size: 1.08rem;
+  }
+
+  .research-columns section:first-child h2:first-child {
+    padding-top: 0;
+    border-top: 0;
+  }
+
+  .research-list {
+    margin: 0;
+    padding-left: 1.05rem;
+    font-size: 0.94rem;
+    line-height: 1.42;
+  }
+
+  .research-list li {
+    margin: 0 0 0.42rem;
+  }
+
+  .research-columns p {
+    margin: 0 0 0.48rem;
+    font-size: 0.94rem;
+    line-height: 1.42;
+  }
+
+  .research-columns section > :last-child {
+    margin-bottom: 0;
+  }
+
+  .research-output-list {
+    columns: 2;
+    column-gap: 1.35rem;
+    margin: 0.72rem 0 0;
+    padding-left: 1.05rem;
+    border-top: 1px solid #d6ddd8;
+    padding-top: 0.58rem;
+    font-size: 0.8rem;
+    line-height: 1.22;
+  }
+
+  .research-output-list li {
+    break-inside: avoid;
+    margin: 0 0 0.32rem;
+  }
+
+  @media only screen and (max-width: 700px) {
+    .research-columns {
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+      margin-top: 0.65rem;
+    }
+
+    .research-columns h2 {
+      margin-bottom: 0.32rem;
+      padding-top: 0.45rem;
+    }
+
+    .research-list,
+    .research-columns p {
+      font-size: 0.92rem;
+      line-height: 1.36;
+    }
+
+    .research-list li {
+      margin-bottom: 0.28rem;
+    }
+
+    .research-output-list {
+      columns: 1;
+      margin-top: 0.65rem;
+      padding-top: 0.55rem;
+      font-size: 0.78rem;
+      line-height: 1.22;
+    }
+
+    .research-output-list li {
+      margin-bottom: 0.28rem;
     }
   }
 </style>
