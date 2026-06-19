@@ -1,0 +1,202 @@
+{{ define "main" }}
+<div class="book-page">
+    <div class="book-container">
+        <div class="book-content">
+            <div class="book-text">
+                <h1>{{ .Title }}</h1>
+                {{ if .Params.author }}
+                <h2 class="author">by {{ .Params.author }}</h2>
+                {{ end }}
+
+                {{ if .Params.genre }}
+                <div class="genre">
+                    <strong>Genre:</strong> {{ delimit .Params.genre ", " }}
+                </div>
+                {{ end }}
+
+                {{ if .Params.date_read }}
+                <div class="date-read">
+                    <strong>Date Read:</strong> {{ .Params.date_read | dateFormat "January 2006" }}
+                </div>
+                {{ end }}
+
+                <div class="description">
+                    <h3>Description & Thoughts</h3>
+                    {{ .Content }}
+                </div>
+
+                {{ if .Params.quotes }}
+                <div class="quotes">
+                    <h3>Favorite Quotes</h3>
+                    {{ range .Params.quotes }}
+                    <blockquote>"{{ . }}"</blockquote>
+                    {{ end }}
+                </div>
+                {{ end }}
+            </div>
+
+            <div class="book-image">
+                {{ if .Params.image }}
+                <img src="{{ .Params.image }}" alt="{{ .Title }}" class="book-cover">
+                {{ else }}
+                <div class="no-image-placeholder">
+                    <p>No image available</p>
+                </div>
+                {{ end }}
+
+                {{ if .Params.goodreads_url }}
+                <a href="{{ .Params.goodreads_url }}" target="_blank" class="goodreads-link">
+                    View on Goodreads
+                </a>
+                {{ end }}
+
+                {{ if .Params.amazon_url }}
+                <a href="{{ .Params.amazon_url }}" target="_blank" class="amazon-link">
+                    Buy on Amazon
+                </a>
+                {{ end }}
+            </div>
+        </div>
+    </div>
+
+    <div class="navigation">
+        <a href="/readings/" class="back-link">&larr; Back to All Books</a>
+    </div>
+</div>
+
+<style>
+    .book-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+    }
+
+    .book-content {
+        display: grid;
+        grid-template-columns: 1fr 250px;
+        gap: 3rem;
+        align-items: start;
+    }
+
+    .book-text h1 {
+        margin-bottom: 0.5rem;
+        color: #333;
+    }
+
+    .author {
+        color: #666;
+        font-style: italic;
+        margin-bottom: 1rem;
+        font-weight: normal;
+    }
+
+    .rating {
+        margin: 1rem 0;
+        font-size: 1.2rem;
+    }
+
+    .rating-number {
+        color: #666;
+        margin-left: 0.5rem;
+    }
+
+    .genre,
+    .date-read {
+        margin: 0.5rem 0;
+    }
+
+    .description {
+        margin-top: 2rem;
+    }
+
+    .description h3 {
+        border-bottom: 2px solid #333;
+        padding-bottom: 0.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .quotes blockquote {
+        border-left: 4px solid #ccc;
+        margin: 1rem 0;
+        padding-left: 1rem;
+        font-style: italic;
+        color: #555;
+    }
+
+    .book-image {
+        position: sticky;
+        top: 2rem;
+    }
+
+    .book-cover {
+        width: 100%;
+        max-width: 200px;
+        height: auto;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        margin-bottom: 1rem;
+    }
+
+    .goodreads-link,
+    .amazon-link {
+        display: block;
+        padding: 0.5rem 1rem;
+        margin: 0.5rem 0;
+        background: #f8f9fa;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        text-decoration: none;
+        text-align: center;
+        transition: background-color 0.2s;
+    }
+
+    .goodreads-link:hover,
+    .amazon-link:hover {
+        background: #e9ecef;
+    }
+
+    .navigation {
+        margin-top: 2rem;
+        text-align: center;
+    }
+
+    .back-link {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    .no-image-placeholder {
+        width: 100%;
+        height: 400px;
+        border: 2px dashed #ccc;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #f8f9fa;
+        margin-bottom: 1rem;
+    }
+
+    .placeholder-content {
+        text-align: center;
+        color: #666;
+    }
+
+    @media (max-width: 768px) {
+        .book-content {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .book-image {
+            position: relative;
+            order: -1;
+            text-align: center;
+        }
+
+        .book-cover {
+            max-width: 250px;
+        }
+    }
+</style>
+{{ end }}

@@ -1,6 +1,7 @@
-baseURL = 'http://rahuldevajji.com'
+baseURL = 'https://rahuldevajji.com/'
 languageCode = 'en-us'
 title = 'rahuldevajji'
+ignoreFiles = ['(^|/)\.DS_Store$']
 
 # Theme to use
 theme = "bettermotherfuckinghugowebsite"
@@ -86,6 +87,4 @@ pygmentsStyle = "emacs"
     startLevel = 2
     endLevel = 3
     ordered = false
-
-
 

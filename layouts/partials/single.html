@@ -1,0 +1,11 @@
+<header>
+    <h1>
+        {{- .Title | markdownify -}}
+    </h1>
+    {{ if not .Params.hide_meta }}
+    {{ partial "post_meta.html" . }}
+    {{ end }}
+</header>
+<article>
+    {{ .Content }}
+</article>

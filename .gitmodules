@@ -9,4 +9,4 @@
 	url = https://github.com/HEIGE-PCloud/DoIt.git
 [submodule "themes/bettermotherfuckinghugowebsite"]
 	path = themes/bettermotherfuckinghugowebsite
-	url = git@github.com:Rahul0598/bettermotherfuckinghugowebsite.git
+	url = https://github.com/Rahul0598/bettermotherfuckinghugowebsite.git
