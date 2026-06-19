@@ -1,4 +1,4 @@
-name: Deploy site to GitHub Pages
+name: Build and publish site
 
 on:
   push:
@@ -8,27 +8,24 @@ on:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
-  group: github-pages
+  group: publish-site
   cancel-in-progress: false
 
 jobs:
-  build:
+  build-and-publish:
     runs-on: ubuntu-latest
+    env:
+      BLOG_PUBLISH_TOKEN: ${{ secrets.BLOG_PUBLISH_TOKEN }}
     steps:
       - name: Checkout source
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Checkout theme
         run: |
           git submodule sync -- themes/bettermotherfuckinghugowebsite
           git submodule update --init --depth 1 themes/bettermotherfuckinghugowebsite
-
-      - name: Configure Pages
-        uses: actions/configure-pages@v5
 
       - name: Build with Hugo
         run: |
@@ -40,21 +37,29 @@ jobs:
             --cleanDestinationDir \
             --baseURL "https://rahuldevajji.com/"
 
-      - name: Remove macOS metadata
-        run: find _site -name .DS_Store -delete
+      - name: Prepare Pages files
+        run: |
+          find _site -name .DS_Store -delete
+          touch _site/.nojekyll
 
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: _site
+      - name: Publish to Pages repository
+        if: env.BLOG_PUBLISH_TOKEN != ''
+        run: |
+          git clone --depth 1 "https://x-access-token:${BLOG_PUBLISH_TOKEN}@github.com/Rahul0598/blog.git" publish
+          find publish -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
+          cp -R _site/. publish/
+          cd publish
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --all
+          if git diff --cached --quiet; then
+            echo "No generated changes to publish."
+          else
+            git commit -m "Deploy ${GITHUB_SHA}"
+            git push origin master
+          fi
 
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Skip publish without token
+        if: env.BLOG_PUBLISH_TOKEN == ''
+        run: |
+          echo "::warning::BLOG_PUBLISH_TOKEN is not set; site was built but not pushed to Rahul0598/blog."
