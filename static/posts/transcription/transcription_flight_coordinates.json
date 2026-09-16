@@ -1,0 +1,221 @@
+{
+  "flight": {
+    "date": "2026-06-20",
+    "source_app": "in_flight_tz",
+    "airline": "Southwest Airlines",
+    "route": "Southwest Traverse (New Mexico → Phoenix PHX → San Diego SAN)",
+    "description": "Logged in-flight telemetry during reading of 'Transcription' by Ben Lerner",
+    "points_count": 19
+  },
+  "waypoints": [
+    {
+      "time_utc": "2026-06-20T21:39:48Z",
+      "time_local": "15:39 MDT",
+      "lat": 36.383,
+      "lon": -104.206,
+      "altitude_ft": 34004,
+      "groundspeed_mph": 479,
+      "tz": "MDT",
+      "landmark": "Sangre de Cristo Foothills, NM",
+      "description": "Cruising over the high plains approaching the granite spine of the southern Rockies."
+    },
+    {
+      "time_utc": "2026-06-20T21:42:03Z",
+      "time_local": "15:42 MDT",
+      "lat": 36.294,
+      "lon": -104.486,
+      "altitude_ft": 33998,
+      "groundspeed_mph": 487,
+      "tz": "MDT",
+      "landmark": "Mora Valley & Rincon Range, NM",
+      "description": "Gliding above forested ridges and folded sedimentary shelves."
+    },
+    {
+      "time_utc": "2026-06-20T21:49:33Z",
+      "time_local": "15:49 MDT",
+      "lat": 35.970,
+      "lon": -105.486,
+      "altitude_ft": 34003,
+      "groundspeed_mph": 486,
+      "tz": "MDT",
+      "landmark": "Pecos Wilderness & Truchas Peak, NM",
+      "description": "Passing directly above alpine summits (13,100+ ft) and ancient quartzite cirques."
+    },
+    {
+      "time_utc": "2026-06-20T21:50:41Z",
+      "time_local": "15:50 MDT",
+      "lat": 35.935,
+      "lon": -105.620,
+      "altitude_ft": 34002,
+      "groundspeed_mph": 487,
+      "tz": "MDT",
+      "landmark": "Glorieta Pass & Santa Fe National Forest, NM",
+      "description": "Historic mountain gap bridging the Great Plains and the Rio Grande valley."
+    },
+    {
+      "time_utc": "2026-06-20T21:51:56Z",
+      "time_local": "15:51 MDT",
+      "lat": 35.881,
+      "lon": -105.828,
+      "altitude_ft": 33999,
+      "groundspeed_mph": 486,
+      "tz": "MDT",
+      "landmark": "Santa Fe Foothills & Canyon Road, NM",
+      "description": "Sunlit piñon-juniper mesas and adobe terraces nestled against the mountain wall."
+    },
+    {
+      "time_utc": "2026-06-20T21:53:11Z",
+      "time_local": "15:53 MDT",
+      "lat": 35.845,
+      "lon": -105.967,
+      "altitude_ft": 34005,
+      "groundspeed_mph": 480,
+      "tz": "MDT",
+      "landmark": "Rio Grande Rift Basin, NM",
+      "description": "A vast continental fracture zone of sculpted badlands, red clays, and river canyon."
+    },
+    {
+      "time_utc": "2026-06-20T21:54:18Z",
+      "time_local": "15:54 MDT",
+      "lat": 35.794,
+      "lon": -106.164,
+      "altitude_ft": 33998,
+      "groundspeed_mph": 474,
+      "tz": "MDT",
+      "landmark": "Caja del Rio Plateau & White Rock Canyon, NM",
+      "description": "Dark volcanic basalt mesa towering over the deep incision of the Rio Grande."
+    },
+    {
+      "time_utc": "2026-06-20T21:56:35Z",
+      "time_local": "15:56 MDT",
+      "lat": 35.720,
+      "lon": -106.443,
+      "altitude_ft": 33997,
+      "groundspeed_mph": 475,
+      "tz": "MDT",
+      "landmark": "Jemez Mountains & Valles Caldera, NM",
+      "description": "A massive 13-mile volcanic caldera ringed by obsidian and ash-welded tuff domes."
+    },
+    {
+      "time_utc": "2026-06-20T22:13:36Z",
+      "time_local": "16:13 MDT",
+      "lat": 35.070,
+      "lon": -108.710,
+      "altitude_ft": 34000,
+      "groundspeed_mph": 476,
+      "tz": "MDT",
+      "landmark": "El Malpais & Zuni Sandstone Bluffs, NM",
+      "description": "Ancient volcanic lava flows meet towering Jurassic sandstone canyon cliffs."
+    },
+    {
+      "time_utc": "2026-06-20T22:15:08Z",
+      "time_local": "16:15 MDT",
+      "lat": 35.006,
+      "lon": -108.913,
+      "altitude_ft": 34000,
+      "groundspeed_mph": 478,
+      "tz": "MDT",
+      "landmark": "Continental Divide & Zuni Mountains, NM",
+      "description": "The hydrographic backbone of North America where waters part toward the oceans."
+    },
+    {
+      "time_utc": "2026-06-20T22:15:53Z",
+      "time_local": "16:15 MDT",
+      "lat": 34.987,
+      "lon": -108.975,
+      "altitude_ft": 34001,
+      "groundspeed_mph": 478,
+      "tz": "MST",
+      "landmark": "New Mexico – Arizona State Line",
+      "description": "Crossing into Arizona; time shifts from Mountain Daylight to Arizona Standard."
+    },
+    {
+      "time_utc": "2026-06-20T22:16:21Z",
+      "time_local": "15:16 MST",
+      "lat": 34.965,
+      "lon": -109.040,
+      "altitude_ft": 33998,
+      "groundspeed_mph": 477,
+      "tz": "MST",
+      "landmark": "Painted Desert Rim, AZ",
+      "description": "Stratified Chinle siltstones striped in lilac, rust, vermilion, and chalk white."
+    },
+    {
+      "time_utc": "2026-06-20T22:16:57Z",
+      "time_local": "15:16 MST",
+      "lat": 34.924,
+      "lon": -109.171,
+      "altitude_ft": 34006,
+      "groundspeed_mph": 477,
+      "tz": "MST",
+      "landmark": "Petrified Forest Plateau, AZ",
+      "description": "Vast exposures of quartz crystal logs and triassic riverbeds turned to stone."
+    },
+    {
+      "time_utc": "2026-06-20T22:36:28Z",
+      "time_local": "15:36 MST",
+      "lat": 33.936,
+      "lon": -111.320,
+      "altitude_ft": 15074,
+      "groundspeed_mph": 357,
+      "tz": "MST",
+      "landmark": "Mogollon Rim & Mazatzal Wilderness, AZ",
+      "description": "Rapid descent past the 2,000-foot limestone escarpment toward the Sonoran Desert."
+    },
+    {
+      "time_utc": "2026-06-20T22:43:50Z",
+      "time_local": "15:43 MST",
+      "lat": 33.487,
+      "lon": -111.732,
+      "altitude_ft": 6014,
+      "groundspeed_mph": 254,
+      "tz": "MST",
+      "landmark": "Superstition Mountains & Salt River, AZ",
+      "description": "Towering volcanic spires and saguaro forests overlooking the eastern Phoenix basin."
+    },
+    {
+      "time_utc": "2026-06-21T00:13:03Z",
+      "time_local": "17:13 MST",
+      "lat": 33.433,
+      "lon": -111.996,
+      "altitude_ft": 1309,
+      "groundspeed_mph": 0,
+      "tz": "MST",
+      "landmark": "Phoenix Sky Harbor International (PHX), AZ",
+      "description": "On tarmac between desert heat shimmer and distant sawtooth ridges."
+    },
+    {
+      "time_utc": "2026-06-21T00:36:23Z",
+      "time_local": "17:36 MST",
+      "lat": 33.432,
+      "lon": -112.023,
+      "altitude_ft": 1743,
+      "groundspeed_mph": 190,
+      "tz": "MST",
+      "landmark": "Sierra Estrella & Gila River Valley, AZ",
+      "description": "Climbing out westward into the evening golden hour toward Southern California."
+    },
+    {
+      "time_utc": "2026-06-21T00:54:28Z",
+      "time_local": "17:54 PDT",
+      "lat": 32.787,
+      "lon": -113.884,
+      "altitude_ft": 31999,
+      "groundspeed_mph": 485,
+      "tz": "PDT",
+      "landmark": "Sonoran Desert & Imperial Sand Dunes, CA",
+      "description": "Cruising 32,000 ft above undulating sand dunes and cracked playa beds."
+    },
+    {
+      "time_utc": "2026-06-21T01:35:33Z",
+      "time_local": "18:35 PDT",
+      "lat": 32.732,
+      "lon": -117.191,
+      "altitude_ft": 0,
+      "groundspeed_mph": 1,
+      "tz": "PDT",
+      "landmark": "San Diego Bay & Touchdown at SAN, CA",
+      "description": "Sweeping final turn over Balboa Park directly onto runway 27 on the edge of the Pacific."
+    }
+  ]
+}
