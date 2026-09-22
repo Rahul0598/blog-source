@@ -42,16 +42,16 @@ Following are the steps to integrate the themes and public files into your sourc
 4. Create an empty repository (without the README.md) for the public files(say, gh-pages-public). Now, before you add it as a submodule to your source, make an empty commit, so that the master branch gets created. Once this is done, add it to your source repository as a submodule: 
 `git submodule add https://github.com/<user-name>/gh-pages=public.git public`
 5. Generate the public files : `docker-compose up publish`
-6. The way you commit and push the changes are described below, you have to commit the changes in the public folder, followed by the source folder and then push recursively.
-    - ```shell
-        $ cd public
-        $ git add .
-        $ git commit -m "added public files as submodule"
-        $ cd ../
-        $ git add .
-        $ git commit -m "initialized submodules"
-        $ git push -u origin master --recurse-submodules=on-demand
-
-This way, you can separate the source and public files while maintaining synchronicity.
+6. **Deployment:** Pushing changes to `master` automatically builds and publishes the site via GitHub Actions (`.github/workflows/pages.yml`).
+    - Only push the source repository:
+      ```shell
+      git add .
+      git commit -m "your message"
+      git push origin master
+      ```
+    - **Note:** Do not push with `--recurse-submodules=on-demand`. GitHub Actions commits deployments directly to the remote `blog` (public) repo, which causes non-fast-forward divergence locally. If you ever need to manually push `public`, force-push it:
+      ```shell
+      git -C public push origin master --force
+      ```
 
 To clone this repo, remember to add the --recursive flag : `git clone https://github.com/Rahul0598/blog-source.git --recursive`.
