@@ -22,6 +22,18 @@ Habeeb, D., **Devajji, R.**, Polak, N., Unabia, G., & Urbina, O. (2025). [Design
 
 Habeeb, D., Subramanian, L., **Devajji, R.**, & Polak, N. (2026). [Publics, Place, and Sensors: Co-Designing Environmental Monitoring with a Community Orchard](https://dl.acm.org/doi/abs/10.1145/3772318.3790740). *Proceedings of the 2026 CHI Conference on Human Factors in Computing Systems*, 1–16. [[PDF]](https://dl.acm.org/doi/pdf/10.1145/3772318.3790740)
 
+**Devajji, R.**, Habeeb, D., & Wilson, J. S. (2026). Evaluation of Temperature Prediction Methodologies using a Sparse Sensor Network. *American Association of Geographers (AAG) Annual Meeting*.
+
+**Devajji, R.** (2026). Modeling Extreme Heat Exposure and Health Vulnerability for Local Decision Support. Poster presentation at the [Human-Computer Interaction Consortium (HCIC)](https://hcic.org/).
+
+---
+
+## Hackathons & Workshops
+
+[HeatHack 2026](https://karenamckinnon.github.io/heathack.html). Climate science and statistics hackathon on heat extremes. National Center for Atmospheric Research (NCAR) Mesa Lab, Boulder, CO (July 2026).
+
+---
+
 **Devajji, R.**, Habeeb, D., & Wilson, J. S. (2025). Extreme Heat and Health Impacts: A Study of Emergency Department Visits in Midwest Communities. *American Association of Geographers (AAG) Annual Meeting*.
 
 Habeeb, D., **Devajji, R.**, & Wilson, J. (2025). Local Climate Zones Validation Utilizing Hyperlocal Near-Surface Air Temperature Data. *American Association of Geographers (AAG) Annual Meeting*.
