@@ -224,3 +224,46 @@
   }
 </style>
 {{ end }}
+
+{{ if or (eq .RelPermalink "/posts/hurricane-helene-provenance-of-prediction/") (eq .RelPermalink "/posts/hurricane-helene/") }}
+<style>
+  article ol {
+    list-style-type: decimal !important;
+    padding-left: 1.55rem;
+    margin: 0.45rem 0;
+  }
+  article ol ol {
+    list-style-type: decimal !important;
+    padding-left: 1.55rem;
+    margin: 0.25rem 0;
+  }
+  article ol ol ol {
+    list-style-type: decimal !important;
+    padding-left: 1.55rem;
+    margin: 0.25rem 0;
+  }
+  article li {
+    padding-left: 0.2rem;
+    margin-bottom: 0.32rem;
+    line-height: 1.52;
+  }
+  article blockquote {
+    background: transparent !important;
+    border-left: 2px solid #b8bec2 !important;
+    margin: 0.35rem 0 0.35rem 0.2rem !important;
+    padding: 0 0 0 0.85rem !important;
+    color: inherit;
+  }
+  article blockquote p {
+    margin: 0.35rem 0;
+  }
+  .helene-divider {
+    margin: 0.45rem 0 0.45rem 0.25rem;
+    color: #444;
+    letter-spacing: -0.5px;
+    font-family: inherit;
+    line-height: 1.2;
+    user-select: none;
+  }
+</style>
+{{ end }}
