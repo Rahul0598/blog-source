@@ -4,6 +4,8 @@ slug: "bloomington-temperature-whiplash"
 date: "2026-10-18"
 draft: false
 toc: false
+back_to_top: true
+website_carbon: true
 tags: ["weather", "data-viz"]
 ---
 
