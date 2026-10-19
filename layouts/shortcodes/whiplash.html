@@ -1,0 +1,75 @@
+{{- $id := printf "whiplash-%d" .Ordinal -}}
+{{- $assets := "posts/whiplash/" | relURL -}}
+{{- if not (.Page.Scratch.Get "whiplash-assets") -}}
+{{- .Page.Scratch.Set "whiplash-assets" true -}}
+<link rel="stylesheet" href="{{ $assets }}css/whiplash.css">
+<script defer src="{{ $assets }}js/vendor/d3.v7.9.0.min.js"></script>
+<script defer src="{{ $assets }}js/whiplash.js"></script>
+{{- end -}}
+<div id="{{ $id }}" class="whiplash" data-whiplash data-source="{{ $assets }}data/bloomington-whiplash.json">
+  <details class="bw-methods">
+    <summary>Methods</summary>
+    <p>A cycle is warm-cold-warm or cold-warm-cold, with the threshold met on both temperature changes. Intensity is the
+      smaller of the two absolute changes: 71 → 27 → 76°F changes by 44°F, then 49°F, so its intensity is 44°F. This
+      ensures both changes are substantial. Overlapping candidates are consolidated, strongest first.</p>
+    <p>Full-cycle span is the elapsed time from the first temperature to the final temperature, including both changes.
+      Four days cooling followed by five days warming spans nine days. The median summarizes all detected cycles in the
+      record under the current settings.</p>
+    <p data-role="fit-scope"></p>
+    <p>R² is the fraction of variation between annual values explained by the fitted curve. Linear trends are solid when
+      their 95% change interval excludes zero, dashed otherwise.</p>
+    <p>The default is a 27°F (15°C) minimum change in each direction.</p>
+    <p>Source: <a href="https://www.ncei.noaa.gov/pub/data/ghcn/daily/all/USC00120784.dly">NOAA GHCN-Daily, Bloomington
+        IU</a>. Reporting times: <a
+        href="https://www.ncei.noaa.gov/access/homr/services/station/search?qid=GHCND:USC00120784&amp;date=all">NOAA
+        station history</a>.
+      <a href="{{ $assets }}data/reporting-windows.json">Verification and processing notes</a>.
+      Downloaded October 18, 2026. Click a point to inspect it; drag either end of the time
+      brush to zoom.
+    </p>
+  </details>
+  <p class="bw-record" data-role="record-label">Bloomington temperature record, 1895-2026.</p>
+  <p class="bw-period" data-role="window-label"></p>
+  <p class="bw-status" role="status" data-role="status">Loading observations…</p>
+  <div class="bw-legend" aria-label="Chart legend">
+    <span><i class="bw-dot" aria-hidden="true"></i>One point per reversal cycle</span>
+    <span>Height = smaller of the two temperature changes</span>
+  </div>
+  <p class="bw-period" data-role="period-label"></p>
+  <div class="bw-chart" data-role="weather-chart"></div>
+  <div class="bw-chart" data-role="overview-chart"></div>
+  <div class="bw-controls">
+    <div class="bw-threshold">
+      <label for="{{ $id }}-threshold">Minimum change in both directions: <output data-role="threshold-value">27°F
+          (15°C)</output></label>
+      <input id="{{ $id }}-threshold" data-control="threshold" type="range" min="20" max="50" step="1" value="27"
+        aria-describedby="{{ $id }}-count">
+    </div>
+    <label class="bw-window">Maximum days for each change
+      <select data-control="window">
+        <option value="3">3 days</option>
+        <option value="5">5 days</option>
+        <option value="7">7 days</option>
+      </select>
+    </label>
+  </div>
+  <p id="{{ $id }}-count" data-role="event-count" aria-live="polite"></p>
+  <section class="bw-event-detail" data-role="event-detail">
+    <div class="bw-event-heading">
+      <h3>Selected cycle</h3>
+      <div><button type="button" data-role="event-prev">Previous</button><button type="button"
+          data-role="event-next">Next</button></div>
+    </div>
+    <div class="bw-chart" data-role="event-chart"></div>
+    <p class="bw-selected" data-role="selection" aria-live="polite"></p>
+  </section>
+  <h3>Annual mean intensity</h3>
+  <p class="bw-fit" data-role="intensity-fit"></p>
+  <div class="bw-chart" data-role="intensity-chart"></div>
+  <h3>Annual frequency</h3>
+  <p class="bw-fit" data-role="frequency-fit"></p>
+  <div class="bw-chart" data-role="frequency-chart"></div>
+  <div class="bw-tooltip" role="tooltip" data-role="tooltip" hidden></div>
+  <noscript>This chart needs JavaScript. The full Bloomington IU record contains 234 complete cycles with both changes
+    at least 27°F (15°C) and each taking at most three days.</noscript>
+</div>

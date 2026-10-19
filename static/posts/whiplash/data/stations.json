@@ -1,0 +1,15 @@
+{
+  "downloaded": "2026-10-18",
+  "coordinates_source": "https://www.ncei.noaa.gov/pub/data/ghcn/daily/ghcnd-stations.txt",
+  "boundary_source": "https://services9.arcgis.com/47GwVXZ9a8thrviM/ArcGIS/rest/services/Basemap_MunicipalBoundary/FeatureServer/3",
+  "streets_source": "https://services9.arcgis.com/47GwVXZ9a8thrviM/ArcGIS/rest/services/Road_Centerlines_(Public_View)/FeatureServer/0",
+  "stations": [
+    {
+      "id": "USC00120784",
+      "label": "Bloomington IU",
+      "longitude": -86.5208,
+      "latitude": 39.1739
+    }
+  ],
+  "selection_reason": "Bloomington IU was chosen for its longer historical temperature record, beginning in 1895."
+}

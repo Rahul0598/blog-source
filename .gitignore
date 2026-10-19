@@ -6,3 +6,4 @@ _site/
 *.out
 *.xml
 resume/*
+/static/posts/whiplash/output/

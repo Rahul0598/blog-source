@@ -20,6 +20,10 @@ Habeeb, D., **Devajji, R.**, Polak, N., Unabia, G., & Urbina, O. (2025). [Design
 
 ## Conference Papers & Presentations
 
+**Devajji, R.** & Habeeb, D. (2026, October 8). Modeling Urban Heat Across the Diurnal Cycle: Time-Specific Approaches for Sparse Sensor Networks. *Association of Collegiate Schools of Planning (ACSP) Annual Conference*. Session 3.09: Strategizing for Heat Mitigation. Presented by Rahul Devajji.
+
+Habeeb, D., **Devajji, R.**, & Wilson, J. (2026, October 8). Integrating Health Data and Sensor Networks to Inform Localized Heat Alert System. *Association of Collegiate Schools of Planning (ACSP) Annual Conference*. Session 3.07: Heat Risk, Measurement & Experiences. Presented by Dana Habeeb.
+
 Habeeb, D., Subramanian, L., **Devajji, R.**, & Polak, N. (2026). [Publics, Place, and Sensors: Co-Designing Environmental Monitoring with a Community Orchard](https://dl.acm.org/doi/abs/10.1145/3772318.3790740). *Proceedings of the 2026 CHI Conference on Human Factors in Computing Systems*, 1–16. [[PDF]](https://dl.acm.org/doi/pdf/10.1145/3772318.3790740)
 
 **Devajji, R.**, Habeeb, D., & Wilson, J. S. (2026). Evaluation of Temperature Prediction Methodologies using a Sparse Sensor Network. *American Association of Geographers (AAG) Annual Meeting*.

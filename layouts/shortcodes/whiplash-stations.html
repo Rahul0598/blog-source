@@ -1,0 +1,19 @@
+{{- $assets := "posts/whiplash/" | relURL -}}
+<link rel="stylesheet" href="{{ $assets }}css/post.css">
+<script defer src="{{ $assets }}js/post.js"></script>
+<div data-station-context>{{ .Inner | markdownify }}</div>
+<aside class="whiplash-stations" data-station-map aria-label="Bloomington IU weather station location" inert>
+  <button type="button" class="whiplash-map-close" data-map-close aria-label="Hide station map">Close ×</button>
+  <figure>
+    <img src="{{ $assets }}stations.svg" width="420" height="440"
+      alt="Bloomington city outline and selected streets, with the Bloomington IU weather station near 10th and 17th Streets.">
+    <figcaption><a href="https://www.ncei.noaa.gov/pub/data/ghcn/daily/ghcnd-stations.txt">NOAA station location</a> ·
+      <a
+        href="https://services9.arcgis.com/47GwVXZ9a8thrviM/ArcGIS/rest/services/Road_Centerlines_(Public_View)/FeatureServer/0">Bloomington
+        GIS streets</a>
+    </figcaption>
+  </figure>
+</aside>
+<noscript>
+  <p><a href="{{ $assets }}stations.svg">View the station map</a>.</p>
+</noscript>

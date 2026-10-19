@@ -1,0 +1,257 @@
+{
+  "verified_on": "2026-10-18",
+  "selection_reason": "Bloomington IU was chosen for its longer historical record, beginning in 1895.",
+  "iu": {
+    "station": "USC00120784",
+    "observation_time": "0700",
+    "source": "NOAA HOMR station history and GHCN-Daily by-station OBS-TIME column",
+    "history": [
+      {
+        "dataProgram": "COOP SOD",
+        "element": "TEMP",
+        "frequency": "DAILY",
+        "observationTime": "0700",
+        "date": {
+          "beginDate": "2022-12-08T00:00:00.000",
+          "endDate": "Present"
+        }
+      },
+      {
+        "dataProgram": "COOP SOD",
+        "element": "TEMP",
+        "frequency": "DAILY",
+        "observationTime": "0700",
+        "date": {
+          "beginDate": "2019-10-31T00:00:00.000",
+          "endDate": "2022-12-08T00:00:00.000"
+        }
+      },
+      {
+        "dataProgram": "COOP SOD",
+        "element": "TEMP",
+        "frequency": "DAILY",
+        "observationTime": "0700",
+        "date": {
+          "beginDate": "2019-05-25T00:00:00.000",
+          "endDate": "2019-10-31T00:00:00.000"
+        }
+      },
+      {
+        "dataProgram": "COOP SOD",
+        "element": "TEMP",
+        "frequency": "DAILY",
+        "observationTime": "0700",
+        "date": {
+          "beginDate": "2016-04-21T00:00:00.000",
+          "endDate": "2019-05-25T00:00:00.000"
+        }
+      },
+      {
+        "dataProgram": "COOP SOD",
+        "element": "TEMP",
+        "frequency": "DAILY",
+        "observationTime": "0700",
+        "date": {
+          "beginDate": "2015-06-05T00:00:00.000",
+          "endDate": "2016-04-21T00:00:00.000"
+        }
+      },
+      {
+        "dataProgram": "COOP SOD",
+        "element": "TEMP",
+        "frequency": "DAILY",
+        "observationTime": "0700",
+        "date": {
+          "beginDate": "2009-09-19T00:00:00.000",
+          "endDate": "2015-06-05T00:00:00.000"
+        }
+      },
+      {
+        "dataProgram": "COOP SOD",
+        "element": "TEMP",
+        "frequency": "DAILY",
+        "observationTime": "0700",
+        "date": {
+          "beginDate": "2007-11-08T00:00:00.000",
+          "endDate": "2009-09-19T00:00:00.000"
+        }
+      },
+      {
+        "dataProgram": "COOP SOD",
+        "element": "TEMP",
+        "frequency": "DAILY",
+        "observationTime": "0700",
+        "date": {
+          "beginDate": "2006-04-02T00:00:00.000",
+          "endDate": "2007-11-08T00:00:00.000"
+        }
+      },
+      {
+        "dataProgram": "COOP SOD",
+        "element": "TEMP",
+        "frequency": "DAILY",
+        "observationTime": "0700",
+        "date": {
+          "beginDate": "2004-10-27T00:00:00.000",
+          "endDate": "2006-04-02T00:00:00.000"
+        }
+      },
+      {
+        "dataProgram": "COOP SOD",
+        "element": "TEMP",
+        "frequency": "DAILY",
+        "observationTime": "0700",
+        "date": {
+          "beginDate": "2000-10-31T00:00:00.000",
+          "endDate": "2004-10-27T00:00:00.000"
+        }
+      },
+      {
+        "dataProgram": "COOP SOD",
+        "element": "TEMP",
+        "frequency": "DAILY",
+        "observationTime": "0700",
+        "date": {
+          "beginDate": "1988-07-12T00:00:00.000",
+          "endDate": "2000-10-31T00:00:00.000"
+        }
+      },
+      {
+        "dataProgram": "COOP SOD",
+        "element": "TEMP",
+        "frequency": "DAILY",
+        "observationTime": "0700",
+        "date": {
+          "beginDate": "1985-05-23T00:00:00.000",
+          "endDate": "1988-07-12T00:00:00.000"
+        }
+      },
+      {
+        "dataProgram": "COOP SOD",
+        "element": "TEMP",
+        "frequency": "DAILY",
+        "observationTime": "0700",
+        "date": {
+          "beginDate": "1954-04-01T00:00:00.000",
+          "endDate": "1985-05-23T00:00:00.000"
+        }
+      },
+      {
+        "dataProgram": "COOP SOD",
+        "element": "TEMP",
+        "frequency": "DAILY",
+        "observationTime": "0700",
+        "date": {
+          "beginDate": "1954-03-31T00:00:00.000",
+          "endDate": "1954-04-01T00:00:00.000"
+        }
+      },
+      {
+        "dataProgram": "COOP SOD",
+        "element": "TEMP",
+        "frequency": "DAILY",
+        "observationTime": "0700",
+        "date": {
+          "beginDate": "1948-04-01T00:00:00.000",
+          "endDate": "1954-03-31T00:00:00.000"
+        }
+      },
+      {
+        "dataProgram": "COOP SOD",
+        "element": "TEMP",
+        "frequency": "DAILY",
+        "observationTime": "0700",
+        "date": {
+          "beginDate": "1895-12-01T00:00:00.000",
+          "endDate": "1948-04-01T00:00:00.000"
+        }
+      }
+    ],
+    "unknown_observation_time": "1895-11-15 through 1895-11-30",
+    "recent_raw_shef": ".A BMGI3 260613 E DH0700/TX 81/TN 52/TA 61/PP 0.02/PT 1/SF 0.0/SD 0/DC2606151706",
+    "shef_interpretation": "E means Eastern local time, following standard/daylight time; ES would force standard time. Recent report confirms 7 a.m. local clock time. Historical daily temperatures are retained as reported, without reconstructing subdaily values."
+  },
+  "data_processing": "NOAA GHCN-Daily TMAX observations retain their published reporting dates. These daily dates are not UTC timestamps. Missing and quality-flagged maxima are excluded. Temperatures are converted from tenths Celsius to whole degrees Fahrenheit without interpolation.",
+  "limitations": [
+    "",
+    "Observation time is undocumented for November 15\u201330, 1895.",
+    "The record has not been homogenized for station moves, instrument changes or historical observing practices."
+  ],
+  "references": [
+    {
+      "title": "NOAA IU station history",
+      "url": "https://www.ncei.noaa.gov/access/homr/services/station/search?qid=GHCND:USC00120784&date=all"
+    },
+    {
+      "title": "NOAA by-station CSV field documentation",
+      "url": "https://www.ncei.noaa.gov/pub/data/ghcn/daily/readme-by_station.txt"
+    },
+    {
+      "title": "NOAA IU by-station observations including OBS-TIME",
+      "url": "https://www.ncei.noaa.gov/pub/data/ghcn/daily/by_station/USC00120784.csv.gz"
+    },
+    {
+      "title": "NWS SHEF manual Table 8, E/ES/ED time-zone codes",
+      "url": "https://dcs3.noaa.gov/documents/SHEF_CodeManual_2012.pdf"
+    },
+    {
+      "title": "IU June 13, 2026 raw NWS COOP report archived by IEM (use raw SHEF, not the page display timezone)",
+      "url": "https://mesonet.agron.iastate.edu/COOP/cat.phtml?date=2026-06-13&network=IN_COOP"
+    }
+  ],
+  "verified_chart_results": {
+    "default_threshold_F": 27,
+    "maximum_calendar_days_each_change": 3,
+    "cycles": 234,
+    "warm_cold_warm": 133,
+    "cold_warm_cold": 101,
+    "eligible_years": 108,
+    "fit_period": [
+      1897,
+      2025
+    ],
+    "annual_count_fitted_change": 2.099777413112388,
+    "annual_count_change_ci95": [
+      1.3844503152558727,
+      2.8151045109689026
+    ],
+    "annual_count_R_squared": 0.13841345248309433,
+    "mean_intensity_fitted_change_F": 0.8265037623246707,
+    "mean_intensity_change_ci95_F": [
+      -0.5488488231458456,
+      2.201856347795187
+    ],
+    "mean_intensity_R_squared": 0.008811441626352168,
+    "strongest_complete_cycles": [
+      {
+        "dates": [
+          "2026-03-16",
+          "2026-03-18",
+          "2026-03-21"
+        ],
+        "highs_F": [
+          71,
+          27,
+          76
+        ],
+        "intensity_F": 44
+      },
+      {
+        "dates": [
+          "2019-01-29",
+          "2019-01-31",
+          "2019-02-03"
+        ],
+        "highs_F": [
+          46,
+          2,
+          48
+        ],
+        "intensity_F": 44
+      }
+    ],
+    "default_threshold_C": 15,
+    "intensity_fit_years": 89
+  },
+  "event_definition": "Custom warm-cold-warm or cold-warm-cold station cycles; default minimum change is 27\u00b0F (15\u00b0C) in each direction within three days per change. This is not the Francis et al. continental circulation-regime definition."
+}
