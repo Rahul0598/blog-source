@@ -1,33 +1,14 @@
 {{- $id := printf "whiplash-%d" .Ordinal -}}
 {{- $assets := "posts/whiplash/" | relURL -}}
+{{- $scriptVersion := md5 (readFile "static/posts/whiplash/js/whiplash.js") -}}
 {{- if not (.Page.Scratch.Get "whiplash-assets") -}}
 {{- .Page.Scratch.Set "whiplash-assets" true -}}
 <link rel="stylesheet" href="{{ $assets }}css/whiplash.css">
 <script defer src="{{ $assets }}js/vendor/d3.v7.9.0.min.js"></script>
-<script defer src="{{ $assets }}js/whiplash.js"></script>
+<script defer src="{{ $assets }}js/whiplash.js?v={{ $scriptVersion }}"></script>
 {{- end -}}
 <div id="{{ $id }}" class="whiplash" data-whiplash data-source="{{ $assets }}data/bloomington-whiplash.json">
-  <details class="bw-methods">
-    <summary>Methods</summary>
-    <p>A cycle is warm-cold-warm or cold-warm-cold, with the threshold met on both temperature changes. Intensity is the
-      smaller of the two absolute changes: 71 → 27 → 76°F changes by 44°F, then 49°F, so its intensity is 44°F. This
-      ensures both changes are substantial. Overlapping candidates are consolidated, strongest first.</p>
-    <p>Full-cycle span is the elapsed time from the first temperature to the final temperature, including both changes.
-      Four days cooling followed by five days warming spans nine days. The median summarizes all detected cycles in the
-      record under the current settings.</p>
-    <p data-role="fit-scope"></p>
-    <p>R² is the fraction of variation between annual values explained by the fitted curve. Linear trends are solid when
-      their 95% change interval excludes zero, dashed otherwise.</p>
-    <p>The default is a 27°F (15°C) minimum change in each direction.</p>
-    <p>Source: <a href="https://www.ncei.noaa.gov/pub/data/ghcn/daily/all/USC00120784.dly">NOAA GHCN-Daily, Bloomington
-        IU</a>. Reporting times: <a
-        href="https://www.ncei.noaa.gov/access/homr/services/station/search?qid=GHCND:USC00120784&amp;date=all">NOAA
-        station history</a>.
-      <a href="{{ $assets }}data/reporting-windows.json">Verification and processing notes</a>.
-      Downloaded October 18, 2026. Click a point to inspect it; drag either end of the time
-      brush to zoom.
-    </p>
-  </details>
+  <p>Select a point to see the temperatures behind it.</p>
   <p class="bw-record" data-role="record-label">Bloomington temperature record, 1895-2026.</p>
   <p class="bw-period" data-role="window-label"></p>
   <p class="bw-status" role="status" data-role="status">Loading observations…</p>
@@ -56,19 +37,103 @@
   <p id="{{ $id }}-count" data-role="event-count" aria-live="polite"></p>
   <section class="bw-event-detail" data-role="event-detail">
     <div class="bw-event-heading">
-      <h3>Selected cycle</h3>
+      <h3>One cycle, up close</h3>
       <div><button type="button" data-role="event-prev">Previous</button><button type="button"
           data-role="event-next">Next</button></div>
     </div>
     <div class="bw-chart" data-role="event-chart"></div>
     <p class="bw-selected" data-role="selection" aria-live="polite"></p>
   </section>
-  <h3>Annual mean intensity</h3>
-  <p class="bw-fit" data-role="intensity-fit"></p>
-  <div class="bw-chart" data-role="intensity-chart"></div>
-  <h3>Annual frequency</h3>
-  <p class="bw-fit" data-role="frequency-fit"></p>
+  <p>With the default settings, the strongest cycles tie in 2019 and 2026. Daily highs went 46 → 2 → 48°F on January 29–February 3, 2019, and 71 → 27 → 76°F on March 16–21, 2026. Both cycles had a smaller change of 44°F.</p>
+  <p>With those same settings, warm-cold-warm cycles outnumber cold-warm-cold cycles, 133 to 101. The largest single change within three days was a 59°F rise in January 1972, from −7°F to 52°F.</p>
+  <h3>Are reversals happening more often?</h3>
+  <p>Each point shows the number of cycles in a complete year with at least 95% of daily highs available.</p>
   <div class="bw-chart" data-role="frequency-chart"></div>
+  <p data-role="frequency-story"></p>
+  <p class="bw-fit" data-role="frequency-fit"></p>
+  <details class="bw-methods">
+    <summary>Methods</summary>
+    <p>A cycle is warm-cold-warm or cold-warm-cold, with the threshold met on both temperature changes. Intensity is the
+      smaller of the two absolute changes: 71 → 27 → 76°F changes by 44°F, then 49°F, so its intensity is 44°F. This
+      ensures both changes are substantial. Overlapping candidates are consolidated, strongest first.</p>
+    <p>Full-cycle span is the elapsed time from the first temperature to the final temperature, including both changes.
+      Four days cooling followed by five days warming spans nine days. The median summarizes all detected cycles in the
+      record under the current settings.</p>
+    <p data-role="fit-scope"></p>
+    <p>R² is the fraction of variation between annual values explained by the fitted curve. Linear trends are solid when
+      their 95% change interval excludes zero, dashed otherwise.</p>
+    <p>The default is a 27°F (15°C) minimum change in each direction.</p>
+    <p>Source: <a href="https://www.ncei.noaa.gov/pub/data/ghcn/daily/all/USC00120784.dly">NOAA GHCN-Daily, Bloomington
+        IU</a>. Reporting times: <a
+        href="https://www.ncei.noaa.gov/access/homr/services/station/search?qid=GHCND:USC00120784&amp;date=all">NOAA
+        station history</a>.
+      <a href="{{ $assets }}data/reporting-windows.json">Verification and processing notes</a>.
+      Downloaded October 18, 2026. Click a point to inspect it; drag either end of the time
+      brush to zoom.
+    </p>
+  </details>
+  <h3>Are the swings getting larger?</h3>
+  <p>For each cycle, I use the smaller of its two temperature changes. The chart shows the average for each year with at least one cycle.</p>
+  <div class="bw-chart" data-role="intensity-chart"></div>
+  <p data-role="intensity-story"></p>
+  <p class="bw-fit" data-role="intensity-fit"></p>
+  <section class="bw-return-period" aria-labelledby="{{ $id }}-return-heading">
+  <h3 id="{{ $id }}-return-heading">Have large reversals become more common?</h3>
+  <p>Choose a minimum change to compare how often reversals occurred at the beginning and end of the record.</p>
+  <label class="bw-return-control">Minimum change in both directions
+    <select data-control="return-intensity" aria-label="Intensity for the return-period comparison">
+      {{ range (slice 20 27 30 35 40 45 50) }}<option value="{{ . }}"{{ if eq . 40 }} selected{{ end }}>{{ . }}°F</option>{{ end }}
+    </select>
+  </label>
+  <p class="bw-period" data-role="return-history-duration"></p>
+  <div class="bw-era-scroll" tabindex="0" role="region" aria-label="Earlier and recent recurrence estimates">
+    <table class="bw-era-table">
+      <thead><tr><th scope="col">Period</th><th scope="col">Years with a cycle</th><th scope="col">Annual chance (95% interval)</th><th scope="col">Return period</th></tr></thead>
+      <tbody data-role="return-history-rows"></tbody>
+    </table>
+  </div>
+  <p data-role="return-history-summary" aria-live="polite"></p>
+  <p class="bw-period">The annual chance is the fraction of qualifying years with a cycle. The intervals show uncertainty in that fraction. “Not estimable” means no qualifying year contained a cycle; it does not mean the event could never happen.</p>
+  <p class="bw-period">The 2019 and 2026 cycles are in the timeline above. Their years are excluded here because they lack enough daily observations or are incomplete.</p>
+  <p>The chart repeats this calculation for each 30-year window. Each point is placed at the last year of its window.</p>
+  <div class="bw-chart" data-role="return-history-chart"></div>
+  <p class="bw-fit" data-role="return-history-detail" aria-live="polite"></p>
+  <p data-role="return-history-reading"></p>
+  <details class="bw-methods" data-return-overview>
+  <summary>Return periods across the full record</summary>
+  <p class="bw-fit" data-role="return-period-summary" aria-live="polite"></p>
+  <p class="bw-period" data-role="return-period-scope"></p>
+  <div class="bw-chart" data-role="return-period-chart"></div>
+  <p class="bw-fit" data-role="return-period-detail" aria-live="polite"></p>
+  <p class="bw-period">This summarizes the observed record. Estimates for the largest changes depend on very few years and do not predict when the next event will occur.</p>
+  </details>
+  <details class="bw-methods bw-return-methods">
+    <summary>How return periods are calculated</summary>
+    <p>For each eligible year, take the strongest detected reversal cycle, assigned to the year of its turning point.
+      For a chosen intensity, count years containing at least one cycle that meets or exceeds it. Divide that count by
+      the total eligible years to get the observed annual exceedance fraction p; the empirical annual return period is 1/p.
+      Years with no qualifying cycle remain in the denominator. This measures recurrence of years with a cycle, rather
+      than the average spacing between individual cycles. See the <a href="https://www.weather.gov/owp/hdsc_faqs#:~:text=3%2E1%20What%20is%20the%20difference%20between%20Annual%20Exceedance%20Probability%20%28AEP%29%20and%20Average%20Recurrence%20Interval%20%28ARI%29%3F">NWS explanation of annual exceedance and recurrence</a> for that distinction.</p>
+    <p>The intensity threshold and maximum days for each change update this panel. It uses the same full-record years
+      with at least 95% valid observations as the trend fits, including years with zero cycles. Cycles in excluded years
+      remain visible in the timeline but do not enter these estimates; for example, the 2019 and 2026 peaks are excluded.
+      Missing observations can still hide a year's strongest cycle. No probability distribution is fitted and no return
+      period is extrapolated beyond observed intensities. With zero exceeding years, a finite return period cannot be estimated.</p>
+    <p>The comparison above uses the first and last 30-calendar-year windows anchored to the first and last eligible
+      years. Each point in the history chart repeats that calculation for the preceding 30 calendar years, ending in
+      the plotted year. At least 20 of those years must meet the 95% daily-data coverage rule; other windows are gaps.
+      Counts are divided by the number of eligible years in that window, not by 30 automatically. The time brush does
+      not change these windows. The comparison has its own intensity selector and shares the maximum-days setting
+      above; the folded full-record curve follows the timeline's intensity threshold.</p>
+    <p>The table's approximate 95% intervals use the <a href="https://www.itl.nist.gov/div898/handbook/prc/section2/prc241.htm">Wilson binomial method</a>.
+      They assume independent years with a common probability within each window, and do not account for serial
+      dependence, station changes or missing extremes. Overlapping rolling windows share observations and are not
+      independent samples. These intervals are descriptive guides, rather than a formal test of a trend or a change between eras.</p>
+    <p>A 10-year annual return period means a historical exceedance fraction of 10%, not a regular ten-year schedule.
+      Treating that fraction as a probability for a future year would assume stable conditions; this record's changing
+      frequency makes that assumption questionable. The curve is descriptive and has no confidence band.</p>
+  </details>
+  </section>
   <div class="bw-tooltip" role="tooltip" data-role="tooltip" hidden></div>
   <noscript>This chart needs JavaScript. The full Bloomington IU record contains 234 complete cycles with both changes
     at least 27°F (15°C) and each taking at most three days.</noscript>

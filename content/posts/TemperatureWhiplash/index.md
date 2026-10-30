@@ -25,25 +25,29 @@ I was reminded of Michael Scott in *The Office*. I'm happy it's warming up again
 That got me wondering: how often has Bloomington's weather swung back and forth like this? And are these swings becoming more common?
 
 {{< whiplash-stations >}}
-To explore those questions, I used daily high temperatures from the Bloomington IU weather station within the city. I chose IU for its longer historical record, which begins in 1895.
+To find out, I used daily high temperatures from the Bloomington IU weather station. Its record starts in 1895.
 {{< /whiplash-stations >}}
 
-The chart below looks for sharp temperature swings followed by a reversal within a few days. Move the threshold to explore when these cycles happened and how intense they were.
+I looked for a sharp change in daily highs followed by a change back. By default, each change must be at least 27°F and take no more than three days. Each point below is one such reversal. Move the threshold to explore other sizes.
 
 {{< whiplash >}}
 
-With the default threshold of 27°F (15°C) in both directions, and at most three days for each change:
+## What those weeks felt like
 
-- Cycles are becoming more frequent: the fitted annual count rises by about 2.1 cycles between 1897 and 2025.
-- The intensity trend is less clear: the fitted mean intensity rises by about 0.8°F between 1897 and 2025, but its uncertainty includes no change.
-- Warm-cold-warm is more common than cold-warm-cold: 133 versus 101 cycles.
-- The strongest complete cycles tie in 2026 and 2019: 71 → 27 → 76°F on March 16-21, 2026, and 46 → 2 → 48°F on January 29-February 3, 2019. Both have a 44°F minimum change, with two days of cooling and three of warming.
-- The biggest single change within three days happened in 1972: a 59°F rise, from -7 to 52°F on January 16-19.
+Local reports describe some of the cold and warm spells behind these swings:
 
-Bloomington has a long history of snip-snap weather, including bigger single swings decades ago. With this definition, sharp reversals are becoming more frequent.
-
-Local reporting puts these episodes in context:
-
-- [The B Square: “Late January cold sets record for Bloomington”](https://bsquarebulletin.com/late-january-cold-sets-record-for-bloomington/) (January 31, 2019). Reports the IU station’s 2°F daily high, the cold turning point in the 2019 cycle above. It documents the cold phase of that reversal.
+- [The B Square: “Late January cold sets record for Bloomington”](https://bsquarebulletin.com/late-january-cold-sets-record-for-bloomington/) (January 31, 2019). Reports the IU station’s 2°F daily high, the cold turning point in the 2019 reversal above.
 - [WRTV: “March weather madness: From snow to flooding to storms”](https://www.wrtv.com/weather/march-weather-madness-from-snow-to-flooding-to-storms/) (March 16-17, 2026). A downtown Indianapolis resident, walking in snow, recalls sunbathing in shorts just two days earlier. The story explicitly calls the conditions “weather whiplash.”
 - [WRTV: “Why have there been so many wild weather swings in March in Indianapolis?”](https://www.wrtv.com/news/local-news/why-have-there-been-so-many-wild-weather-swings-in-march-in-indianapolis/) (March 25, 2026). An NWS meteorologist discusses Indianapolis’s March 22 record high of 88°F and a rare 50°F spread down to 38°F. That comparison uses a high and a low, whereas the charts here compare daily highs.
+
+## IU and the airport
+
+Would the airport show the same swings? Its station sits in a more open setting than IU's. The charts compare daily highs on dates when both stations had valid readings.
+
+{{< whiplash-comparison >}}
+
+These two stations don't describe every part of Bloomington. Daily highs also leave out nighttime temperatures.
+
+## What I take from this
+
+With the default definition, reversals have become more frequent at the IU station. Their average size shows no clear trend. There are too few reversals of at least 40°F in both directions to draw a firm conclusion about how their frequency has changed.

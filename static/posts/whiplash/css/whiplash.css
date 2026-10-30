@@ -57,6 +57,20 @@
 .whiplash .bw-brush .handle { fill: var(--bw-ink); }
 .whiplash .bw-status:empty { display: none; }
 .whiplash .bw-error { color: #863109; }
+.whiplash .bw-return-point { cursor: pointer; }
+.whiplash .bw-return-point:focus { outline: 2px solid var(--bw-ink); outline-offset: 3px; }
+.whiplash .bw-return-control { display: inline-flex; gap: .65rem; align-items: center; flex-wrap: wrap; font-size: .85rem; }
+.whiplash .bw-return-control select { display: inline-block; width: auto; margin: 0; }
+.whiplash .bw-era-scroll { max-width: 100%; overflow-x: auto; margin: .8rem 0; }
+.whiplash .bw-era-table { width: 100%; border-collapse: collapse; font-size: .8rem; font-variant-numeric: tabular-nums; }
+.whiplash .bw-era-table th,
+.whiplash .bw-era-table td { border: 0; border-bottom: 1px solid var(--bw-rule); padding: .4rem .5rem .4rem 0; text-align: left; font-weight: 400; }
+.whiplash .bw-era-table th:first-child { min-width: 8rem; }
+.whiplash .bw-era-table td { min-width: 5rem; }
+.whiplash [data-role="return-history-detail"] { min-height: 2.5em; }
+.whiplash [data-role="return-period-detail"] { min-height: 2.5em; }
+.whiplash [data-role="return-period-chart"][hidden],
+.whiplash [data-role="return-period-detail"][hidden] { display: none; }
 
 @media (pointer: coarse) {
   .whiplash select { min-height: 44px; font-size: 16px; }

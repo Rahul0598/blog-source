@@ -7,6 +7,7 @@
     const controls = {
       threshold: root.querySelector('[data-control="threshold"]'),
       window: root.querySelector('[data-control="window"]'),
+      returnIntensity: root.querySelector('[data-control="return-intensity"]'),
     };
     const dateFmt = d3.utcFormat("%b %d, %Y"),
       shortFmt = d3.utcFormat("%Y-%m-%d");
@@ -25,6 +26,8 @@
       events = [],
       annual = [],
       fits = {},
+      recurrence,
+      returnHistory,
       selected = null,
       range = null;
     let pending = 0,
@@ -131,6 +134,94 @@
         result.push(e);
       }
       return result.sort((a, b) => a.b - b.b);
+    }
+
+    function returnPeriods(s, candidates, cutoff) {
+      const years = [...s.years.values()].filter((y) => y.eligible),
+        maxima = new Map(years.map((y) => [y.year, null]));
+      for (const e of candidates) {
+        if (!maxima.has(e.year) || e.strength < cutoff - 1e-9) continue;
+        maxima.set(
+          e.year,
+          Math.max(maxima.get(e.year) ?? -Infinity, e.strength),
+        );
+      }
+      const levels = [
+        ...new Set([cutoff, ...[...maxima.values()].filter(Number.isFinite)]),
+      ].sort((a, b) => a - b);
+      const points = levels.map((strength) => {
+        // Count a year once, including zero-cycle years in the denominator.
+        const exceedingYears = [...maxima.values()].filter(
+          (v) => v !== null && v >= strength - 1e-9,
+        ).length;
+        return {
+          strength,
+          exceedingYears,
+          probability: years.length ? exceedingYears / years.length : null,
+          period: exceedingYears ? years.length / exceedingYears : null,
+        };
+      });
+      return {
+        years: years.length,
+        extent: d3.extent(years, (y) => y.year),
+        points: points.filter((p) => p.period !== null),
+        atThreshold: points[0],
+      };
+    }
+
+    function recurrenceHistory(s, candidates, cutoff, span = 30) {
+      const years = [...s.years.values()]
+          .filter((y) => y.eligible)
+          .map((y) => y.year)
+          .sort((a, b) => a - b),
+        eligible = new Set(years),
+        exceeding = new Set(
+          candidates
+            .filter((e) => eligible.has(e.year) && e.strength >= cutoff - 1e-9)
+            .map((e) => e.year),
+        );
+      function summarize(end) {
+        const start = end - span + 1,
+          sample = years.filter((year) => year >= start && year <= end),
+          n = sample.length,
+          k = sample.filter((year) => exceeding.has(year)).length,
+          p = n ? k / n : null;
+        // Wilson's interval remains informative when no exceeding year is observed.
+        const z = 1.959963984540054,
+          z2 = z * z,
+          center = n ? (p + z2 / (2 * n)) / (1 + z2 / n) : null,
+          half = n
+            ? (z * Math.sqrt((p * (1 - p)) / n + z2 / (4 * n * n))) /
+              (1 + z2 / n)
+            : null;
+        return {
+          start,
+          end,
+          t: Date.UTC(end, 6, 1),
+          years: n,
+          exceedingYears: k,
+          probability: p,
+          period: k ? n / k : null,
+          low: n ? (k === 0 ? 0 : Math.max(0, center - half)) : null,
+          high: n ? (k === n ? 1 : Math.min(1, center + half)) : null,
+        };
+      }
+      if (!years.length || years.at(-1) - years[0] + 1 < span)
+        return { rolling: [], earlier: null, recent: null, peak: null };
+      const rolling = [];
+      for (let end = years[0] + span - 1; end <= years.at(-1); end++) {
+        const row = summarize(end);
+        // Require at least two-thirds of each calendar window to be eligible.
+        if (row.years < Math.ceil((span * 2) / 3)) row.probability = null;
+        rolling.push(row);
+      }
+      const valid = rolling.filter((r) => r.probability !== null);
+      return {
+        rolling,
+        earlier: rolling[0].probability === null ? null : rolling[0],
+        recent: rolling.at(-1).probability === null ? null : rolling.at(-1),
+        peak: d3.greatest(valid, (r) => r.probability) || null,
+      };
     }
 
     function invert(matrix) {
@@ -272,6 +363,12 @@
             .map((y) => ({ year: y.year, value: y.intensity })),
         ),
       };
+      recurrence = returnPeriods(dataset, baseEvents, threshold);
+      returnHistory = recurrenceHistory(
+        dataset,
+        baseEvents,
+        +controls.returnIntensity.value,
+      );
       if (!range) range = [...dataset.domain];
       range = [
         Math.max(range[0], dataset.domain[0]),
@@ -945,6 +1042,303 @@
       return f;
     }
 
+    function returnPeriodText(point) {
+      return `≥${point.strength}°F in both changes: ${point.exceedingYears} of ${recurrence.years} eligible years (${d3.format(".1%")(point.probability)}) · annual return period ${d3.format(".2~f")(point.period)} years`;
+    }
+
+    function drawReturnHistory() {
+      const level = +controls.returnIntensity.value,
+        { earlier, recent, peak, rolling } = returnHistory,
+        fmt = d3.format(".1%"),
+        yearsFmt = d3.format(".2~f"),
+        period = (r) =>
+          r.period === null ? "Not estimable" : `${yearsFmt(r.period)} years`;
+      q("return-history-duration").textContent =
+        `Both temperature changes must reach ${level}°F, each within ${windowDays} days. This selector is independent of the timeline's intensity threshold.`;
+      const rows = [
+        earlier && { label: "Earlier", ...earlier },
+        recent && { label: "Recent", ...recent },
+      ].filter(Boolean);
+      const table = d3
+        .select(q("return-history-rows"))
+        .selectAll("tr")
+        .data(rows)
+        .join("tr");
+      table.selectAll("*").remove();
+      table
+        .append("th")
+        .attr("scope", "row")
+        .text((r) => `${r.label}: ${r.start}-${r.end}`);
+      table.append("td").text((r) => `${r.exceedingYears} / ${r.years}`);
+      table
+        .append("td")
+        .text((r) => `${fmt(r.probability)} (${fmt(r.low)}-${fmt(r.high)})`);
+      table.append("td").text(period);
+      if (!earlier || !recent) {
+        q("return-history-summary").textContent =
+          "There are not enough qualifying years to compare both ends of the record.";
+      } else {
+        const early = earlier.exceedingYears
+          ? `${earlier.exceedingYears} of ${earlier.years} qualifying years in ${earlier.start}-${earlier.end}`
+          : `none of the ${earlier.years} qualifying years in ${earlier.start}-${earlier.end}`;
+        q("return-history-summary").textContent =
+          `At ≥${level}°F, ${early} contained a cycle, compared with ${recent.exceedingYears} of ${recent.years} in ${recent.start}-${recent.end}.`;
+      }
+      q("return-history-reading").textContent =
+        peak && recent && peak.probability > recent.probability
+          ? `The highest observed fraction was in ${peak.start}-${peak.end}: ${peak.exceedingYears} of ${peak.years} qualifying years had a cycle. Its observed return period was ${yearsFmt(peak.period)} years.`
+          : "Few observations leave wide uncertainty. No observed cycles does not mean a cycle was impossible.";
+      q("return-history-detail").textContent =
+        "Higher on the line means more years with a cycle, and a shorter return period. Hover, tap or focus a marked point to inspect a window.";
+      if (!rolling.length) {
+        d3.select(q("return-history-chart")).selectAll("svg").remove();
+        return;
+      }
+      const f = frame(
+        "return-history-chart",
+        235,
+        [0, 100],
+        "Years with a cycle (%)",
+        {
+          top: 18,
+          xDomain: [rolling[0].t, rolling.at(-1).t],
+        },
+      );
+      const upper = Math.min(
+        100,
+        Math.max(
+          10,
+          Math.ceil(
+            d3.max(rolling, (r) =>
+              r.probability === null ? 0 : 100 * r.probability,
+            ) / 10,
+          ) * 10,
+        ),
+      );
+      f.y.domain([0, upper]);
+      f.svg
+        .select(".bw-y-axis")
+        .call(d3.axisLeft(f.y).ticks(4).tickSizeOuter(0));
+      f.svg.select(".bw-grid").call(
+        d3
+          .axisLeft(f.y)
+          .ticks(4)
+          .tickSize(-(f.right - f.left))
+          .tickFormat(""),
+      );
+      f.svg.attr(
+        "aria-label",
+        `Historical frequency of ≥${level}°F cycles in moving 30-year windows`,
+      );
+      f.svg
+        .select("title")
+        .text(`Changing annual recurrence of ≥${level}°F reversals`);
+      f.svg.select('[data-axis="x"]').text("Last year of each 30-year window");
+      seriesPath(
+        f.plot,
+        rolling,
+        f.x,
+        f.y,
+        (r) => (r.probability === null ? NaN : 100 * r.probability),
+        colors.events,
+        1.6,
+        1,
+      );
+      function describe(r) {
+        return [
+          `${r.start}-${r.end}`,
+          `${r.exceedingYears} of ${r.years} eligible years with a ≥${level}°F cycle`,
+          `Historical annual chance: ${fmt(r.probability)}`,
+          `Annual return period: ${period(r)}`,
+        ];
+      }
+      const marked = [
+        ...new Map(
+          [earlier, peak, recent].filter(Boolean).map((r) => [r.end, r]),
+        ).values(),
+      ];
+      const dots = f.svg
+        .selectAll(".bw-return-point")
+        .data(marked)
+        .join("circle")
+        .attr("class", "bw-return-point")
+        .attr("cx", (r) => f.x(r.t))
+        .attr("cy", (r) => f.y(100 * r.probability))
+        .attr("r", 4)
+        .attr("fill", colors.events)
+        .attr("tabindex", 0)
+        .attr("role", "img")
+        .attr("aria-label", (r) => describe(r).join(" · "))
+        .on("focus click", (_, r) => {
+          q("return-history-detail").textContent = describe(r).join(" · ");
+        });
+      dots.append("title").text((r) => describe(r).join(" · "));
+      hoverOverlay(
+        f,
+        (event, t) => {
+          const row = d3.least(rolling, (r) => Math.abs(r.t - t));
+          showTip(
+            event,
+            row.probability === null
+              ? [
+                  `${row.start}-${row.end}`,
+                  "Too few eligible years in this window.",
+                ]
+              : describe(row),
+          );
+        },
+        (t) => {
+          const row = d3.least(rolling, (r) => Math.abs(r.t - t));
+          if (row.probability !== null)
+            q("return-history-detail").textContent = describe(row).join(" · ");
+        },
+      );
+    }
+
+    function drawReturnPeriods() {
+      const { years, extent, points, atThreshold } = recurrence;
+      q("return-period-summary").textContent = !years
+        ? "No complete years have enough observations to estimate recurrence."
+        : !points.length
+          ? `No eligible year contained a cycle with both changes ≥${threshold}°F. A finite return period cannot be estimated from these observations.`
+          : returnPeriodText(atThreshold) + ".";
+      q("return-period-scope").textContent = years
+        ? `Full record: ${years} qualifying years, ${extent[0]}-${extent[1]}. The time brush only zooms the charts above. Return periods use years with at least one qualifying cycle; several cycles in one year still count as one year.`
+        : "Partial years and years below 95% valid temperature coverage are excluded.";
+      const empty = !points.length;
+      q("return-period-chart").hidden = empty;
+      q("return-period-detail").hidden = empty;
+      q("return-period-detail").textContent =
+        "Hover, tap or focus a point to inspect its count and return period. The logarithmic vertical scale keeps common and rare events readable.";
+      if (empty) {
+        d3.select(q("return-period-chart")).selectAll("svg").remove();
+        return;
+      }
+      const width = Math.max(
+          280,
+          q("return-period-chart").getBoundingClientRect().width,
+        ),
+        height = 245,
+        m = { left: 65, right: 18, top: 16, bottom: 48 },
+        strongest = d3.max(points, (p) => p.strength),
+        longest = d3.max(points, (p) => p.period),
+        x = d3
+          .scaleLinear()
+          .domain([threshold - 0.5, Math.max(threshold + 1, strongest) + 0.5])
+          .range([m.left, width - m.right]),
+        y = d3
+          .scaleLog()
+          .domain([1, Math.max(1.5, longest * 1.1)])
+          .range([height - m.bottom, m.top]);
+      const svg = d3
+        .select(q("return-period-chart"))
+        .selectAll("svg")
+        .data([0])
+        .join("svg")
+        .attr("viewBox", `0 0 ${width} ${height}`)
+        .attr("width", width)
+        .attr("height", height)
+        .attr("role", "group")
+        .attr(
+          "aria-label",
+          "Empirical annual return periods by reversal intensity",
+        );
+      svg.selectAll("*").remove();
+      svg
+        .append("title")
+        .text("Historical annual return periods: IU temperature reversals");
+      const ticks = [1, 2, 5, 10, 20, 50, 100, 200].filter(
+        (v) => v <= y.domain()[1],
+      );
+      svg
+        .append("g")
+        .attr("class", "bw-grid")
+        .attr("transform", `translate(${m.left},0)`)
+        .call(
+          d3
+            .axisLeft(y)
+            .tickValues(ticks)
+            .tickSize(-(width - m.left - m.right))
+            .tickFormat(""),
+        );
+      svg
+        .append("g")
+        .attr("class", "bw-y-axis")
+        .attr("transform", `translate(${m.left},0)`)
+        .call(
+          d3
+            .axisLeft(y)
+            .tickValues(ticks)
+            .tickFormat(d3.format("~g"))
+            .tickSizeOuter(0),
+        );
+      svg
+        .append("g")
+        .attr("class", "bw-x-axis")
+        .attr("transform", `translate(0,${height - m.bottom})`)
+        .call(
+          d3
+            .axisBottom(x)
+            .tickValues(
+              d3
+                .ticks(
+                  Math.ceil(x.domain()[0]),
+                  Math.floor(x.domain()[1]),
+                  width < 420 ? 3 : 6,
+                )
+                .filter(Number.isInteger),
+            )
+            .tickFormat(d3.format(".0f"))
+            .tickSizeOuter(0),
+        );
+      svg
+        .append("text")
+        .attr("class", "axis-title")
+        .attr("x", (m.left + width - m.right) / 2)
+        .attr("y", height - 7)
+        .attr("text-anchor", "middle")
+        .text("Minimum change in both directions (°F)");
+      svg
+        .append("text")
+        .attr("class", "axis-title")
+        .attr(
+          "transform",
+          `translate(17,${(m.top + height - m.bottom) / 2}) rotate(-90)`,
+        )
+        .attr("text-anchor", "middle")
+        .text("Return period (years)");
+      svg
+        .append("path")
+        .datum(points)
+        .attr("fill", "none")
+        .attr("stroke", colors.events)
+        .attr("stroke-width", 1.4)
+        .attr(
+          "d",
+          d3
+            .line()
+            .curve(d3.curveStepBefore)
+            .x((p) => x(p.strength))
+            .y((p) => y(p.period)),
+        );
+      const dots = svg
+        .selectAll("circle")
+        .data(points)
+        .join("circle")
+        .attr("class", "bw-return-point")
+        .attr("cx", (p) => x(p.strength))
+        .attr("cy", (p) => y(p.period))
+        .attr("r", (p) => (p === atThreshold ? 4.5 : 3.5))
+        .attr("fill", colors.events)
+        .attr("tabindex", 0)
+        .attr("role", "img")
+        .attr("aria-label", returnPeriodText)
+        .on("pointerenter focus click", (_, p) => {
+          q("return-period-detail").textContent = returnPeriodText(p) + ".";
+        });
+      dots.append("title").text(returnPeriodText);
+    }
+
     function drawOverview() {
       const f = frame(
         "overview-chart",
@@ -1052,6 +1446,20 @@
         `Visible period: ${shortFmt(new Date(range[0]))}-${shortFmt(new Date(range[1]))} · drag the brush handles to zoom`;
       q("intensity-fit").textContent = fitText(fits.intensity, "intensity");
       q("frequency-fit").textContent = fitText(fits.frequency, "frequency");
+      q("frequency-story").textContent = !fits.frequency
+        ? "There are too few qualifying years to fit a trend."
+        : fits.frequency.slopeLow > 0
+          ? "The fitted trend shows more cycles per year over time."
+          : fits.frequency?.slopeHigh < 0
+            ? "The fitted trend shows fewer cycles per year over time."
+            : "The trend in cycle counts is unclear.";
+      q("intensity-story").textContent = !fits.intensity
+        ? "There are too few years with cycles to fit a trend."
+        : fits.intensity.slopeLow > 0
+          ? "The fitted trend shows a larger average cycle size over time."
+          : fits.intensity?.slopeHigh < 0
+            ? "The fitted trend shows a smaller average cycle size over time."
+            : "The average cycle size shows no clear trend.";
       const eligible = annual.filter((y) => y.eligible);
       q("fit-scope").textContent =
         `Linear fits use the full record: ${eligible.length} complete years have ≥95% valid temperatures. Frequency includes zero-cycle years; intensity uses the ${fits.intensity?.n || 0} years with qualifying cycles. Partial years and gaps are excluded. Reported change compares the first and last fitted years. Bands: approximate 95% uncertainty, autocorrelation robust through 3 calendar years. Intensity = smaller of the two absolute temperature changes. Regressions fit annual values, not individual events. The band represents uncertainty in the mean trend, not a prediction interval.`;
@@ -1065,6 +1473,8 @@
       drawSelectedEvent();
       drawTrend("intensity");
       drawTrend("frequency");
+      drawReturnPeriods();
+      drawReturnHistory();
       declutter();
       q("status").textContent = "";
       root.dataset.ready = "true";
@@ -1086,6 +1496,19 @@
       selected = null;
       schedule();
     });
+    controls.returnIntensity.addEventListener("change", () => {
+      returnHistory = recurrenceHistory(
+        dataset,
+        baseEvents,
+        +controls.returnIntensity.value,
+      );
+      schedule(false);
+    });
+    root
+      .querySelector("[data-return-overview]")
+      .addEventListener("toggle", (event) => {
+        if (event.currentTarget.open) schedule(false);
+      });
     for (const [role, step] of [
       ["event-prev", -1],
       ["event-next", 1],
@@ -1118,6 +1541,8 @@
     root.whiplash = {
       detect,
       regress,
+      returnPeriods,
+      recurrenceHistory,
       prepared,
       getState: () => ({
         station,
@@ -1126,6 +1551,8 @@
         events,
         annual,
         fits,
+        recurrence,
+        returnHistory,
         range,
       }),
       selectEvent: (id) => {

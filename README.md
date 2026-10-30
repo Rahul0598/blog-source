@@ -2,6 +2,8 @@
 
 I'm using docker to build, debug and publish this site. Lately I have been working towards building a completely containerized desktop workflow, which would keep the host installation clean and free from various packages and dependencies. Which is why - docker! 
 
+Docker Compose uses the version-pinned `klakegg/hugo:0.111.3-pandoc` image. It includes Pandoc and selects the native architecture automatically, including ARM64 on Apple Silicon Macs.
+
 Following are the steps to set up a new site with the template directory structure: 
 
 1. First, we create a Hugo site, using the [klakeqq/hugo](https://hub.docker.com/r/klakegg/hugo/) alpine docker image which provides us a bash shell with Hugo completion.

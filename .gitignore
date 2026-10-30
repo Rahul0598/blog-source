@@ -7,3 +7,4 @@ _site/
 *.xml
 resume/*
 /static/posts/whiplash/output/
+/tests/
