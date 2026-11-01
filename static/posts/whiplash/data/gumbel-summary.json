@@ -1,0 +1,145 @@
+{
+  "source": "https://www.ncei.noaa.gov/pub/data/ghcn/daily/all/USC00120784.dly",
+  "downloaded": "2026-11-01",
+  "last_valid_day": "2026-10-26",
+  "window_days": 3,
+  "years": 110,
+  "forced_partial_years": [
+    2019,
+    2026
+  ],
+  "partial_year_coverage": {
+    "2019": 300,
+    "2026": 280
+  },
+  "gumbel": {
+    "loc": 28.87,
+    "scale": 4.22,
+    "ks_p": 0.62
+  },
+  "return_period": {
+    "35": {
+      "gumbel": 4.8,
+      "observed": 4.2,
+      "observed_years": 26,
+      "bootstrap_90": [
+        4.0,
+        6.0
+      ]
+    },
+    "40": {
+      "gumbel": 14.5,
+      "observed": 11.0,
+      "observed_years": 10,
+      "bootstrap_90": [
+        11.0,
+        22.0
+      ]
+    },
+    "44": {
+      "gumbel": 36.6,
+      "observed": 55.0,
+      "observed_years": 2,
+      "bootstrap_90": [
+        24.0,
+        64.0
+      ]
+    }
+  },
+  "eras": {
+    "1896-1960": {
+      "years": 52,
+      "mean": 29.3,
+      "loc": 27.34,
+      "scale": 3.7,
+      "return_period": {
+        "35": 8.4,
+        "40": 31.1,
+        "44": 90.8
+      }
+    },
+    "1961-2026": {
+      "years": 58,
+      "mean": 32.9,
+      "loc": 30.51,
+      "scale": 4.13,
+      "return_period": {
+        "35": 3.5,
+        "40": 10.5,
+        "44": 26.8
+      }
+    }
+  },
+  "top_years": [
+    {
+      "year": 2019,
+      "intensity": 44,
+      "temps": [
+        46,
+        2,
+        48
+      ],
+      "dates": [
+        "2019-01-29",
+        "2019-01-31",
+        "2019-02-03"
+      ]
+    },
+    {
+      "year": 2026,
+      "intensity": 44,
+      "temps": [
+        71,
+        27,
+        76
+      ],
+      "dates": [
+        "2026-03-16",
+        "2026-03-18",
+        "2026-03-21"
+      ]
+    },
+    {
+      "year": 1979,
+      "intensity": 42,
+      "temps": [
+        74,
+        27,
+        69
+      ],
+      "dates": [
+        "1979-03-23",
+        "1979-03-26",
+        "1979-03-29"
+      ]
+    },
+    {
+      "year": 1990,
+      "intensity": 42,
+      "temps": [
+        21,
+        63,
+        21
+      ],
+      "dates": [
+        "1990-12-27",
+        "1990-12-30",
+        "1991-01-01"
+      ]
+    },
+    {
+      "year": 1959,
+      "intensity": 40,
+      "temps": [
+        55,
+        15,
+        57
+      ],
+      "dates": [
+        "1959-01-15",
+        "1959-01-17",
+        "1959-01-20"
+      ]
+    }
+  ]
+}
