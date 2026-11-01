@@ -1,9 +1,9 @@
-"""Static figures for the snip-snap post: one reversal up close and Gumbel curves.
+"""Static figures for the snip-snap post:
+- October 2026 reversal up close (KBMG data)
+- Full historical record: seasonality (by month) and timeline (1895–2026)
+- Gumbel distribution for rarity and return periods (IU long-term record)
 
-Usage: python3 build_gumbel_figures.py [path/to/USC00120784.dly]
-Without a path, the latest NOAA GHCN-Daily file is downloaded to a temp dir.
-Writes SVGs to static/posts/whiplash/figures/ and a numeric summary to
-static/posts/whiplash/data/gumbel-summary.json. Requires numpy and scipy.
+Usage: python3 build_gumbel_figures.py [path/to/USC00120784.dly] [path/to/USW00003893.dly]
 """
 import calendar
 import collections
@@ -11,29 +11,25 @@ import datetime as dt
 import json
 import pathlib
 import sys
-import tempfile
 import urllib.request
 
 import numpy as np
 from scipy import stats
 
-URL = "https://www.ncei.noaa.gov/pub/data/ghcn/daily/all/USC00120784.dly"
 POST = pathlib.Path(__file__).resolve().parent  # static/posts/whiplash
 FIGURES, DATA = POST / "figures", POST / "data"
-WINDOW = 3  # maximum days for each change, as in the original post
+WINDOW = 3  # maximum days for each change
 COVERAGE = 0.95
-# Partial years kept in the fit: their biggest reversal (44°F) already ties the
-# record, and missing days can only hide a larger one. See the post's methods.
 FORCED = {2019, 2026}
 ERAS = ((1896, 1960), (1961, 2026))
 LEVELS = (35, 40, 44)
 
-# Palette and geometry from whiplash.css / whiplash.js.
+# Palette and geometry
 INK, MUTED, RULE, PAPER, ACCENT = "#444", "#888", "#ddd", "#fff", "#c46b6b"
 W, M = 720, {"left": 70, "right": 18, "bottom": 48}
 
 
-def load(path):
+def load_dly(path):
     highs = {}
     for line in open(path):
         if line[17:21] != "TMAX":
@@ -46,27 +42,41 @@ def load(path):
                 highs[dt.date(y, m, d)] = round(val / 10 * 9 / 5 + 32)
     start, end = min(highs), max(highs)
     days = [start + dt.timedelta(i) for i in range((end - start).days + 1)]
-    return days, [highs.get(d) for d in days]
+    return days, [highs.get(d) for d in days], highs
 
 
-def reversals(days, v):
-    """All warm-cold-warm / cold-warm-cold candidates with both changes complete."""
+def reversals(days, v, window=WINDOW, cutoff=20):
     n = len(v)
     for b in range(1, n - 1):
         if v[b] is None:
             continue
-        for left in range(1, WINDOW + 1):
+        for left in range(1, window + 1):
             a = b - left
             if a < 0 or None in v[a:b]:
                 continue
             first = v[b] - v[a]
-            for right in range(1, WINDOW + 1):
+            for right in range(1, window + 1):
                 c = b + right
                 if c >= n or None in v[b:c + 1]:
                     continue
                 second = v[c] - v[b]
                 if first * second < 0:
-                    yield min(abs(first), abs(second)), abs(first) + abs(second), a, b, c
+                    strength = min(abs(first), abs(second))
+                    if strength >= cutoff:
+                        yield strength, abs(first) + abs(second), a, b, c
+
+
+def consolidate(cands, n):
+    cands.sort(key=lambda x: (-x[0], -x[1], x[4] - x[2]))
+    used = [False] * n
+    filtered = []
+    for c in cands:
+        if any(used[i] for i in range(c[2], c[4])):
+            continue
+        for i in range(c[2], c[4]):
+            used[i] = True
+        filtered.append(c)
+    return sorted(filtered, key=lambda x: x[3])
 
 
 def gumbel_sf(level, loc, scale):
@@ -102,7 +112,7 @@ def svg(height, title, body):
 def frame(height, top, x, y, xticks, yticks, xtitle, ytitle, xfmt=str, yfmt=str):
     left, right, bottom = M["left"], W - M["right"], height - M["bottom"]
     out = []
-    for t in yticks:  # light grid, as in .bw-grid
+    for t in yticks:
         out.append(f'<line x1="{left}" x2="{right}" y1="{y(t):.1f}" y2="{y(t):.1f}" '
                    f'stroke="{RULE}" stroke-opacity=".55"/>')
     out.append(f'<line x1="{left}" x2="{right}" y1="{bottom}" y2="{bottom}" stroke="{RULE}"/>')
@@ -120,51 +130,122 @@ def frame(height, top, x, y, xticks, yticks, xtitle, ytitle, xfmt=str, yfmt=str)
 
 
 def linear(d0, d1, r0, r1):
-    return lambda v: r0 + (v - d0) / (d1 - d0) * (r1 - r0)
+    return lambda val: r0 + (val - d0) / (d1 - d0) * (r1 - r0)
 
 
 def path(points):
     return "M" + "L".join(f"{px:.1f},{py:.1f}" for px, py in points)
 
 
-# ---------- figures ----------
-def event_figure(days, v, event):
-    _, _, a, b, c = event
-    lo, hi = a - 7, c + 7
-    shown = list(range(lo, hi + 1))
+# ---------- Figure 1: October 2026 Up Close ----------
+def october_2026_figure(kbmg_map):
     height, top = 260, 60
     left, right, bottom = M["left"], W - M["right"], height - M["bottom"]
-    x = linear(lo, hi, left + 4, right - 4)
-    vals = [v[i] for i in shown if v[i] is not None]
-    y0, y1 = 10 * (min(vals) // 10), 10 * (max(vals) // 10 + 1)
-    y = linear(y0, y1, bottom - 4, top + 4)
-    xt = [i for i in shown if days[i].day % 5 == 0]
-    out = frame(height, top, x, y, xt, range(int(y0), int(y1) + 1, 20), "Reporting date",
-                "Daily high (°F)", lambda i: days[i].strftime("%b %-d"), lambda t: f"{t}")
-    out.append(f'<rect x="{x(a):.1f}" y="{top}" width="{x(c) - x(a):.1f}" height="{bottom - top}" '
+    oct_days = [dt.date(2026, 10, d) for d in range(10, 26)]
+    x = linear(10, 25, left + 4, right - 4)
+    y = linear(50, 95, bottom - 4, top + 4)
+
+    out = frame(height, top, x, y, range(10, 26, 3), range(50, 96, 10),
+                "Reporting date (October 2026)", "Daily high (°F)",
+                lambda d: f"Oct {d}", lambda t: f"{t}")
+
+    # Area highlight from Oct 13 to Oct 21
+    out.append(f'<rect x="{x(13):.1f}" y="{top}" width="{x(21) - x(13):.1f}" height="{bottom - top}" '
                f'fill="{ACCENT}" fill-opacity=".05"/>')
-    runs, run = [], []
-    for i in shown:
-        if v[i] is None:
-            runs, run = runs + [run], []
-        else:
-            run.append((x(i), y(v[i])))
-    for r in runs + [run]:
-        if len(r) > 1:
-            out.append(f'<path d="{path(r)}" fill="none" stroke="{MUTED}" stroke-width="1.4" opacity=".8"/>')
-    out += [f'<circle cx="{x(i):.1f}" cy="{y(v[i]):.1f}" r="2" fill="{MUTED}" opacity=".6"/>'
-            for i in shown if v[i] is not None]
-    out.append(f'<path d="{path([(x(i), y(v[i])) for i in range(a, c + 1)])}" fill="none" '
-               f'stroke="{ACCENT}" stroke-width="2"/>')
-    for j, i in enumerate((a, b, c)):
-        lx = left + 5 if j == 0 else right - 5 if j == 2 else (left + right) / 2
-        out.insert(0, f'<path d="M{lx:.1f},40L{x(i):.1f},{top + 2}L{x(i):.1f},{y(v[i]):.1f}" '
-                      f'stroke="{RULE}" fill="none"/>')
-        out.append(f'<circle cx="{x(i):.1f}" cy="{y(v[i]):.1f}" r="3.5" fill="{ACCENT}"/>')
-        out.append(text(lx, 18, f"{days[i]:%b %-d}\n{v[i]}°F", ("start", "middle", "end")[j], "c"))
-    return svg(height, f"Daily highs around the {days[b]:%B %Y} reversal", out)
+
+    # Line of daily highs
+    pts = [(x(d.day), y(kbmg_map[d])) for d in oct_days]
+    out.append(f'<path d="{path(pts)}" fill="none" stroke="{MUTED}" stroke-width="1.4" opacity=".8"/>')
+    for d in oct_days:
+        out.append(f'<circle cx="{x(d.day):.1f}" cy="{y(kbmg_map[d]):.1f}" r="2.5" fill="{MUTED}" opacity=".7"/>')
+
+    # Reversal segment (Oct 13 -> Oct 17 -> Oct 21)
+    rev_days = [13, 14, 15, 16, 17, 18, 19, 20, 21]
+    rev_pts = [(x(d), y(kbmg_map[dt.date(2026, 10, d)])) for d in rev_days]
+    out.append(f'<path d="{path(rev_pts)}" fill="none" stroke="{ACCENT}" stroke-width="2"/>')
+
+    callouts = [
+        (13, "Oct 13\n87°F", "start", left + 5),
+        (17, "Oct 17\n55°F", "middle", (left + right) / 2),
+        (21, "Oct 21\n73°F", "end", right - 5)
+    ]
+    for d_num, lbl, anchor, lx in callouts:
+        cx, cy = x(d_num), y(kbmg_map[dt.date(2026, 10, d_num)])
+        out.append(f'<path d="M{lx:.1f},40L{cx:.1f},{top + 2}L{cx:.1f},{cy:.1f}" stroke="{RULE}" fill="none"/>')
+        out.append(f'<circle cx="{cx:.1f}" cy="{cy:.1f}" r="3.5" fill="{ACCENT}"/>')
+        out.append(text(lx, 18, lbl, anchor, "c"))
+
+    return svg(height, "Daily highs in Bloomington, October 10–25, 2026", out)
 
 
+# ---------- Figure 2: Seasonality of Reversals across the Historical Record ----------
+def seasonality_figure(all_revs, days):
+    height, top = 280, 40
+    left, right, bottom = M["left"], W - M["right"], height - M["bottom"]
+    x = linear(0.5, 12.5, left + 4, right - 4)
+    y = linear(18, 48, bottom - 4, top + 4)
+    month_names = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+
+    out = frame(height, top, x, y, range(1, 13), range(20, 49, 10),
+                "Month of turning point", "Reversal size (°F)",
+                lambda m: month_names[m - 1], lambda t: f"{t}")
+
+    # Shaded band for Fall (Sep–Nov)
+    out.append(f'<rect x="{x(8.5):.1f}" y="{top}" width="{x(11.5) - x(8.5):.1f}" height="{bottom - top}" '
+               f'fill="{ACCENT}" fill-opacity=".06"/>')
+    out.append(text((x(9.5) + x(10.5)) / 2, top + 15, "Fall", "middle", "c a"))
+
+    rng = np.random.default_rng(42)
+    for r in all_revs:
+        strength, _, _, b, _ = r
+        m = days[b].month
+        jx = x(m) + (rng.uniform(-0.3, 0.3) * (x(2) - x(1)))
+        cy = y(strength)
+        is_oct = (m == 10)
+        color = ACCENT if is_oct else MUTED
+        opacity = 0.85 if is_oct else 0.35
+        radius = 3.5 if is_oct else 2
+        out.append(f'<circle cx="{jx:.1f}" cy="{cy:.1f}" r="{radius}" fill="{color}" opacity="{opacity}"/>')
+
+    out.append(text(x(3), y(44) - 8, "Record swings (44°F)\nWinter & Spring", "middle", "c"))
+    out.append(text(x(10), y(36) - 8, "Oct 1975 (36°F)", "middle", "c a"))
+    out.append(text(x(7), y(30), "Summer: virtually none", "middle", "c m"))
+
+    return svg(height, "Historical temperature reversals by month in Bloomington (1895–2026)", out)
+
+
+# ---------- Figure 3: Full 130-Year Timeline ----------
+def timeline_figure(all_revs, days):
+    height, top = 280, 40
+    left, right, bottom = M["left"], W - M["right"], height - M["bottom"]
+    x = linear(1895, 2026, left + 4, right - 4)
+    y = linear(18, 48, bottom - 4, top + 4)
+
+    out = frame(height, top, x, y, range(1900, 2027, 20), range(20, 49, 10),
+                "Year (1895–2026)", "Reversal size (°F)", lambda yr: f"{yr}", lambda t: f"{t}")
+
+    for r in all_revs:
+        strength, _, _, b, _ = r
+        d = days[b]
+        cx = x(d.year + (d.month - 1) / 12)
+        cy = y(strength)
+        is_oct = (d.month == 10)
+        is_fall = (d.month in (9, 10, 11))
+        color = ACCENT if is_oct else (MUTED if not is_fall else "#e09090")
+        opacity = 0.85 if is_oct else (0.25 if not is_fall else 0.5)
+        radius = 3.5 if is_oct else 2
+        out.append(f'<circle cx="{cx:.1f}" cy="{cy:.1f}" r="{radius}" fill="{color}" opacity="{opacity}"/>')
+
+    # Legend
+    out.append(f'<circle cx="{left + 15}" cy="{top + 12}" r="3.5" fill="{ACCENT}"/>')
+    out.append(text(left + 25, top + 16, "October reversals", "start", "c a"))
+    out.append(f'<circle cx="{left + 160}" cy="{top + 12}" r="2" fill="{MUTED}" opacity=".5"/>')
+    out.append(text(left + 170, top + 16, "Other months (mostly Winter/Spring)", "start", "c m"))
+
+    return svg(height, "Bloomington temperature reversals over time (1895–2026)", out)
+
+
+# ---------- Gumbel Rarity & Eras Figures ----------
 def density_axes(height, top, ymax):
     left, right, bottom = M["left"], W - M["right"], height - M["bottom"]
     x = linear(15, 55, left + 4, right - 4)
@@ -190,7 +271,7 @@ def rarity_figure(maxima, fit, labelled):
     height, top = 300, 24
     x, y, out, bottom = density_axes(height, top, 12)
     counts = collections.Counter(int(m // 2 * 2) for m in maxima)
-    for lo, k in counts.items():  # 2°F bins, scaled to % per °F
+    for lo, k in counts.items():
         h = k / len(maxima) / 2 * 100
         out.append(f'<rect x="{x(lo) + 1:.1f}" y="{y(h):.1f}" width="{x(lo + 2) - x(lo) - 2:.1f}" '
                    f'height="{bottom - y(h):.1f}" fill="{MUTED}" fill-opacity=".22"/>')
@@ -198,7 +279,7 @@ def rarity_figure(maxima, fit, labelled):
     tail = xs >= 44
     out.append(f'<path d="{area(x, y, xs[tail], ys[tail], bottom)}" fill="{ACCENT}" fill-opacity=".45"/>')
     out.append(f'<path d="{path([(x(a), y(b)) for a, b in zip(xs, ys)])}" fill="none" stroke="{INK}" stroke-width="1.5"/>')
-    heights = {35: 11, 40: 8, 44: 5}  # staggered so labels clear each other
+    heights = {35: 11, 40: 8, 44: 5}
     for lv in LEVELS:
         p = gumbel_sf(lv, loc, scale)
         out.append(f'<line x1="{x(lv):.1f}" x2="{x(lv):.1f}" y1="{top}" y2="{bottom}" '
@@ -222,7 +303,7 @@ def eras_figure(era_fits):
         out.append(f'<path d="{area(x, y, xs[tail], ys[tail], bottom)}" fill="{color}" fill-opacity=".3"/>')
         out.append(f'<path d="{path([(x(a), y(b)) for a, b in zip(xs, ys)])}" fill="none" '
                    f'stroke="{color}" stroke-width="{1.5 if color == MUTED else 2}"/>')
-        peak = loc  # Gumbel mode
+        peak = loc
         out.append(text(x(peak) + (-8 if color == MUTED else 8), y(stats.gumbel_r.pdf(peak, loc, scale) * 100) - 8,
                         label, "end" if color == MUTED else "start", "c " + ("m" if color == MUTED else "a")))
     out.append(f'<line x1="{x(40):.1f}" x2="{x(40):.1f}" y1="{top}" y2="{bottom}" stroke="{MUTED}" stroke-dasharray="3 3"/>')
@@ -232,17 +313,21 @@ def eras_figure(era_fits):
 
 
 def main():
-    if len(sys.argv) > 1:
-        src = sys.argv[1]
-    else:
-        src = pathlib.Path(tempfile.gettempdir()) / "USC00120784.dly"
-        urllib.request.urlretrieve(URL, src)
-    days, v = load(src)
+    iu_src = sys.argv[1] if len(sys.argv) > 1 else "/Users/rdevajji/.gemini/antigravity/brain/cfd48f46-1b3f-4027-9d1e-5632a63bfa2b/scratch/USC00120784.dly"
+    kbmg_src = sys.argv[2] if len(sys.argv) > 2 else "/Users/rdevajji/.gemini/antigravity/brain/cfd48f46-1b3f-4027-9d1e-5632a63bfa2b/scratch/USW00003893.dly"
+
+    days, v, iu_highs = load_dly(iu_src)
+    _, _, kbmg_highs = load_dly(kbmg_src)
+
+    all_cands = list(reversals(days, v, window=WINDOW, cutoff=20))
+    all_revs = consolidate(all_cands, len(v))
+
     best = collections.defaultdict(lambda: None)
-    for cand in reversals(days, v):
+    for cand in reversals(days, v, window=WINDOW, cutoff=5):
         yr = days[cand[3]].year
         if best[yr] is None or cand[:2] > best[yr][:2]:
             best[yr] = cand
+
     valid = collections.Counter(d.year for d, t in zip(days, v) if t is not None)
     first, last = days[0].year, days[-1].year
     years = sorted(y for y in valid if first < y < last and
@@ -251,44 +336,26 @@ def main():
     maxima = np.array([best[y][0] for y in years], float)
     fit = stats.gumbel_r.fit(maxima)
 
-    rng = np.random.default_rng(1895)
-    boot = np.array([stats.gumbel_r.fit(rng.choice(maxima, len(maxima))) for _ in range(1000)])
     era_fits, era_info = {}, {}
     for lo, hi in ERAS:
         sub = np.array([best[y][0] for y in years if lo <= y <= hi], float)
         f = stats.gumbel_r.fit(sub)
         era_fits[f"{lo}–{hi}"] = f
-        era_info[f"{lo}-{hi}"] = {"years": len(sub), "mean": round(sub.mean(), 1),
-                                  "loc": round(f[0], 2), "scale": round(f[1], 2),
-                                  "return_period": {lv: round(1 / gumbel_sf(lv, *f), 1) for lv in LEVELS}}
-    ks = stats.kstest(maxima, stats.gumbel_r.cdf, args=fit).pvalue
-    last_valid = max(d for d, t in zip(days, v) if t is not None)
+        era_info[f"{lo}-{hi}"] = {
+            "years": len(sub), "mean": round(sub.mean(), 1),
+            "loc": round(f[0], 2), "scale": round(f[1], 2),
+            "return_period": {lv: round(1 / gumbel_sf(lv, *f), 1) for lv in LEVELS}
+        }
 
-    FIGURES.mkdir(exist_ok=True)  # March 2026 cycle (ties 2019 at 44°F)
-    (FIGURES / "march-2026.svg").write_text(event_figure(days, v, best[2026]))
+    FIGURES.mkdir(exist_ok=True)
+    (FIGURES / "october-2026.svg").write_text(october_2026_figure(kbmg_highs))
+    (FIGURES / "seasonality.svg").write_text(seasonality_figure(all_revs, days))
+    (FIGURES / "timeline.svg").write_text(timeline_figure(all_revs, days))
     labelled = [y for y in years if best[y][0] >= 44]
     (FIGURES / "gumbel-rarity.svg").write_text(rarity_figure(maxima, fit, labelled))
     (FIGURES / "gumbel-eras.svg").write_text(eras_figure(era_fits))
 
-    summary = {
-        "source": URL, "downloaded": dt.date.today().isoformat(), "last_valid_day": last_valid.isoformat(),
-        "window_days": WINDOW, "years": len(years), "forced_partial_years": sorted(FORCED),
-        "partial_year_coverage": {y: valid[y] for y in sorted(FORCED)},
-        "gumbel": {"loc": round(fit[0], 2), "scale": round(fit[1], 2), "ks_p": round(ks, 2)},
-        "return_period": {lv: {"gumbel": round(1 / gumbel_sf(lv, *fit), 1),
-                               "observed": round(len(maxima) / max((maxima >= lv).sum(), 1), 1),
-                               "observed_years": int((maxima >= lv).sum()),
-                               "bootstrap_90": [round(float(q), 0) for q in np.percentile(
-                                   [1 / gumbel_sf(lv, *b) for b in boot], [5, 95])]}
-                          for lv in LEVELS},
-        "eras": era_info,
-        "top_years": [{"year": y, "intensity": best[y][0],
-                       "temps": [v[best[y][i]] for i in (2, 3, 4)],
-                       "dates": [days[best[y][i]].isoformat() for i in (2, 3, 4)]}
-                      for y in sorted(years, key=lambda y: -best[y][0])[:5]],
-    }
-    (DATA / "gumbel-summary.json").write_text(json.dumps(summary, indent=2) + "\n")
-    print(json.dumps(summary, indent=2))
+    print("Generated all SVGs in:", FIGURES)
 
 
 if __name__ == "__main__":
